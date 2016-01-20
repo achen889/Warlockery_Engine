@@ -1,0 +1,42 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+
+# Executables
+*.exe
+*.out
+*.app
+
+*.zip
+*.suo
+
+Engine/Sound/cricket-1.4.2/doc/
+Engine/Sound/cricket-1.4.2/src/samples/
+Engine/Sound/cricket-1.4.2/bin/
+Engine/Sound/cricket-1.4.2/lib/wp8/
+Engine/Sound/cricket-1.4.2/inc/
+
+sd6/Debug/
+sd6/Release/
+sd6/sd6_a1/Debug/
+sd6/sd6_a1/Release/
