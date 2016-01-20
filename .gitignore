@@ -34,7 +34,8 @@ Engine/Sound/cricket-1.4.2/doc/
 Engine/Sound/cricket-1.4.2/src/samples/
 Engine/Sound/cricket-1.4.2/bin/
 Engine/Sound/cricket-1.4.2/lib/wp8/
-Engine/Sound/cricket-1.4.2/inc/
+Engine/Sound/cricket-1.4.2/lib/android/
+Engine/Sound/cricket-1.4.2/build/android/
 
 sd6/Debug/
 sd6/Release/
