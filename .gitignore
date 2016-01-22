@@ -37,7 +37,4 @@ Engine/Sound/cricket-1.4.2/lib/wp8/
 Engine/Sound/cricket-1.4.2/lib/android/
 Engine/Sound/cricket-1.4.2/build/android/
 
-sd6/Debug/
-sd6/Release/
-sd6/sd6_a1/Debug/
-sd6/sd6_a1/Release/
+EchoServer/Temporary/
