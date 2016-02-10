@@ -5,17 +5,17 @@
 
 #pragma once
 
-#include "Engine\Renderer\OpenGLRenderer.hpp"
+#ifndef _included_TextRenderer__
+#define _included_TextRenderer__
+
+
 #include "Engine\Core\Utilities.hpp"
 #include "Engine\Renderer\Text\FontSystem.hpp"
 
 #include "Engine\Input\InputSystem.hpp"
 #include "Engine\Math\MathCommands.hpp"
 
-//#include "Engine\Renderer\OGLRenderingUtils.hpp"
-
-#ifndef _included_TextRenderer__
-#define _included_TextRenderer__
+#include "Engine\Renderer\OpenGLRenderer.hpp"
 
 //===========================================================================================================
 
@@ -79,6 +79,7 @@ public:
 	void ShutDown();
 
 	void RegisterDefaultCommands();
+
 	~TextSystem(){
 
 	}
@@ -93,6 +94,10 @@ public:
 	bool IsKeyPressedDevConsoleHotkey(const unsigned int& keyPressedID);
 
 	void ProcessDevConsoleHotkeys(std::string& bufferText);
+	//dev console hotkey helpers
+	void ConfirmDevConsoleCommand(std::string& bufferText);
+	void ProcessTextHistoryHotkeys(std::string& bufferText);
+
 
 	void ProcessDevConsoleScrolling(std::string& bufferText);
 
@@ -102,11 +107,13 @@ public:
 
 	void DevConsoleScrollDown(std::string& bufferText, const int& scrollAmount = 1);
 
+	void DeleteDevConsoleChar(std::string& bufferText);
 	void DeleteDevConsoleChar(VertexArrayObject& myVAO, std::string& bufferText);
 
 	void SkipConsoleLine(VertexArrayObject& myVAO, bool skipDown = true);
+	void SkipConsoleLine(Vertex3Ds& m_vertexArray, bool skipDown);
 
-	void ResetCursorPosition(){
+	void ResetCursorPosition() {
 		currentCursorPos = DEV_CONSOLE_CURSOR_START_POSITION;
 	}
 
@@ -115,7 +122,6 @@ public:
 
 	//loading helpers
 	void LoadFontSystem(const std::string& fontFilePath);
-
 	void LoadFontSystem(FontSystem& fontSystem, const std::string& fontFilePath);
 
 	void InitializeFontMeshRenderer();

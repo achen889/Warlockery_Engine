@@ -15,6 +15,10 @@
 
 //#define FAST_CALL _fastcall //function args are passed to registers
 
+#define KB = 1024;
+
+#define MB = 1024 * 1024;
+
 #define LOG_MEM_ALLOC(numBytes) LogMemAlloc(numBytes, FILE_NAME, LINE_NUM )
 
 struct MemoryUse{

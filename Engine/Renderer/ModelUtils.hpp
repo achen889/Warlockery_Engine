@@ -10,7 +10,9 @@
 
 #include "Engine/Core/BinaryUtils.hpp"
 //#include "Engine/Renderer/OpenGLRenderer.hpp
-#include "Engine/Renderer/OGLRenderingUtils.hpp"
+//#include "Engine/Renderer/OGLRenderingUtils.hpp"
+
+#include "Engine/Renderer/MeshRenderer.hpp"
 
 struct FileHeader{
 	unsigned char* fourCC = new unsigned char[4];

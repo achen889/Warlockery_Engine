@@ -9,6 +9,8 @@
 #include "Time.hpp"
 #include "Engine\Input\GUI\UIProgressBar.hpp"
 
+#include "SystemClockWin32.hpp"
+
 //===========================================================================================================
 
 ByteTrackerMap* g_byteTrackerMap = NULL;

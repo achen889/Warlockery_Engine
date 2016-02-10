@@ -25,7 +25,7 @@ struct ModelViewMatrix{
 	void SetTranslation2D(const Vector2& translation);
 
 	//Rotate
-	void SetRotationDegrees3D(EulerAngles rotationDegrees3D);
+	void SetRotationDegrees3D(const EulerAngles& rotationDegrees3D);
 	void SetRotationDegrees2D(float degrees2D);
 
 	//scale

@@ -26,8 +26,10 @@ extern ProfileMap s_profileMap;
 extern bool doDebugProfile;
 
 #define PROFILE_SECTION() ProfileSection p(FUNCTION_NAME);
+#define PROFILE_START(name) { ProfileSection p(STRINGIFY(name), false); //causes a warning in 2015
 
-#define PROFILE_START(name) { ProfileSection p(STRINGIFY(name), false);
+
+
 #define PROFILE_STOP() p.ProfileEnd(); }
 //===========================================================================================================
 
@@ -49,7 +51,11 @@ public:
 
 	 void AddProfileToMap(const std::string& profileName);
 
+	 friend void RenderProfileMapToScreen();
+
 	 friend std::string OutputProfileMapToScreen();
+
+	
 
 	 //vars
 	std::string m_name;
@@ -61,6 +67,8 @@ public:
 	double totalElapsedTime = 0;
 	unsigned int numCalls = 1;
 	double averageElapsedTime = 0;
+
+	static bool s_doDebugProfiling;
 
 	
 	//static ProfileMap s_profileMap;

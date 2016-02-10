@@ -84,11 +84,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINSOCKAPI_;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.4.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -109,11 +108,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
     <ClCompile>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINSOCKAPI_;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.4.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -135,12 +133,11 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
-      <PrecompiledHeader>
-      </PrecompiledHeader>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_WINSOCKAPI_;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.4.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
@@ -165,9 +162,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Components\BaseComponent.hpp" />
+    <ClInclude Include="Components\ClockComponent.hpp" />
+    <ClInclude Include="Components\CollisionComponents\ColliderComponent.hpp" />
     <ClInclude Include="Components\DestructibleComponent.hpp" />
-    <ClInclude Include="Components\PhysicsMotionComponent.hpp" />
-    <ClInclude Include="Components\RenderComponent.hpp" />
+    <ClInclude Include="Components\RenderComponents\Render2DComponent.hpp" />
+    <ClInclude Include="Components\RenderComponents\Render3DComponent.hpp" />
+    <ClInclude Include="Components\RenderComponents\RenderComponent.hpp" />
+    <ClInclude Include="Components\TransformComponents\RigidBodyComponent.hpp" />
+    <ClInclude Include="Components\TransformComponents\TransformComponent.hpp" />
     <ClInclude Include="Console\Console.hpp" />
     <ClInclude Include="Console\DevConsole.hpp" />
     <ClInclude Include="Console\LogFile.hpp" />
@@ -186,18 +188,11 @@
     <ClInclude Include="Core\Utilities.hpp" />
     <ClInclude Include="Core\XML\xmlParser.h" />
     <ClInclude Include="Core\XML\XMLUtils.hpp" />
-    <ClInclude Include="Entity\Entity.hpp" />
     <ClInclude Include="Input\GUI\UIButton.hpp" />
     <ClInclude Include="Input\GUI\UIProgressBar.hpp" />
     <ClInclude Include="Input\GUI\UIElement.hpp" />
     <ClInclude Include="Input\GUI\UIText.hpp" />
     <ClInclude Include="Input\InputSystem.hpp" />
-    <ClInclude Include="Map\Map.hpp" />
-    <ClInclude Include="Map\Pathfinding\Path.hpp" />
-    <ClInclude Include="Map\Pathfinding\Pathfinder.hpp" />
-    <ClInclude Include="Map\Pathfinding\PathNode.hpp" />
-    <ClInclude Include="Map\Tile.hpp" />
-    <ClInclude Include="Map\TileState.hpp" />
     <ClInclude Include="Math\AABB2.hpp" />
     <ClInclude Include="Math\AABB3.hpp" />
     <ClInclude Include="Math\Disc2.hpp" />
@@ -224,11 +219,14 @@
     <ClInclude Include="Multithreading\JobManager.hpp" />
     <ClInclude Include="Multithreading\Thread.hpp" />
     <ClInclude Include="Multithreading\ThreadSafeQueue.hpp" />
-    <ClInclude Include="Networking\ClientThread.hpp" />
-    <ClInclude Include="Networking\ConnectionSocket.hpp" />
-    <ClInclude Include="Networking\NetworkCommon.hpp" />
+    <ClInclude Include="Networking\NetAddress.hpp" />
+    <ClInclude Include="Networking\NetConnection.hpp" />
+    <ClInclude Include="Networking\NetMessage.hpp" />
+    <ClInclude Include="Networking\NetPacket.hpp" />
+    <ClInclude Include="Networking\NetPacketQueue.hpp" />
+    <ClInclude Include="Networking\NetworkSession.hpp" />
     <ClInclude Include="Networking\NetworkSystem.hpp" />
-    <ClInclude Include="Networking\ServerThread.hpp" />
+    <ClInclude Include="Networking\UDPSocket.hpp" />
     <ClInclude Include="ParticleSystem\AdvancedParticleUtils.hpp" />
     <ClInclude Include="ParticleSystem\Effect.hpp" />
     <ClInclude Include="ParticleSystem\Emitter.hpp" />
@@ -245,7 +243,6 @@
     <ClInclude Include="Renderer\MeshRenderer.hpp" />
     <ClInclude Include="Renderer\ModelUtils.hpp" />
     <ClInclude Include="Renderer\Number.hpp" />
-    <ClInclude Include="Renderer\OGLRenderingUtils.hpp" />
     <ClInclude Include="Renderer\OpenGLRenderer.hpp" />
     <ClInclude Include="Renderer\SceneGraph\GeometryNode.hpp" />
     <ClInclude Include="Renderer\SceneGraph\Node.hpp" />
@@ -261,9 +258,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\BaseComponent.cpp" />
+    <ClCompile Include="Components\ClockComponent.cpp" />
+    <ClCompile Include="Components\CollisionComponents\ColliderComponent.cpp" />
     <ClCompile Include="Components\DestructibleComponent.cpp" />
-    <ClCompile Include="Components\PhysicsMotionComponent.cpp" />
-    <ClCompile Include="Components\RenderComponent.cpp" />
+    <ClCompile Include="Components\RenderComponents\Render2DComponent.cpp" />
+    <ClCompile Include="Components\RenderComponents\Render3DComponent.cpp" />
+    <ClCompile Include="Components\RenderComponents\RenderComponent.cpp" />
+    <ClCompile Include="Components\TransformComponents\RigidBodyComponent.cpp" />
+    <ClCompile Include="Components\TransformComponents\TransformComponent.cpp" />
     <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Console\DevConsole.cpp" />
     <ClCompile Include="Console\LogFile.cpp" />
@@ -282,18 +284,11 @@
     <ClCompile Include="Core\Utilities.cpp" />
     <ClCompile Include="Core\XML\xmlParser.cpp" />
     <ClCompile Include="Core\XML\XMLUtils.cpp" />
-    <ClCompile Include="Entity\Entity.cpp" />
     <ClCompile Include="Input\GUI\UIButton.cpp" />
     <ClCompile Include="Input\GUI\UIProgressBar.cpp" />
     <ClCompile Include="Input\GUI\UIElement.cpp" />
     <ClCompile Include="Input\GUI\UIText.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
-    <ClCompile Include="Map\Map.cpp" />
-    <ClCompile Include="Map\Pathfinding\Path.cpp" />
-    <ClCompile Include="Map\Pathfinding\Pathfinder.cpp" />
-    <ClCompile Include="Map\Pathfinding\PathNode.cpp" />
-    <ClCompile Include="Map\Tile.cpp" />
-    <ClCompile Include="Map\TileState.cpp" />
     <ClCompile Include="Math\AABB2.cpp" />
     <ClCompile Include="Math\AABB3.cpp" />
     <ClCompile Include="Math\Disc2.cpp">
@@ -336,10 +331,13 @@
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
     <ClCompile Include="Multithreading\JobManager.cpp" />
-    <ClCompile Include="Networking\ClientThread.cpp" />
-    <ClCompile Include="Networking\ConnectionSocket.cpp" />
+    <ClCompile Include="Networking\NetAddress.cpp" />
+    <ClCompile Include="Networking\NetConnection.cpp" />
+    <ClCompile Include="Networking\NetMessage.cpp" />
+    <ClCompile Include="Networking\NetPacket.cpp" />
+    <ClCompile Include="Networking\NetworkSession.cpp" />
     <ClCompile Include="Networking\NetworkSystem.cpp" />
-    <ClCompile Include="Networking\ServerThread.cpp" />
+    <ClCompile Include="Networking\UDPSocket.cpp" />
     <ClCompile Include="ParticleSystem\AdvancedParticleUtils.cpp" />
     <ClCompile Include="ParticleSystem\Effect.cpp" />
     <ClCompile Include="ParticleSystem\Emitter.cpp" />
@@ -355,7 +353,6 @@
     <ClCompile Include="Renderer\MeshRenderer.cpp" />
     <ClCompile Include="Renderer\ModelUtils.cpp" />
     <ClCompile Include="Renderer\Number.cpp" />
-    <ClCompile Include="Renderer\OGLRenderingUtils.cpp" />
     <ClCompile Include="Renderer\OpenGLRenderer.cpp" />
     <ClCompile Include="Renderer\ShaderWizard.cpp" />
     <ClCompile Include="Renderer\stb_image.c" />

@@ -1,0 +1,3053 @@
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 17:43:59
+alloc count: 202390
+dealloc count: 201768
+total bytes alloc: 20303389 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 629
+total bytes of memory leak: 20297650 bytes
+num memory leaks in map: 14
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+World.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(18):memory alloc: 1400
+
+num bytes of memory leak in map: 2350 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 17:45:39
+alloc count: 245480
+dealloc count: 244858
+total bytes alloc: 24564308 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 629
+total bytes of memory leak: 24558569 bytes
+num memory leaks in map: 14
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+World.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(18):memory alloc: 1400
+
+num bytes of memory leak in map: 2350 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 17:46:29
+alloc count: 223547
+dealloc count: 222917
+total bytes alloc: 22382324 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 637
+total bytes of memory leak: 22376585 bytes
+num memory leaks in map: 16
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+World.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(18):memory alloc: 1400
+
+num bytes of memory leak in map: 2361 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 17:47:07
+alloc count: 135948
+dealloc count: 135334
+total bytes alloc: 13716149 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 621
+total bytes of memory leak: 13710410 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Networking\NetPacket.cpp(18):memory alloc: 1400
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+World.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(48):memory alloc: 9
+
+num bytes of memory leak in map: 2339 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 17:49:04
+alloc count: 164483
+dealloc count: 163861
+total bytes alloc: 16542385 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 629
+total bytes of memory leak: 16536646 bytes
+num memory leaks in map: 14
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Networking\NetPacket.cpp(18):memory alloc: 1400
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Core\BinaryUtils.cpp(48):memory alloc: 9
+
+num bytes of memory leak in map: 2350 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 17:49:58
+alloc count: 164531
+dealloc count: 163909
+total bytes alloc: 16556279 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 629
+total bytes of memory leak: 16550540 bytes
+num memory leaks in map: 14
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(18):memory alloc: 1400
+
+num bytes of memory leak in map: 2350 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 18:13:13
+alloc count: 430737
+dealloc count: 430098
+total bytes alloc: 43009498 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 99 bytes
+num memory leaks: 646
+total bytes of memory leak: 43003759 bytes
+num memory leaks in map: 16
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Networking\NetworkSession.cpp(219):memory alloc: 160
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+World.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(18):memory alloc: 1400
+
+num bytes of memory leak in map: 2530 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 18:48:37
+alloc count: 147908
+dealloc count: 147292
+total bytes alloc: 14939126 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 623
+total bytes of memory leak: 14933387 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+World.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(19):memory alloc: 1400
+
+num bytes of memory leak in map: 2339 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 19:03:14
+alloc count: 204265
+dealloc count: 203649
+total bytes alloc: 20499573 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 623
+total bytes of memory leak: 20493834 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Core\BinaryUtils.cpp(126):memory alloc: 2
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetPacket.cpp(19):memory alloc: 1400
+
+num bytes of memory leak in map: 2343 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 19:06:36
+alloc count: 131527
+dealloc count: 130911
+total bytes alloc: 13307177 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 623
+total bytes of memory leak: 13301438 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+World.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetPacket.cpp(19):memory alloc: 1400
+
+num bytes of memory leak in map: 2343 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 19:08:43
+alloc count: 170021
+dealloc count: 169403
+total bytes alloc: 17089669 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 625
+total bytes of memory leak: 17083930 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Networking\NetPacket.cpp(19):memory alloc: 1400
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+World.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 2343 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 19:10:32
+alloc count: 114847
+dealloc count: 114231
+total bytes alloc: 11615701 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 623
+total bytes of memory leak: 11609962 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Networking\NetPacket.cpp(19):memory alloc: 1400
+
+num bytes of memory leak in map: 2343 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 19:11:30
+alloc count: 141078
+dealloc count: 140462
+total bytes alloc: 14205368 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 623
+total bytes of memory leak: 14199629 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Networking\UDPSocket.cpp(222):memory alloc: 192
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(19):memory alloc: 1400
+
+num bytes of memory leak in map: 2339 bytes
+
+//===========================================================================================================
+Mem Use Log created on Thursday, February 4, 2016 19:13:38
+alloc count: 270908
+dealloc count: 270292
+total bytes alloc: 27085164 bytes
+total bytes dealloc: 6549 bytes
+largest alloc: 600039 bytes
+average alloc: 99 bytes
+num memory leaks: 623
+total bytes of memory leak: 27079425 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 168
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Networking\UDPSocket.cpp(222):memory alloc: 192
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(48):memory alloc: 9
+Networking\NetPacket.cpp(19):memory alloc: 1400
+
+num bytes of memory leak in map: 2339 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 21:56:02
+alloc count: 18934
+dealloc count: 18345
+total bytes alloc: 2231411 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 117 bytes
+num memory leaks: 596
+total bytes of memory leak: 2229288 bytes
+num memory leaks in map: 7
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(223):memory alloc: 192
+
+num bytes of memory leak in map: 740 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 22:15:41
+alloc count: 339424
+dealloc count: 338803
+total bytes alloc: 34100453 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 100 bytes
+num memory leaks: 628
+total bytes of memory leak: 34095194 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Networking\UDPSocket.cpp(223):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 2358 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 22:16:18
+alloc count: 234196
+dealloc count: 233576
+total bytes alloc: 23661168 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 627
+total bytes of memory leak: 23655909 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(223):memory alloc: 192
+
+num bytes of memory leak in map: 2358 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 22:17:17
+alloc count: 154410
+dealloc count: 153790
+total bytes alloc: 15736447 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 627
+total bytes of memory leak: 15731188 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Networking\UDPSocket.cpp(223):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 2358 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 23:21:34
+alloc count: 108838
+dealloc count: 108209
+total bytes alloc: 11238845 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 103 bytes
+num memory leaks: 636
+total bytes of memory leak: 11233586 bytes
+num memory leaks in map: 15
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 5494 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 23:23:59
+alloc count: 357646
+dealloc count: 357023
+total bytes alloc: 51863555 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 145 bytes
+num memory leaks: 630
+total bytes of memory leak: 51858296 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 2358 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 23:24:36
+alloc count: 203981
+dealloc count: 203352
+total bytes alloc: 20678061 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 636
+total bytes of memory leak: 20672802 bytes
+num memory leaks in map: 15
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(222):memory alloc: 192
+
+num bytes of memory leak in map: 5494 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 23:25:51
+alloc count: 140202
+dealloc count: 139573
+total bytes alloc: 14348609 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 102 bytes
+num memory leaks: 636
+total bytes of memory leak: 14343350 bytes
+num memory leaks in map: 15
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+
+num bytes of memory leak in map: 5494 bytes
+
+//===========================================================================================================
+Mem Use Log created on Friday, February 5, 2016 23:47:00
+alloc count: 468485
+dealloc count: 467856
+total bytes alloc: 48393485 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 103 bytes
+num memory leaks: 636
+total bytes of memory leak: 48388226 bytes
+num memory leaks in map: 15
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+
+num bytes of memory leak in map: 5494 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:06:28
+alloc count: 189290
+dealloc count: 188640
+total bytes alloc: 19198609 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 657
+total bytes of memory leak: 19193350 bytes
+num memory leaks in map: 18
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+
+num bytes of memory leak in map: 5834 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:07:05
+alloc count: 127674
+dealloc count: 127007
+total bytes alloc: 12994197 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 674
+total bytes of memory leak: 12988938 bytes
+num memory leaks in map: 21
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 6174 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:28:23
+alloc count: 115666
+dealloc count: 114999
+total bytes alloc: 11835849 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 102 bytes
+num memory leaks: 674
+total bytes of memory leak: 11830590 bytes
+num memory leaks in map: 21
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetworkSession.cpp(210):memory alloc: 160
+Networking\NetworkSession.cpp(210):memory alloc: 160
+Networking\NetworkSession.cpp(210):memory alloc: 160
+Networking\NetworkSession.cpp(210):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+
+num bytes of memory leak in map: 6174 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:37:08
+alloc count: 822639
+dealloc count: 821911
+total bytes alloc: 104492930 bytes
+total bytes dealloc: 12954613 bytes
+largest alloc: 600039 bytes
+average alloc: 127 bytes
+num memory leaks: 735
+total bytes of memory leak: 91539127 bytes
+num memory leaks in map: 25
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(48):memory alloc: 10
+Core\BinaryUtils.cpp(48):memory alloc: 10
+
+num bytes of memory leak in map: 6198 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:46:07
+alloc count: 106671
+dealloc count: 105986
+total bytes alloc: 10927456 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 102 bytes
+num memory leaks: 692
+total bytes of memory leak: 10922197 bytes
+num memory leaks in map: 25
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(48):memory alloc: 10
+Core\BinaryUtils.cpp(48):memory alloc: 10
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 6198 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:46:30
+alloc count: 120557
+dealloc count: 115472
+total bytes alloc: 15208573 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 126 bytes
+num memory leaks: 5092
+total bytes of memory leak: 15203314 bytes
+num memory leaks in map: 1125
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetConnection.cpp(32):memory alloc: 1568
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:53:21
+alloc count: 217950
+dealloc count: 208993
+total bytes alloc: 27246773 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 124 bytes
+num memory leaks: 8964
+total bytes of memory leak: 27241514 bytes
+num memory leaks in map: 2093
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Net
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:55:32
+alloc count: 122394
+dealloc count: 117261
+total bytes alloc: 15423085 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 125 bytes
+num memory leaks: 5140
+total bytes of memory leak: 15417826 bytes
+num memory leaks in map: 1137
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\ne
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 0:56:39
+alloc count: 330403
+dealloc count: 316935
+total bytes alloc: 41420581 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 125 bytes
+num memory leaks: 13475
+total bytes of memory leak: 41415322 bytes
+num memory leaks in map: 3222
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(48):memory alloc: 13
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+Core\BinaryUtils.cpp(126):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 15
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 13:08:23
+alloc count: 1051872
+dealloc count: 1029505
+total bytes alloc: 118545017 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 112 bytes
+num memory leaks: 22374
+total bytes of memory leak: 118542894 bytes
+num memory leaks in map: 5450
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(208):memory alloc: 160
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\UDPSocket.cpp(222):memory alloc: 192
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\NetConnection.cpp(33):memory alloc: 1568
+Networking\Ne
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 13:38:26
+alloc count: 59477
+dealloc count: 58887
+total bytes alloc: 6082131 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 102 bytes
+num memory leaks: 597
+total bytes of memory leak: 6080008 bytes
+num memory leaks in map: 7
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+
+num bytes of memory leak in map: 740 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 16:38:48
+alloc count: 86248
+dealloc count: 85640
+total bytes alloc: 8988487 bytes
+total bytes dealloc: 4501 bytes
+largest alloc: 600039 bytes
+average alloc: 104 bytes
+num memory leaks: 615
+total bytes of memory leak: 8984796 bytes
+num memory leaks in map: 10
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(222):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 3896 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 18:16:25
+alloc count: 91797
+dealloc count: 91188
+total bytes alloc: 9367058 bytes
+total bytes dealloc: 4501 bytes
+largest alloc: 600039 bytes
+average alloc: 102 bytes
+num memory leaks: 616
+total bytes of memory leak: 9363367 bytes
+num memory leaks in map: 10
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(223):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 3896 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 19:10:18
+alloc count: 19147
+dealloc count: 18558
+total bytes alloc: 2114773 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 110 bytes
+num memory leaks: 596
+total bytes of memory leak: 2112650 bytes
+num memory leaks in map: 7
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(224):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+
+num bytes of memory leak in map: 740 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 19:20:18
+alloc count: 89011
+dealloc count: 88402
+total bytes alloc: 9064546 bytes
+total bytes dealloc: 4501 bytes
+largest alloc: 600039 bytes
+average alloc: 101 bytes
+num memory leaks: 616
+total bytes of memory leak: 9060855 bytes
+num memory leaks in map: 10
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(226):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 3896 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 20:22:14
+alloc count: 715899
+dealloc count: 715286
+total bytes alloc: 79373631 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 110 bytes
+num memory leaks: 620
+total bytes of memory leak: 79368372 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(226):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+
+num bytes of memory leak in map: 5464 bytes
+
+//===========================================================================================================
+Mem Use Log created on Saturday, February 6, 2016 21:56:45
+alloc count: 1787916
+dealloc count: 1787303
+total bytes alloc: 195761347 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 620
+total bytes of memory leak: 195756088 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(230):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 5464 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 21:01:24
+alloc count: 915684
+dealloc count: 915071
+total bytes alloc: 100672312 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 620
+total bytes of memory leak: 100667053 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\UDPSocket.cpp(230):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 5464 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 21:02:36
+alloc count: 544069
+dealloc count: 543456
+total bytes alloc: 59828984 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 620
+total bytes of memory leak: 59823725 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(230):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 5464 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 21:03:05
+alloc count: 522167
+dealloc count: 521554
+total bytes alloc: 57444623 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 110 bytes
+num memory leaks: 620
+total bytes of memory leak: 57439364 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\UDPSocket.cpp(230):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 5464 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 21:04:40
+alloc count: 1406003
+dealloc count: 1405390
+total bytes alloc: 155563652 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 110 bytes
+num memory leaks: 620
+total bytes of memory leak: 155558393 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+Networking\UDPSocket.cpp(231):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(46):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+
+num bytes of memory leak in map: 5464 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 22:06:34
+alloc count: 29042
+dealloc count: 27703
+total bytes alloc: 3937017 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 135 bytes
+num memory leaks: 1346
+total bytes of memory leak: 3934894 bytes
+num memory leaks in map: 191
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetworkSession.cpp(216):memory alloc: 160
+Networking\UDPSocket.cpp(230):memory alloc: 192
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Netw
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 22:50:57
+alloc count: 72008
+dealloc count: 68933
+total bytes alloc: 9875005 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 137 bytes
+num memory leaks: 3082
+total bytes of memory leak: 9872882 bytes
+num memory leaks in map: 625
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 1568
+Networking\NetConnection.cpp(34):memory alloc: 
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:06:30
+alloc count: 685707
+dealloc count: 685030
+total bytes alloc: 74874563 bytes
+total bytes dealloc: 9205 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 684
+total bytes of memory leak: 74866168 bytes
+num memory leaks in map: 23
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+
+num bytes of memory leak in map: 3058 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:08:07
+alloc count: 1410348
+dealloc count: 1409667
+total bytes alloc: 153066902 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 153056939 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetConnection.cpp(63):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:10:25
+alloc count: 1045591
+dealloc count: 1044911
+total bytes alloc: 113658076 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 687
+total bytes of memory leak: 113648113 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetConnection.cpp(66):memory alloc: 1568
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:13:57
+alloc count: 1142062
+dealloc count: 1141385
+total bytes alloc: 124137439 bytes
+total bytes dealloc: 12341 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 684
+total bytes of memory leak: 124125908 bytes
+num memory leaks in map: 23
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 3058 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:17:28
+alloc count: 2008620
+dealloc count: 2007937
+total bytes alloc: 302892542 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 150 bytes
+num memory leaks: 690
+total bytes of memory leak: 302882579 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Networking\NetConnection.cpp(44):memory alloc: 1568
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:18:57
+alloc count: 588843
+dealloc count: 588162
+total bytes alloc: 64451975 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 688
+total bytes of memory leak: 64442012 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Networking\NetConnection.cpp(46):memory alloc: 1568
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:22:26
+alloc count: 900258
+dealloc count: 899577
+total bytes alloc: 97917047 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 97907084 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetConnection.cpp(62):memory alloc: 1568
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetworkSession.cpp(218):memory alloc: 160
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:23:23
+alloc count: 968823
+dealloc count: 968132
+total bytes alloc: 133562991 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 137 bytes
+num memory leaks: 698
+total bytes of memory leak: 133553028 bytes
+num memory leaks in map: 26
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetConnection.cpp(78):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetConnection.cpp(78):memory alloc: 1568
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetConnection.cpp(62):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 7762 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:23:49
+alloc count: 640647
+dealloc count: 615502
+total bytes alloc: 85856491 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 134 bytes
+num memory leaks: 25152
+total bytes of memory leak: 85846528 bytes
+num memory leaks in map: 6140
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetConnection.cpp(55):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+Networking\NetConnection.cpp(55):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\s
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:25:38
+alloc count: 1385616
+dealloc count: 1384935
+total bytes alloc: 150450151 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 150440188 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetConnection.cpp(62):memory alloc: 1568
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:29:57
+alloc count: 1127767
+dealloc count: 1127086
+total bytes alloc: 122512160 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 122502197 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetConnection.cpp(65):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:34:16
+alloc count: 876651
+dealloc count: 875970
+total bytes alloc: 95366614 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 95356651 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetConnection.cpp(62):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:35:42
+alloc count: 1659915
+dealloc count: 1659234
+total bytes alloc: 180094899 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 180084936 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetConnection.cpp(62):memory alloc: 1568
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:36:42
+alloc count: 914096
+dealloc count: 913415
+total bytes alloc: 99558659 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 99548696 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetConnection.cpp(62):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:40:26
+alloc count: 1071135
+dealloc count: 1070455
+total bytes alloc: 116918873 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 687
+total bytes of memory leak: 116908910 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetConnection.cpp(62):memory alloc: 1568
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:41:07
+alloc count: 52326
+dealloc count: 51699
+total bytes alloc: 6087349 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 116 bytes
+num memory leaks: 634
+total bytes of memory leak: 6085226 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetworkSession.cpp(218):memory alloc: 160
+
+num bytes of memory leak in map: 1420 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:41:40
+alloc count: 58471
+dealloc count: 57844
+total bytes alloc: 6778609 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 115 bytes
+num memory leaks: 634
+total bytes of memory leak: 6776486 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 1420 bytes
+
+//===========================================================================================================
+Mem Use Log created on Sunday, February 7, 2016 23:44:10
+alloc count: 911516
+dealloc count: 910835
+total bytes alloc: 99139007 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 688
+total bytes of memory leak: 99129044 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetConnection.cpp(60):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 0:03:10
+alloc count: 893499
+dealloc count: 892810
+total bytes alloc: 97204903 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 696
+total bytes of memory leak: 97194940 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetConnection.cpp(62):memory alloc: 1568
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 0:03:58
+alloc count: 313809
+dealloc count: 313173
+total bytes alloc: 34409835 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 643
+total bytes of memory leak: 34407712 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(232):memory alloc: 192
+
+num bytes of memory leak in map: 1420 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 0:04:30
+alloc count: 1032575
+dealloc count: 1031884
+total bytes alloc: 152184190 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 147 bytes
+num memory leaks: 698
+total bytes of memory leak: 152174227 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetConnection.cpp(62):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 0:10:49
+alloc count: 566686
+dealloc count: 565995
+total bytes alloc: 84476733 bytes
+total bytes dealloc: 10773 bytes
+largest alloc: 600039 bytes
+average alloc: 149 bytes
+num memory leaks: 698
+total bytes of memory leak: 84466770 bytes
+num memory leaks in map: 24
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+Networking\NetworkSession.cpp(218):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetConnection.cpp(64):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+
+num bytes of memory leak in map: 4626 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:02:14
+alloc count: 125808
+dealloc count: 125185
+total bytes alloc: 14244740 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 113 bytes
+num memory leaks: 630
+total bytes of memory leak: 14242617 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(231):memory alloc: 160
+Networking\NetworkSession.cpp(231):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+
+num bytes of memory leak in map: 1100 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:32:05
+alloc count: 1167735
+dealloc count: 1167078
+total bytes alloc: 127312531 bytes
+total bytes dealloc: 7637 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 664
+total bytes of memory leak: 127305704 bytes
+num memory leaks in map: 17
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(238):memory alloc: 160
+Networking\NetworkSession.cpp(238):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 2713 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:36:24
+alloc count: 1193762
+dealloc count: 1193105
+total bytes alloc: 129965994 bytes
+total bytes dealloc: 7637 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 664
+total bytes of memory leak: 129959167 bytes
+num memory leaks in map: 17
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(238):memory alloc: 160
+Networking\NetworkSession.cpp(238):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 2713 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:47:42
+alloc count: 1294211
+dealloc count: 1293574
+total bytes alloc: 140972952 bytes
+total bytes dealloc: 4501 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 644
+total bytes of memory leak: 140969261 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(235):memory alloc: 160
+Networking\NetworkSession.cpp(235):memory alloc: 160
+
+num bytes of memory leak in map: 1120 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:48:21
+alloc count: 923708
+dealloc count: 923071
+total bytes alloc: 100725657 bytes
+total bytes dealloc: 4501 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 644
+total bytes of memory leak: 100721966 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Networking\NetworkSession.cpp(235):memory alloc: 160
+Networking\NetworkSession.cpp(235):memory alloc: 160
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 1120 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:49:07
+alloc count: 2371292
+dealloc count: 2370617
+total bytes alloc: 258315944 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 682
+total bytes of memory leak: 258310685 bytes
+num memory leaks in map: 20
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSession.cpp(235):memory alloc: 160
+Networking\NetworkSession.cpp(235):memory alloc: 160
+Networking\NetConnection.cpp(63):memory alloc: 1568
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(59):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\UDPSocket.cpp(232):memory alloc: 192
+
+num bytes of memory leak in map: 5869 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:52:07
+alloc count: 2218714
+dealloc count: 2218051
+total bytes alloc: 241488187 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 670
+total bytes of memory leak: 241482928 bytes
+num memory leaks in map: 18
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(59):memory alloc: 1568
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSession.cpp(244):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(244):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 4281 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 13:54:44
+alloc count: 10540143
+dealloc count: 10539477
+total bytes alloc: 1141791153 bytes
+total bytes dealloc: 4501 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 673
+total bytes of memory leak: 1141787462 bytes
+num memory leaks in map: 18
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(59):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 11
+Core\BinaryUtils.cpp(46):memory alloc: 8
+
+num bytes of memory leak in map: 2871 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 14:01:52
+alloc count: 85472
+dealloc count: 84846
+total bytes alloc: 9692220 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 113 bytes
+num memory leaks: 633
+total bytes of memory leak: 9690097 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Console\DevConsole.cpp(58):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+
+num bytes of memory leak in map: 1100 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 14:05:42
+alloc count: 7674869
+dealloc count: 7674206
+total bytes alloc: 834417031 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 670
+total bytes of memory leak: 834411772 bytes
+num memory leaks in map: 18
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(59):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+
+num bytes of memory leak in map: 4281 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 14:06:34
+alloc count: 877822
+dealloc count: 877159
+total bytes alloc: 95759606 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 670
+total bytes of memory leak: 95754347 bytes
+num memory leaks in map: 18
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(59):memory alloc: 1568
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+
+num bytes of memory leak in map: 4281 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 14:10:02
+alloc count: 1956571
+dealloc count: 1955908
+total bytes alloc: 213025390 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 670
+total bytes of memory leak: 213020131 bytes
+num memory leaks in map: 18
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(244):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetPacketQueue.hpp(59):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\UDPSocket.cpp(232):memory alloc: 192
+
+num bytes of memory leak in map: 4281 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 14:18:53
+alloc count: 12956856
+dealloc count: 12956189
+total bytes alloc: 1402163669 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 674
+total bytes of memory leak: 1402158410 bytes
+num memory leaks in map: 17
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\NetworkSystem.cpp(77):memory alloc: 1568
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+
+num bytes of memory leak in map: 4456 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 15:14:44
+alloc count: 9803853
+dealloc count: 9803193
+total bytes alloc: 1258564560 bytes
+total bytes dealloc: 4501 bytes
+largest alloc: 600039 bytes
+average alloc: 128 bytes
+num memory leaks: 667
+total bytes of memory leak: 1258560869 bytes
+num memory leaks in map: 14
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(244):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+
+num bytes of memory leak in map: 2708 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 15:17:34
+alloc count: 8093135
+dealloc count: 8092444
+total bytes alloc: 872056421 bytes
+total bytes dealloc: 7637 bytes
+largest alloc: 600039 bytes
+average alloc: 107 bytes
+num memory leaks: 698
+total bytes of memory leak: 872049594 bytes
+num memory leaks in map: 21
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Core\BinaryUtils.cpp(46):memory alloc: 25
+Core\BinaryUtils.cpp(46):memory alloc: 28
+Core\BinaryUtils.cpp(46):memory alloc: 25
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+
+num bytes of memory leak in map: 2952 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 15:24:19
+alloc count: 6560611
+dealloc count: 6559928
+total bytes alloc: 707895067 bytes
+total bytes dealloc: 7637 bytes
+largest alloc: 600039 bytes
+average alloc: 107 bytes
+num memory leaks: 690
+total bytes of memory leak: 707888240 bytes
+num memory leaks in map: 19
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 2893 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 15:25:29
+alloc count: 2271109
+dealloc count: 2270426
+total bytes alloc: 245007535 bytes
+total bytes dealloc: 7637 bytes
+largest alloc: 600039 bytes
+average alloc: 107 bytes
+num memory leaks: 690
+total bytes of memory leak: 245000708 bytes
+num memory leaks in map: 19
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+
+num bytes of memory leak in map: 2893 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 15:27:56
+alloc count: 1812721
+dealloc count: 1812070
+total bytes alloc: 195486850 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 107 bytes
+num memory leaks: 658
+total bytes of memory leak: 195484727 bytes
+num memory leaks in map: 13
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Networking\NetworkSession.cpp(244):memory alloc: 160
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(232):memory alloc: 192
+
+num bytes of memory leak in map: 1280 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 15:42:30
+alloc count: 5940369
+dealloc count: 5939702
+total bytes alloc: 649031851 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 674
+total bytes of memory leak: 649026592 bytes
+num memory leaks in map: 15
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Networking\NetworkSession.cpp(253):memory alloc: 160
+Networking\NetworkSession.cpp(253):memory alloc: 160
+Networking\NetworkSession.cpp(253):memory alloc: 160
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\NetConnection.cpp(63):memory alloc: 1568
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\UDPSocket.cpp(232):memory alloc: 192
+
+num bytes of memory leak in map: 2868 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 16:00:37
+alloc count: 5473306
+dealloc count: 5472658
+total bytes alloc: 597810388 bytes
+total bytes dealloc: 6069 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 655
+total bytes of memory leak: 597805129 bytes
+num memory leaks in map: 12
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(253):memory alloc: 168
+Networking\NetworkSession.cpp(253):memory alloc: 168
+
+num bytes of memory leak in map: 1136 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 16:13:26
+alloc count: 450211
+dealloc count: 449574
+total bytes alloc: 49116955 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 109 bytes
+num memory leaks: 644
+total bytes of memory leak: 49114832 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetworkSession.cpp(253):memory alloc: 168
+Networking\NetworkSession.cpp(253):memory alloc: 168
+
+num bytes of memory leak in map: 1116 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 16:13:31
+alloc count: 84039
+dealloc count: 83403
+total bytes alloc: 9487105 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 112 bytes
+num memory leaks: 643
+total bytes of memory leak: 9484982 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Networking\NetworkSession.cpp(253):memory alloc: 168
+Networking\NetworkSession.cpp(253):memory alloc: 168
+
+num bytes of memory leak in map: 1116 bytes
+
+//===========================================================================================================
+Mem Use Log created on Monday, February 8, 2016 17:20:21
+alloc count: 1425095
+dealloc count: 1424458
+total bytes alloc: 155011064 bytes
+total bytes dealloc: 2933 bytes
+largest alloc: 600039 bytes
+average alloc: 108 bytes
+num memory leaks: 644
+total bytes of memory leak: 155008941 bytes
+num memory leaks in map: 11
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\Text\TextSystem.cpp(841):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\sd6\a3_udp_session\gamecode\world.cpp(36):memory alloc: 12
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Networking\NetworkSession.cpp(255):memory alloc: 168
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+
+num bytes of memory leak in map: 1116 bytes
+
+//===========================================================================================================
+Mem Use Log created on Tuesday, February 9, 2016 15:05:17
+alloc count: 110405
+dealloc count: 109769
+total bytes alloc: 12353362 bytes
+total bytes dealloc: 2865 bytes
+largest alloc: 600039 bytes
+average alloc: 111 bytes
+num memory leaks: 642
+total bytes of memory leak: 12351275 bytes
+num memory leaks in map: 12
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+World.cpp(36):memory alloc: 12
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(51):memory alloc: 144
+Networking\UDPSocket.cpp(232):memory alloc: 192
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(72):memory alloc: 264
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Networking\NetworkSession.cpp(255):memory alloc: 168
+
+num bytes of memory leak in map: 1284 bytes
+
+//===========================================================================================================
+Mem Use Log created on Tuesday, February 9, 2016 15:14:52
+alloc count: 5174705
+dealloc count: 5174012
+total bytes alloc: 749234461 bytes
+total bytes dealloc: 10969 bytes
+largest alloc: 1092459 bytes
+average alloc: 144 bytes
+num memory leaks: 699
+total bytes of memory leak: 749224270 bytes
+num memory leaks in map: 26
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+World.cpp(36):memory alloc: 12
+d:\perforce\personal\albertc\projects\guildhall\engine\networking\NetworkSystem.hpp(56):memory alloc: 144
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Networking\NetConnection.cpp(68):memory alloc: 1568
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 12
+
+num bytes of memory leak in map: 4254 bytes
+
+//===========================================================================================================
+Mem Use Log created on Tuesday, February 9, 2016 15:16:26
+alloc count: 2338350
+dealloc count: 2337666
+total bytes alloc: 247100620 bytes
+total bytes dealloc: 11113 bytes
+largest alloc: 1092459 bytes
+average alloc: 105 bytes
+num memory leaks: 690
+total bytes of memory leak: 247090285 bytes
+num memory leaks in map: 25
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Networking\NetworkSession.cpp(255):memory alloc: 168
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Networking\UDPSocket.cpp(232):memory alloc: 192
+World.cpp(36):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Networking\NetConnection.cpp(68):memory alloc: 1568
+
+num bytes of memory leak in map: 4110 bytes
+
+//===========================================================================================================
+Mem Use Log created on Tuesday, February 9, 2016 15:25:20
+alloc count: 1889328
+dealloc count: 1888645
+total bytes alloc: 200070518 bytes
+total bytes dealloc: 11113 bytes
+largest alloc: 1092459 bytes
+average alloc: 105 bytes
+num memory leaks: 689
+total bytes of memory leak: 200060183 bytes
+num memory leaks in map: 25
+Renderer\MeshRenderer.cpp(18):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Renderer\Text\TextSystem.cpp(875):memory alloc: 20
+Networking\NetworkSession.cpp(262):memory alloc: 168
+Networking\NetworkSession.cpp(262):memory alloc: 168
+Networking\NetworkSession.cpp(262):memory alloc: 168
+Renderer\MeshRenderer.cpp(19):memory alloc: 88
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Core\BinaryUtils.cpp(46):memory alloc: 9
+Core\BinaryUtils.cpp(46):memory alloc: 12
+Networking\NetworkSystem.cpp(71):memory alloc: 1568
+Networking\UDPSocket.cpp(232):memory alloc: 192
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+Core\BinaryUtils.cpp(124):memory alloc: 2
+World.cpp(36):memory alloc: 12
+Networking\NetConnection.cpp(68):memory alloc: 1568
+
+num bytes of memory leak in map: 4110 bytes

@@ -5,8 +5,7 @@
 
 #include "InputSystem.hpp"
 #include "Engine\Console\DevConsole.hpp"
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+
 #include <Windowsx.h>
 #include <Xinput.h> // include the Xinput API
 #pragma comment( lib, "xinput" ) // Link in the xinput.lib static library

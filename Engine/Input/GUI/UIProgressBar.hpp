@@ -3,7 +3,7 @@
 //by Albert Chen Sep-1-2015.
 //==============================================================================================================
 
-#include "Engine\Renderer\OGLRenderingUtils.hpp"
+//#include "Engine\Renderer\OGLRenderingUtils.hpp"
 #include "Engine\Renderer\OpenGLRenderer.hpp"
 
 #include "UIElement.hpp"

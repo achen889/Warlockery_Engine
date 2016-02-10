@@ -10,7 +10,7 @@
 
 //-----------------------------------------------------------------------------------------------------------
 
-void ModelViewMatrix::SetRotationDegrees3D(EulerAngles rotationDegrees3D){
+void ModelViewMatrix::SetRotationDegrees3D(const EulerAngles& rotationDegrees3D){
 	
 	Matrix4 modelViewRollRotationX;
 	modelViewRollRotationX.RotateDegreesAboutX(rotationDegrees3D.rollDegreesAboutX);

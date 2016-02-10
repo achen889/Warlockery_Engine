@@ -8,24 +8,32 @@
 #ifndef _included_OpenGLRenderer__
 #define _included_OpenGLRenderer__
 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
 #include <vector>
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
-#include "Engine\Math\EngineMath.hpp"
-#include "Engine\Math\Vector3.hpp"
-#include "Engine\Renderer\Texture.hpp"
-#include "Engine\Math\Disc2.hpp"
-#include "Engine\Math\AABB2.hpp"
-#include "Engine\Core\Rgba.hpp"
-#include "Engine\Math\EulerAngles.hpp"
-#include "Engine\Renderer\Camera3D.hpp"
-#include "Engine\Renderer\glext.h"
-#include "Engine\Math\Sphere3.hpp"
-#include "Engine\Math\LineSegment3.hpp"
-#include "Engine\Math\AABB3.hpp"
-#include "Engine\Math\MatrixUtils.hpp"
+#include "Engine/Renderer\Texture.hpp"
+#include "Engine/Renderer\Camera3D.hpp"
+#include "Engine/Renderer\glext.h"
+#include "Engine/Renderer/Vertex3D.hpp"
+#include "Engine/Renderer/ShaderWizard.hpp"
+#include "Engine/Core/Rgba.hpp"
+//math
+#include "Engine/Math/EngineMath.hpp"
+#include "Engine/Math/Vector3.hpp"
+#include "Engine/Math/Disc2.hpp"
+#include "Engine/Math/AABB2.hpp"
+#include "Engine/Math/EulerAngles.hpp"
+#include "Engine/Math/Sphere3.hpp"
+#include "Engine/Math/LineSegment3.hpp"
+#include "Engine/Math/AABB3.hpp"
+#include "Engine/Math/MatrixUtils.hpp"
+
+
+//===========================================================================================================
 
 static const Matrix4 basisYZX(
 	Vector4(0, 1, 0, 0), //xRIGHT -> yRIGHT //basis for shader
@@ -109,10 +117,49 @@ extern PFNGLDELETESAMPLERSPROC glDeleteSamplers;
 extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 extern PFNGLBINDSAMPLERPROC glBindSampler;
 
-struct VertexArrayObject;
-struct Vertex3D;
+//===========================================================================================================
+///----------------------------------------------------------------------------------------------------------
+///pre declaration
+
 class Material;
-struct GLSampler;
+
+//===========================================================================================================
+///----------------------------------------------------------------------------------------------------------
+///Legacy VAO class used for rendering
+
+struct VertexArrayObject {
+public:
+	unsigned int m_vaoID;
+	unsigned int m_vboID;
+	Vertex3Ds m_vertexArray;
+	unsigned int m_drawMode;
+
+	unsigned int m_Program;
+	GLSampler m_glSampler;
+	unsigned int m_samplerID;
+
+	bool m_samplerIsValid = false;
+
+	VertexArrayObject() {
+		//do nothing
+	}
+
+	void SetSampler(unsigned int minFilter, unsigned int magFilter, unsigned int uWrap, unsigned int vWrap);
+
+	void SetIsUsingSampler(bool usingSampler) { m_samplerIsValid = usingSampler; }
+
+	size_t CalcVAOSize() { return sizeof(Vertex3D) * m_vertexArray.size(); }
+
+	void SetDrawMode(unsigned int drawMode) { m_drawMode = drawMode; }
+
+};
+
+//-----------------------------------------------------------------------------------------------------------
+///----------------------------------------------------------------------------------------------------------
+///inline methods
+
+
+//===========================================================================================================
 
 typedef std::vector<Vertex3D> Vertex3Ds;
 
@@ -146,6 +193,7 @@ public:
 
 	//Initialize Shader Methods
 	void InitializeShaders();
+
 	//legacy
 	void InitializeVAO(VertexArrayObject& myVAO, const char* vertFile, const char* fragFile);
 	void InitializeVAOWithVertexArrayBuffer(VertexArrayObject& myVAO);

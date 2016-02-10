@@ -31,14 +31,79 @@ typedef unsigned char Byte;
 
 //===========================================================================================================
 
+//data is a value not a ptr
+#define WRITE_BYTES(data) WriteBytes((void*)&data, SIZE_OF(data))
+
+struct ByteBuffer{
+	Byte* buffer = NULL;
+	size_t curSize = 0;
+	size_t maxSize;
+	size_t writeIndex = 0;
+	size_t readIndex = 0;
+
+	~ByteBuffer() {
+		//delete the buffer
+	}
+
+	void Set(Byte* newBuffer, size_t max_size) {
+		buffer = newBuffer;
+		maxSize = max_size;
+	}
+
+	const Byte* GetBuffer() const { return buffer; }
+
+	const size_t GetBufferLength() const { return curSize;  }
+
+	//writes to end of buffer, true means was enough room, false: not enough room
+	bool WriteBytes(void* data, size_t dataSize);
+
+	//reads from buffer copying data up to size into data
+	//number of bytes read, should equal size 
+	size_t ReadBytes(void* data, size_t dataSize);
+
+	//gets the buffer as a series of hex values
+	std::string ToStringAsBase(int numberBase ) {
+		if (buffer) {
+			std::string bufferDebugString = "";
+			for (size_t i = 0; i < curSize; i++) {
+				int bufferVal = buffer[i];
+				bufferDebugString += IntToString(bufferVal, numberBase) + ":";
+			}
+			bufferDebugString += "";
+
+			return bufferDebugString;
+		}
+		return "";
+	}
+
+
+};
+
+inline std::string GetBufferAsNumbers(const Byte* buffer, size_t bufferLen , int numBase) {
+	if (buffer) {
+		std::string bufferDebugString = "";
+		for (size_t i = 0; i < bufferLen; i++) {
+			int bufferVal = buffer[i];
+			bufferDebugString += IntToString(bufferVal, numBase) + ":";
+		}
+		bufferDebugString += "";
+
+		return bufferDebugString;
+	}
+	return "";
+}
+
+
+//===========================================================================================================
+
 class BinaryBufferParser{
 public:
 	//constructors
 	BinaryBufferParser();
 	~BinaryBufferParser();
 	
-	BinaryBufferParser(const unsigned char* buffer, size_t bufferSize);
-	BinaryBufferParser(std::vector<unsigned char> bytes);
+	BinaryBufferParser(const Byte* buffer, size_t bufferSize);
+	BinaryBufferParser(std::vector<Byte> bytes);
 
 	//Read primitive methods
 	int ReadNextInt();
@@ -313,6 +378,8 @@ public:
 	//output
 
 	std::string ByteVectorToString(bool useHex = false);
+	void CopyByteVectorToByteBuffer(Byte* bufferToCopyTo, size_t bufferToCopyToSize);
+
 	//write buffer
 	void WriteBufferToFile(const std::string& filePath );
 	void WriteBufferToFile();
@@ -320,6 +387,7 @@ public:
 	void LoadExistingBufferToByteVector(const unsigned char* buffer, bool clearByteVector = false);
 
 	//Write primitive types methods
+	
 	void WriteIntToBuffer(const int& intToWrite);
 	void WriteUIntToBuffer(const unsigned int& intToWrite);
 
@@ -328,6 +396,7 @@ public:
 
 	void WriteCharToBuffer(const char& charToWrite);
 	void WriteUCharToBuffer(const unsigned char& charToWrite);
+	void WriteByteToBuffer(const Byte& byteToWrite);
 
 	void WriteFloatToBuffer(const float& floatToWrite);
 	void WriteDoubleToBuffer(const double& doubleToWrite);
@@ -343,7 +412,7 @@ public:
 	void WriteMatrix4ToBuffer(Matrix4 matrixToWrite);
 
 	//vars
-	std::vector<unsigned char> m_bufferDataBytes;
+	std::vector<Byte> m_bufferDataBytes;
 	std::string m_filePath;
 	size_t m_currentIndex = 0;
 	size_t m_currentBufferSize = 0;
@@ -380,6 +449,12 @@ inline void BinaryBufferBuilder::WriteUCharToBuffer(const unsigned char& charToW
 
 	m_bufferDataBytes.push_back(charBytes[0]);
 	m_currentIndex++;
+}
+
+inline void BinaryBufferBuilder::WriteByteToBuffer(const Byte& byteToWrite) {
+
+	WriteUCharToBuffer(byteToWrite); 
+
 }
 
 inline void BinaryBufferBuilder::WriteBoolToBuffer(const bool& boolToWrite){

@@ -15,7 +15,7 @@
 MeshRenderer::MeshRenderer(){
 	m_vaoID = CreateVertexArrayObject();
 
-	m_mesh = new Mesh();
+	m_mesh = new Mesh(); //mem leak here
 	m_material = new Material();
 
 }
@@ -57,6 +57,7 @@ void MeshRenderer::InitializeMeshRenderer(const Mesh& mesh, const Material& mate
 
 void MeshRenderer::InitializeCoordinateAxesMeshRenderer(const int& length){
 	m_mesh->InitializeMeshCoordinateAxes(length);
+
 	m_material->InitializeMaterial("Data/Shaders/basic.vert", "Data/Shaders/basic.frag");
 	m_material->m_samplerInUse = false;
 	BindVertexArray();
@@ -267,7 +268,7 @@ void MeshRenderer::RenderMesh2D(ModelViewMatrix* modelView, Light* light){
 
 //this one works and is even used for mesh 2d
 void MeshRenderer::RenderMesh(Camera3D& camera, bool isPerspective, Light* light, ModelViewMatrix* modelView){
-
+	PROFILE_SECTION();
 	if (theOGLRenderer){
 		//PROFILE_START("PrepareMesh");
 		//binds material shader and all the uniforms I might ever need
@@ -280,7 +281,6 @@ void MeshRenderer::RenderMesh(Camera3D& camera, bool isPerspective, Light* light
 
 		//PROFILE_STOP();
 
-		//theOGLRenderer->PrepareMaterialShaderForRendering(*m_material, camera, isPerspective);
 		//if it has a texture and sampler
 		if (m_material->m_samplerInUse){
 

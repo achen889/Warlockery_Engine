@@ -9,7 +9,9 @@
 #ifndef _included_SystemClockWin32__
 #define _included_SystemClockWin32__
 
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+
 #include <stdio.h>
 #include <string>
 

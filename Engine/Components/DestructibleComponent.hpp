@@ -39,7 +39,7 @@ public:
 
 	virtual void Update(double deltaSeconds);
 	
-private:
+protected:
 	//vars
 	int m_currentHealth;
 	int m_maxHealth;

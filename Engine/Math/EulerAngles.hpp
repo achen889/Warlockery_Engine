@@ -4,10 +4,11 @@
 //==============================================================================================================
 
 #pragma once
-#include "Vector3.hpp"
 
 #ifndef _included_EulerAngles__
 #define _included_EulerAngles__
+
+#include "Vector3.hpp"
 
 class EulerAngles{
 public:

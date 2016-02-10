@@ -77,7 +77,6 @@ void RunCommand(const std::string& commandName, ConsoleArguments* args ){
 //-----------------------------------------------------------------------------------------------------------
 
 
-
 //===========================================================================================================
 
 void AdjustBufferTextForExecution(std::string& bufferText){

@@ -1,0 +1,1 @@
+export with 32 scale on the color channels to get the full stuff, otherwise it can only be GL_Red

@@ -20,6 +20,17 @@ m_elementRenderer(NULL)
 
 //-----------------------------------------------------------------------------------------------------------
 
+UIElement::~UIElement() {
+	//do nothing
+	if (m_elementRenderer) {
+		delete m_elementRenderer;
+	}
+
+}
+
+
+//-----------------------------------------------------------------------------------------------------------
+
 UIElement::UIElement(const Vector2& screenPosition, const Vector2& newSize, const Vector2& scaleFactor, const Rgba& elementColor) :
 m_screenCoordinates(screenPosition),
 m_scaleFactor(scaleFactor),

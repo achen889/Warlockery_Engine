@@ -2,9 +2,11 @@
 //Time.cpp
 //by Albert Chen Jan-27-2015.
 //==============================================================================================================
-#include <windows.h>
+
 #include "Engine/Core/Time.hpp"
 #include "Engine/Console/DevConsole.hpp"
+
+#include "SystemClockWin32.hpp"
 
 double g_secondsPerTick;
 
@@ -57,8 +59,8 @@ double GetDeltaSeconds(){
 
 //===========================================================================================================
 
-float GetFramesPerSecond(){
-	return 1.0f / (float)GetDeltaSeconds();
+double GetFramesPerSecond(){
+	return 1.0 / GetDeltaSeconds();
 }
 
 //===========================================================================================================

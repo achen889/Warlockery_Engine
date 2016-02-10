@@ -32,8 +32,8 @@ SoundSystem::~SoundSystem(){
 
 void SoundSystem::StartUp(){
 	
-	static CkConfig ckConfig;
-	CkInit(&ckConfig);
+	//static CkConfig ckConfig;
+	//CkInit(&ckConfig);
 
 	m_workingDirectory = _getcwd(NULL, 0 );
 	m_workingDirectory+="/";
@@ -46,7 +46,7 @@ void SoundSystem::StartUp(){
 
 void SoundSystem::Update(){
 
-	CkUpdate();
+	//CkUpdate();
 
 	
 	//for every sound instance loop through sounds and reset what needs to be reset
@@ -66,7 +66,7 @@ void SoundSystem::Update(){
 
 void SoundSystem::ShutDown(){
 
-	CkShutdown();
+	//CkShutdown();
 
 }
 
@@ -84,7 +84,7 @@ SoundID SoundSystem::LoadStreamingSound(const std::string& streamingSoundPath,  
 		Sound* newSound = new Sound(fullPath );
 
 		while(!newSound->IsReady() ){
-			CkUpdate();
+			//CkUpdate();
 		}
 
 		if(newSound->IsValid()){

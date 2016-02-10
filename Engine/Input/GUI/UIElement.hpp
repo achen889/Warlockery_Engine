@@ -9,7 +9,9 @@
 #define _included_UIElement__
 
 #include "Engine/Math/Math2D.hpp"
-#include "Engine/Renderer/OGLRenderingUtils.hpp"
+
+#include "Engine/Renderer/MeshRenderer.hpp"
+//#include "Engine/Renderer/OGLRenderingUtils.hpp"
 
 //===========================================================================================================
 
@@ -23,6 +25,7 @@ static int elementID = 0;
 struct MeshRenderer;
 class OpenGLRenderer;
 enum MouseButtonID;
+struct ModelViewMatrix;
 
 //UI anchor constants
 // static const Vector2 UI_SCREEN_SIZE = Vector2(theOGLRenderer->GetDisplayWidth(), theOGLRenderer->GetDisplayHeight());
@@ -97,14 +100,6 @@ typedef std::vector<UIElement*>::iterator UIElementsIterator;
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods
-
-inline UIElement::~UIElement(){
-	//do nothing
-	if (m_elementRenderer){
-		delete m_elementRenderer;
-	}
-	
-}
 
 //-----------------------------------------------------------------------------------------------------------
 ///----------------------------------------------------------------------------------------------------------

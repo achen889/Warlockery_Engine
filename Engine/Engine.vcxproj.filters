@@ -70,26 +70,23 @@
     <Filter Include="Renderer\MeshRenderer">
       <UniqueIdentifier>{d1427a0d-b63e-4cce-85d6-96f7029677c8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components">
-      <UniqueIdentifier>{bd75f9fd-17c0-4799-aeb8-7a16b150d4be}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Components\ComponentTypes">
-      <UniqueIdentifier>{2c0e7c5c-ed49-4bbc-96c1-a3fd508dbcaf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Entity">
-      <UniqueIdentifier>{c1bde653-935d-4e94-9bd5-3456b8352ebd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Core\Event">
       <UniqueIdentifier>{6c54bbf0-07be-4607-be56-3689a89b9941}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Map">
-      <UniqueIdentifier>{24216a1d-2675-4b11-8b88-59542981819b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Map\Pathfinding">
-      <UniqueIdentifier>{0f47fed6-c7e5-4cf6-83a4-4cec919d57ef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Networking">
       <UniqueIdentifier>{13fc1002-fb9e-4088-9f49-b37212e333c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{c330844b-64c2-453a-aba8-2d4ee8200334}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\RenderComponents">
+      <UniqueIdentifier>{36f36eee-3b4f-49ef-8e87-ad519666e405}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Collision">
+      <UniqueIdentifier>{9895dc16-14f7-4c13-8e95-0e8d192c0e11}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Physics">
+      <UniqueIdentifier>{ef447e86-2d5c-429c-a0be-ed046286958f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -197,9 +194,6 @@
     </ClInclude>
     <ClInclude Include="Math\MathCommands.hpp">
       <Filter>Math</Filter>
-    </ClInclude>
-    <ClInclude Include="Renderer\OGLRenderingUtils.hpp">
-      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Camera3D.hpp">
       <Filter>Renderer</Filter>
@@ -309,61 +303,16 @@
     <ClInclude Include="Renderer\MeshRenderer.hpp">
       <Filter>Renderer\MeshRenderer</Filter>
     </ClInclude>
-    <ClInclude Include="Components\RenderComponent.hpp">
-      <Filter>Components\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\BaseComponent.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer\ShaderWizard.hpp">
       <Filter>Renderer\MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Renderer\Vertex3D.hpp">
       <Filter>Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="Components\DestructibleComponent.hpp">
-      <Filter>Components\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity\Entity.hpp">
-      <Filter>Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Components\PhysicsMotionComponent.hpp">
-      <Filter>Components\ComponentTypes</Filter>
-    </ClInclude>
     <ClInclude Include="Core\EventCallback.hpp">
       <Filter>Core\Event</Filter>
     </ClInclude>
-    <ClInclude Include="Map\Tile.hpp">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\TileState.hpp">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Map.hpp">
-      <Filter>Map</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Pathfinding\Path.hpp">
-      <Filter>Map\Pathfinding</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Pathfinding\Pathfinder.hpp">
-      <Filter>Map\Pathfinding</Filter>
-    </ClInclude>
-    <ClInclude Include="Map\Pathfinding\PathNode.hpp">
-      <Filter>Map\Pathfinding</Filter>
-    </ClInclude>
     <ClInclude Include="Networking\NetworkSystem.hpp">
-      <Filter>Networking</Filter>
-    </ClInclude>
-    <ClInclude Include="Networking\ConnectionSocket.hpp">
-      <Filter>Networking</Filter>
-    </ClInclude>
-    <ClInclude Include="Networking\ServerThread.hpp">
-      <Filter>Networking</Filter>
-    </ClInclude>
-    <ClInclude Include="Networking\NetworkCommon.hpp">
-      <Filter>Networking</Filter>
-    </ClInclude>
-    <ClInclude Include="Networking\ClientThread.hpp">
       <Filter>Networking</Filter>
     </ClInclude>
     <ClInclude Include="Sound\EngineSound.hpp">
@@ -374,6 +323,54 @@
     </ClInclude>
     <ClInclude Include="Sound\SoundSystem.hpp">
       <Filter>Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\NetworkSession.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\UDPSocket.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\NetPacketQueue.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\NetPacket.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\NetAddress.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\NetConnection.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\NetMessage.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\BaseComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\ClockComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\DestructibleComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderComponents\Render2DComponent.hpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderComponents\Render3DComponent.hpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\RenderComponents\RenderComponent.hpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TransformComponents\RigidBodyComponent.hpp">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TransformComponents\TransformComponent.hpp">
+      <Filter>Components\Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionComponents\ColliderComponent.hpp">
+      <Filter>Components\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -460,9 +457,6 @@
     </ClCompile>
     <ClCompile Include="Math\MathCommands.cpp">
       <Filter>Math</Filter>
-    </ClCompile>
-    <ClCompile Include="Renderer\OGLRenderingUtils.cpp">
-      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Camera3D.cpp">
       <Filter>Renderer</Filter>
@@ -566,58 +560,16 @@
     <ClCompile Include="Renderer\MeshRenderer.cpp">
       <Filter>Renderer\MeshRenderer</Filter>
     </ClCompile>
-    <ClCompile Include="Components\RenderComponent.cpp">
-      <Filter>Components\ComponentTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\BaseComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer\ShaderWizard.cpp">
       <Filter>Renderer\MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Renderer\Vertex3D.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="Components\DestructibleComponent.cpp">
-      <Filter>Components\ComponentTypes</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity\Entity.cpp">
-      <Filter>Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Components\PhysicsMotionComponent.cpp">
-      <Filter>Components\ComponentTypes</Filter>
-    </ClCompile>
     <ClCompile Include="Core\EventCallback.cpp">
       <Filter>Core\Event</Filter>
     </ClCompile>
-    <ClCompile Include="Map\Tile.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\TileState.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Map.cpp">
-      <Filter>Map</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Pathfinding\Path.cpp">
-      <Filter>Map\Pathfinding</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Pathfinding\Pathfinder.cpp">
-      <Filter>Map\Pathfinding</Filter>
-    </ClCompile>
-    <ClCompile Include="Map\Pathfinding\PathNode.cpp">
-      <Filter>Map\Pathfinding</Filter>
-    </ClCompile>
     <ClCompile Include="Networking\NetworkSystem.cpp">
-      <Filter>Networking</Filter>
-    </ClCompile>
-    <ClCompile Include="Networking\ConnectionSocket.cpp">
-      <Filter>Networking</Filter>
-    </ClCompile>
-    <ClCompile Include="Networking\ServerThread.cpp">
-      <Filter>Networking</Filter>
-    </ClCompile>
-    <ClCompile Include="Networking\ClientThread.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
     <ClCompile Include="Sound\Sound.cpp">
@@ -625,6 +577,51 @@
     </ClCompile>
     <ClCompile Include="Sound\SoundSystem.cpp">
       <Filter>Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="Networking\NetworkSession.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Networking\UDPSocket.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Networking\NetPacket.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Networking\NetAddress.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Networking\NetConnection.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Networking\NetMessage.cpp">
+      <Filter>Networking</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\BaseComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\ClockComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\DestructibleComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RenderComponents\Render2DComponent.cpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RenderComponents\Render3DComponent.cpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\RenderComponents\RenderComponent.cpp">
+      <Filter>Components\RenderComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TransformComponents\RigidBodyComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TransformComponents\TransformComponent.cpp">
+      <Filter>Components\Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CollisionComponents\ColliderComponent.cpp">
+      <Filter>Components\Collision</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

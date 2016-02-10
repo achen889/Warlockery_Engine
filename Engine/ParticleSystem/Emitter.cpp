@@ -60,14 +60,15 @@ void Emitter::PushParticleToParticleSystem(Particles& particlesToUpdate, const f
 
 	//spawn one set!
 	for (unsigned int i = 0; i < m_particlesPerSpawn; i++){
-		particlesToUpdate.push_back(new Particle(m_position, m_effect->GetInitialVelocity(), m_color, m_is2D));
+		particlesToUpdate.push_back(Particle(m_position, m_effect->GetInitialVelocity(), m_color, m_is2D));
+		Particle& particleToPush = particlesToUpdate.back();
 		//additional things
-		particlesToUpdate.back()->SetLifeSpanSeconds(newLifeSpanSeconds);
+		particleToPush.SetLifeSpanSeconds(newLifeSpanSeconds);
 		if (m_color == Rgba::BLACK){
-			particlesToUpdate.back()->SetColor(GetRandomColor());
+			particleToPush.SetColor(GetRandomColor());
 		}
 		//particlesToUpdate.back()->SetColor(GetRandomColor());
-		particlesToUpdate.back()->m_state.forces = m_effect->GetForce(*particlesToUpdate.back());
+		particleToPush.m_state.forces = m_effect->GetForce(particleToPush);
 	}
 
 	m_secondsTillParticleSpawn = 0.0f;

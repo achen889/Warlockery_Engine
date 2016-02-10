@@ -18,8 +18,9 @@ m_state(State(position, initVel, color, is2DMode))
 ///----------------------------------------------------------------------------------------------------------
 ///update
 
-void Particle::Update(double deltaSeconds){
-	PROFILE_SECTION();
+void Particle::Update(const double& deltaSeconds){
+	//PROFILE_SECTION();
+
 	m_state.secondsSinceSpawn += (float)deltaSeconds;
 	//if particle is past it's lifespan
 	if (!m_state.IsDead()){

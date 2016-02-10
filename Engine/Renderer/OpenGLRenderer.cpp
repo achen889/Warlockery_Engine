@@ -4,14 +4,16 @@
 //==============================================================================================================
 //declarations here
 //==============================================================================================================
-#include "Engine\Renderer\OpenGLRenderer.hpp"
-#include "Engine\ParticleSystem\ParticleSystem.hpp"
-#include "Engine\Core\Time.hpp"
-#include "Engine\Input\InputSystem.hpp"
-#include "Engine\Math\Math3D.hpp"
-#include "Engine\Console\DevConsole.hpp"
-#include "Engine\Renderer\Text\TextSystem.hpp"
-#include "Engine\Renderer\OGLRenderingUtils.hpp"
+#include "Engine/Renderer/OpenGLRenderer.hpp"
+#include "Engine/ParticleSystem/ParticleSystem.hpp"
+#include "Engine/Core/Time.hpp"
+#include "Engine/Input/InputSystem.hpp"
+#include "Engine/Math/AABB2.hpp"
+#include "Engine/Console/DevConsole.hpp"
+#include "Engine/Renderer/Text/TextSystem.hpp"
+
+
+//#include "Engine\Renderer\OGLRenderingUtils.hpp"
 
 // Globals "function pointer" variables
 PFNGLGENBUFFERSPROC		glGenBuffers		= nullptr;
@@ -215,7 +217,8 @@ std::string OpenGLRenderer::GLTranslateErrorCode(const GLenum& errorCode){
 //===========================================================================================================
 
 void OpenGLRenderer::InitializeShaders(){
-	//do something here
+	//get the shader wizard to do cool stuff
+	LoadAllShadersFromFiles();
 }
 
 //===========================================================================================================
@@ -232,6 +235,13 @@ void OpenGLRenderer::InitializeVAOWithVertexArrayBuffer(VertexArrayObject& myVAO
 
 void OpenGLRenderer::InitializeVAOWithShader(VertexArrayObject& myVAO, const char* vertFile, const char* fragFile){
 	myVAO.m_Program = LoadProgram(vertFile, fragFile);
+}
+
+void VertexArrayObject::SetSampler(unsigned int minFilter, unsigned int magFilter, unsigned int uWrap, unsigned int vWrap) {
+	m_glSampler.SetGLSamplerData(minFilter, magFilter, uWrap, vWrap);
+	if (theOGLRenderer) {
+		m_samplerID = theOGLRenderer->CreateSampler(m_glSampler);
+	}
 }
 
 int g_BufferCount = 0;
@@ -753,6 +763,7 @@ void OpenGLRenderer::DisableShaderProgram(){
 void OpenGLRenderer::BindViewMatricesToProgram(GLuint& programBinding, const Matrix4& viewMatrix, const Matrix4& perspectiveMatrix){
 	ProgramBindMatrix(programBinding, "gView", viewMatrix);
 	ProgramBindMatrix(programBinding, "gProj", perspectiveMatrix);
+	ProgramBindMatrix(programBinding, "gModel", IDENTITY_MATRIX);
 }
 
 void OpenGLRenderer::BindCameraTransformToProgram(GLuint& programBinding, Camera3D& camera){
@@ -968,7 +979,7 @@ void OpenGLRenderer::StartUp( HWND windowHandle ){
 	m_windowHandle = windowHandle;
 	m_deviceContext = GetDC( windowHandle );
 
-	ConsolePrintf("\n\n===OpenGL Renderer Start Up===\n");
+	ConsolePrintf("\n===OpenGL Renderer Start Up===\n");
 
 	CreateOpenGLRenderingContext();
 
@@ -977,8 +988,7 @@ void OpenGLRenderer::StartUp( HWND windowHandle ){
  	CheckCompatability();
 
 	CreateCommonEngineTextures();
-	
-	LoadAllShadersFromFiles();
+
 }
 ///----------------------------------------------------------------------------------------------------------
 

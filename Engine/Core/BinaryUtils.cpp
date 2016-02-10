@@ -8,15 +8,47 @@
 #include "Engine/Renderer/Vertex3D.hpp"
 
 //===========================================================================================================
+
+//writes to end of buffer, true means was enough room, false: not enough room
+bool ByteBuffer::WriteBytes(void* data, size_t dataSize) {
+
+	memcpy(buffer + writeIndex, data, dataSize);
+	writeIndex += dataSize;
+	if (curSize + dataSize < maxSize) {
+		curSize += dataSize;
+		return true;
+	}
+	return false;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+//reads from buffer copying data up to size into data
+//number of bytes read, should equal size 
+size_t ByteBuffer::ReadBytes(void* data, size_t dataSize) {
+
+	memcpy(data, buffer + readIndex, dataSize);
+	readIndex += dataSize;
+
+	return dataSize;
+
+}
+
+
+//===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///Binary buffer parser methods
 
 ///----------------------------------------------------------------------------------------------------------
 ///constructors
-BinaryBufferParser::BinaryBufferParser(const unsigned char* buffer, size_t bufferSize){
-	UNUSED(bufferSize);
+BinaryBufferParser::BinaryBufferParser(const Byte* buffer, size_t bufferSize){
+	//UNUSED(bufferSize);
+	m_buffer = new Byte[bufferSize];
 
-	*m_buffer = *buffer;
+	memcpy(m_buffer, (void*)buffer, bufferSize);
+
+	m_currentIndex = 0;
+	m_bufferSize = bufferSize;
 	
 }
 
@@ -90,6 +122,7 @@ short BinaryBufferParser::ReadNextShort(){
 
 unsigned short BinaryBufferParser::ReadNextUShort(){
 	unsigned char* shortBytes = new unsigned char[SIZE_OF_SHORT];
+	memset(shortBytes, 0, SIZE_OF_SHORT);
 
 	for (int i = 0; i < SIZE_OF_SHORT; i++){
 		shortBytes[i] = m_buffer[m_currentIndex];
@@ -266,6 +299,26 @@ std::string BinaryBufferBuilder::ByteVectorToString(bool useHex){
 	return bufferString;
 }
 
+//-----------------------------------------------------------------------------------------------------------
+
+void BinaryBufferBuilder::CopyByteVectorToByteBuffer(Byte* bufferToCopyTo, size_t bufferToCopyToSize ) {
+
+	std::vector<unsigned char>::iterator it = m_bufferDataBytes.begin();
+
+	if (m_currentBufferSize <= bufferToCopyToSize) {
+		memcpy((void*)bufferToCopyTo, &it, m_currentBufferSize);
+	}
+	
+// 	for (std::vector<unsigned char>::iterator it = m_bufferDataBytes.begin(); it != m_bufferDataBytes.end(); ++it) {
+// 		Byte& b = (*it);
+// 		outBuffer[i] = b;
+// 	
+// 	}
+// 
+// 	return outBuffer;
+}
+
+
 ///----------------------------------------------------------------------------------------------------------
 ///write methods
 
@@ -296,7 +349,7 @@ void BinaryBufferBuilder::WriteBufferToFile(){
 
 //appends the buffer
 void BinaryBufferBuilder::LoadExistingBufferToByteVector(const unsigned char* buffer, bool clearByteVector){
-
+	
 	if (clearByteVector)m_bufferDataBytes.clear();
 
 	int bufferLength = GetUCStrLength(buffer);

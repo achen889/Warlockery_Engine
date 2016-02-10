@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main_Win32.cpp" />
+    <ClCompile Include="TheApp.cpp" />
+    <ClCompile Include="World.cpp" />
+    <ClCompile Include="GameState\LoadingGameState.cpp">
+      <Filter>GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\MainMenuGameState.cpp">
+      <Filter>GameState</Filter>
+    </ClCompile>
+    <ClCompile Include="GameState\PlayGameState.cpp">
+      <Filter>GameState</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TheApp.hpp" />
+    <ClInclude Include="World.hpp" />
+    <ClInclude Include="GameState\LoadingGameState.hpp">
+      <Filter>GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\MainMenuGameState.hpp">
+      <Filter>GameState</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState\PlayGameState.hpp">
+      <Filter>GameState</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="GameState">
+      <UniqueIdentifier>{3d45cee5-44b2-4dce-b982-e902b3c59d1b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

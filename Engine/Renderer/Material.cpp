@@ -21,6 +21,15 @@ void Material::InitializeMaterial(const char* vert_file, const char* frag_file){
 }
 
 //-----------------------------------------------------------------------------------------------------------
+
+void Material::InitializeMaterial(const char* shaderName ) {
+	InitializeDefaultSampler();
+
+	InitializeShaderProgram(shaderName);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
 void Material::InitializeDefaultTexturedMaterial(const char* filePath){
 	InitializeMaterial("Data/Shaders/basicSampler.vert", "Data/Shaders/basicSampler.frag");
 	std::string fileString = filePath;
@@ -43,6 +52,12 @@ void Material::InitializeShaderProgram(const char* vert_file, const char* frag_f
 
 //-----------------------------------------------------------------------------------------------------------
 
+void Material::InitializeShaderProgram(const char* shaderName) {
+	m_glProgram = *GLShader::CreateOrGetShader(shaderName);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
 void Material::InitializeDefaultSampler(){
 	SetDefaultSamplerData();
 
@@ -50,7 +65,6 @@ void Material::InitializeDefaultSampler(){
 	if (theOGLRenderer){
 		m_glSampler.m_samplerID = theOGLRenderer->CreateSampler(m_glSampler);
 	}
-
 }
 
 //-----------------------------------------------------------------------------------------------------------

@@ -4,13 +4,18 @@
 //==============================================================================================================
 
 #pragma once
-#include "Engine\Math\Vector2.hpp"
-#include "Engine\Console\Console.hpp"
-#include <windows.h>
-#include "Engine\Math\Math2D.hpp"
+
+
 
 #ifndef _included_InputSystem__
 #define _included_InputSystem__
+
+#include "Engine\Math\Vector2.hpp"
+#include "Engine\Console\Console.hpp"
+#include "Engine\Math\Math2D.hpp"
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 
 #define NUMBER_OF_VIRTUAL_KEYS 256
 #define MAX_NUMBER_OF_XBOX_CONTROLLERS 4

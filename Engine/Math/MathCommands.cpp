@@ -206,12 +206,12 @@ CONSOLE_COMMAND(VECLENGTH){
 }
 
 CONSOLE_COMMAND(rolldice) {
-	const unsigned int sumTextLineSkipValue = 500;
+	const unsigned int diceTextLineSkipValue = 500;
 	std::string diceText;
 	if (COMMAND_HAS_ARGS) {
 		int diceMax = ARG_TOKEN_I(0);
 
-		diceText += "\nRoll Dice 1d" + IntToString(diceMax)+"";
+		diceText += "\nRoll Dice 1d" + IntToString(diceMax);
 		
 		int rollNum = GetRandomIntInRange(1, diceMax);
 
@@ -220,7 +220,7 @@ CONSOLE_COMMAND(rolldice) {
 
 		printf("%s", diceText.c_str());
 		//ConsoleGenericMessageBox(diceText);
-		//OUTPUT_STRING_TO_CONSOLE(diceText, sumTextLineSkipValue);
+		OUTPUT_STRING_TO_CONSOLE(diceText, diceTextLineSkipValue);
 	}
 }
 

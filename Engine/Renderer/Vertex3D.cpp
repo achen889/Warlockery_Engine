@@ -134,9 +134,10 @@ void GenerateVertexArrayTextureQuad(Vertex3Ds& out_vertexArray, const AABB2& box
 	out_vertexArray.push_back(Vertex3D(Vector3(boxCoords.mins.x, boxCoords.maxs.y, 0.0f), vertexColor, samplerDefaultTextureCoords[3])); //1
 	out_vertexArray.push_back(Vertex3D(Vector3(boxCoords.maxs.x, boxCoords.maxs.y, 0.0f), vertexColor, samplerDefaultTextureCoords[2])); //2
 	out_vertexArray.push_back(Vertex3D(Vector3(boxCoords.maxs.x, boxCoords.mins.y, 0.0f), vertexColor, samplerDefaultTextureCoords[1])); //3
-	//finally fixed, the vertexes are correct again
 	
-	//currently has bugs with line loop, line strip
+	//finally fixed, the vertexes are correct again
+
+	//currently has bugs with line loop, line strip, has bug with triangle strip
 
 }
 

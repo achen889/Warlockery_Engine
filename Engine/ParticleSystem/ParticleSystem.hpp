@@ -12,8 +12,10 @@
 #include <map>
 #include "Emitter.hpp"
 #include "Engine/Renderer/OpenGLRenderer.hpp"
-#include "Engine/Renderer/OGLRenderingUtils.hpp"
+//#include "Engine/Renderer/OGLRenderingUtils.hpp"
 #include "Engine/Multithreading/JobManager.hpp"
+
+#include "Engine/Renderer/MeshRenderer.hpp"
 
 //===========================================================================================================
 
@@ -53,11 +55,11 @@ struct ParticleString{
 	void InitializeParticleString(Particles& m_particles, int numberOfParticles, const Rgba& stringColor = Rgba::WHITE);
 
 	Particle& GetOrigin(){
-		return (**m_particles.begin() );
+		return (*m_particles.begin() );
 	}
 
 	Particle& GetEnd(){
-		return (**m_particles.end() );
+		return (*m_particles.end() );
 	}
 
 	void UpdateParticleString(double deltaSeconds);
@@ -79,12 +81,13 @@ struct ParticleString{
 
 class ParticleSystem{
 public:
+
 	Particles g_particles;
 	static ParticleEmitterMap g_particleEmitters;
 	unsigned int m_vboID;
 	size_t m_numOFVBOVertexes;
 	VertexArrayObject m_particleVAO;
-	MeshRenderer* m_particleRenderer = NULL;
+	MeshRenderer m_particleRenderer;
 
 	ParticleSystem();
 
@@ -93,29 +96,25 @@ public:
 	
 	~ParticleSystem(){
 		//do nothing
-		if (m_particleRenderer){
-			delete m_particleRenderer;
-			m_particleRenderer = NULL;
-		}
+		g_particleEmitters.clear();
+		g_particles.clear();
 	}
 	
 	//mesh/material stuff
 
-	void UpdateParticleInMesh();
+	void UpdateParticlesInMesh();
 
 	void InitializeParticleVAO();
 
 	void Update(double deltaSeconds);
+	void UpdateEmitters(double deltaSeconds);
 	void UpdateParticles(double deltaSeconds);
 
 	void UpdateParticlesMultithreaded(double deltaSeconds);
 
 	//queries and accessors
 	unsigned int GetTotalParticles();
-	void CalcForcesOnParticles();
-	void ClearAllParticles(){
-		g_particles.clear();
-	}
+	void ClearAllParticles(){ g_particles.clear(); }
 	
 	bool HasEmitterByName(const std::string& emitterName);
 	Emitter& GetEmitterByName(const std::string& emitterName);

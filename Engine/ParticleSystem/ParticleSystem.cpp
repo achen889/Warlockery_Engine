@@ -29,7 +29,7 @@ void UpdateParticleJob::Execute(){
 
 		for (ParticlesIterator pIter = particles.begin() + startIndex; pIter != particles.begin() + startIndex + numParticlesToUpdate;){
 			
-			Particle& particle = *(*pIter);
+			Particle& particle = (*pIter);
 			
 			if (particle.IsDead()){
 				pIter = particles.erase(pIter);
@@ -178,26 +178,25 @@ ParticleSystem::ParticleSystem(){
 
 void ParticleSystem::InitializeParticleMeshRenderer(){
 	//m_particleRenderer.m_material = new Material();
-	m_particleRenderer = new MeshRenderer(); //mem leak: 12
-	m_particleRenderer->m_material->InitializeMaterial("Data/Shaders/basic.vert", "Data/Shaders/basic.frag");
-	m_particleRenderer->m_material->m_samplerInUse = false;
-	m_particleRenderer->m_mesh->SetDrawMode(GL_POINTS);
+	//m_particleRenderer = new MeshRenderer(); //mem leak: 12
+	m_particleRenderer.m_material->InitializeMaterial("Data/Shaders/basic.vert", "Data/Shaders/basic.frag");
+	m_particleRenderer.m_material->m_samplerInUse = false;
+	m_particleRenderer.m_mesh->SetDrawMode(GL_POINTS);
 	
-	m_particleRenderer->BindVertexArray();
-
+	m_particleRenderer.BindVertexArray();
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
-void ParticleSystem::UpdateParticleInMesh(){
+void ParticleSystem::UpdateParticlesInMesh(){
 	//PROFILE_SECTION();
 	Vertex3Ds particlesVertexArray;
-	particlesVertexArray.clear();
-
+	
+	//add all particles to vertex array
 	GenerateParticlesVertexArray(particlesVertexArray);
 	
-	m_particleRenderer->m_mesh->CopyMeshVertexData(particlesVertexArray);
-
+	//copy that to mesh
+	m_particleRenderer.m_mesh->CopyMeshVertexData(particlesVertexArray);
 
 }
 
@@ -231,31 +230,41 @@ void ParticleSystem::InitializeParticleVAO(){
 void ParticleSystem::Update(double deltaSeconds){
 	//PROFILE_SECTION();
 
-	//Update Emitter
-	for (ParticleEmitterMapIterator it = g_particleEmitters.begin(); it != g_particleEmitters.end(); ++it ){
-		//if (g_particleEmitters.empty())break;
-
-		Emitter& emitter = (*it->second);
-		if (!emitter.IsDead()){
-			emitter.Update(deltaSeconds, g_particles);
-			
-		}
-	}//end of emitter update
+	UpdateEmitters(deltaSeconds);
 
 	UpdateParticles(deltaSeconds);
 	
+	//still full of bugs
+// 	if (theJobManager->GetActiveJobCount() == 0) {
+// 		UpdateParticlesMultithreaded(deltaSeconds);
+// 	}
 
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
+void ParticleSystem::UpdateEmitters(double deltaSeconds ) {
+	//Update Emitters
+	for (ParticleEmitterMapIterator it = g_particleEmitters.begin(); it != g_particleEmitters.end(); ++it) {
+		//if (g_particleEmitters.empty())break;
+
+		Emitter& emitter = (*it->second);
+		if (!emitter.IsDead()) {
+			emitter.Update(deltaSeconds, g_particles);
+
+		}
+	}//end of emitter update
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
 void ParticleSystem::UpdateParticles(double deltaSeconds){
-	//PROFILE_SECTION();
+	PROFILE_SECTION();
 
 	//update particles
 	for (ParticlesIterator pIter = g_particles.begin(); pIter != g_particles.end();){
 		if (g_particles.empty())break;
-		Particle& particle = (**pIter);
+		Particle& particle = (*pIter);
 
 		if (particle.IsDead()){
 			pIter = g_particles.erase(pIter);
@@ -267,11 +276,6 @@ void ParticleSystem::UpdateParticles(double deltaSeconds){
 		}
 
 	}//end of particle update
-	
-	//still full of bugs
-	//if (theJobManager->GetActiveJobCount() == 0){
-	//	UpdateParticlesMultithreaded(deltaSeconds);
-	//}
 	
 
 }
@@ -317,7 +321,7 @@ void ParticleSystem::Render(OpenGLRenderer* renderer){
 		Vector3s particlePoints;
 		for (ParticlesIterator pIter = g_particles.begin(); pIter != g_particles.end(); ++pIter){
 			if (g_particles.empty())break;
-			Particle& particle = (**pIter);
+			Particle& particle = (*pIter);
 			if (!particle.IsDead()){
 				particlePoints.push_back(particle.GetPosition());
 			}
@@ -340,17 +344,17 @@ void ParticleSystem::Render(OpenGLRenderer* renderer){
 ///"modern" rendering particles
 void ParticleSystem::RenderParticlesMesh(OpenGLRenderer* renderer, Camera3D& camera, bool isPerspective ){
 
-	//PROFILE_SECTION();
+	PROFILE_SECTION();
 
 	UNUSED(renderer);
 
 	//ConsolePrintString(" " + IntToString(g_numUpdateParticleJobsStarted));
 
-	//if (g_numUpdateParticleJobsStarted == 0){
-		UpdateParticleInMesh();
+	if (g_numUpdateParticleJobsStarted == 0){
+		UpdateParticlesInMesh();
 
-		m_particleRenderer->RenderMesh(camera, isPerspective);
-	//}
+		m_particleRenderer.RenderMesh(camera, isPerspective);
+	}
 
 }
 
@@ -399,18 +403,6 @@ void ParticleSystem::AddEmitter(const std::string& emitterName, const Emitter& n
 
 //===========================================================================================================
 
-void ParticleSystem::CalcForcesOnParticles(){
-// 	for (ParticlesIterator pIter = g_particles.begin(); pIter != g_particles.end(); ++pIter){
-// 		Particle& particle = (**pIter);
-// 
-// 		
-// 		//calc forces
-// 		//Effect* currentEffect;
-// 	}
-}
-
-//===========================================================================================================
-
 void ParticleSystem::GenerateVertexArrayAndVBO(){
 
 	Vertex3Ds vertexArray;
@@ -434,10 +426,10 @@ void ParticleSystem::GenerateParticlesVertexArray(Vertex3Ds& out_vertexArray){
 	//push stuff back to the out vertex
 	if (!g_particles.empty()){
 		out_vertexArray.clear();
-		out_vertexArray.reserve(g_particles.size());
+		out_vertexArray.reserve(g_particles.size() - out_vertexArray.size()); //only reserve if we need to
 		int i = 0;
 		for (ParticlesIterator pIter = g_particles.begin(); pIter != g_particles.end(); ++pIter ){
-			 Particle& particle = *(*pIter);
+			 Particle& particle = (*pIter);
 			 if (particle.IsDead()){ 
 				 continue;
 			 }
@@ -522,25 +514,25 @@ void ParticleSystem::RenderWithVAO( OpenGLRenderer* PRenderer, Camera3D& camera)
 ///----------------------------------------------------------------------------------------------------------
 ///particle string methods
 
-void ParticleString::InitializeParticleString(Particles& m_particles, int numberOfParticles, const Rgba& stringColor ){
+void ParticleString::InitializeParticleString(Particles& particles, int numberOfParticles, const Rgba& stringColor ){
 	//m_particles.push_back(new Particle(Vector3::ZERO, Vector3::ZERO));
-	m_particles.push_back(new Particle(GetRandomVector3InRange(0.0f, 1.3f), Vector3::ZERO));
-	m_particles.back()->SetLifeSpanSeconds(-1.0f);
-	m_particles.back()->m_state.SetMass(GetRandomFloatInRange(0.01f, 0.03f)); //it becomes unstable at high mass
-	m_particles.back()->SetColor(stringColor);
+	particles.push_back( Particle(GetRandomVector3InRange(0.0f, 1.3f), Vector3::ZERO));
+	particles.back().SetLifeSpanSeconds(-1.0f);
+	particles.back().m_state.SetMass(GetRandomFloatInRange(0.01f, 0.03f)); //it becomes unstable at high mass
+	particles.back().SetColor(stringColor);
 
 	for (int i = 1; i < numberOfParticles-1; i++){
 		//m_particles.push_back(new Particle(Vector3::ZERO, Vector3::ZERO));
-		m_particles.push_back(new Particle(GetRandomVector3InRange(0.0f, 0.3f), Vector3::ZERO));
-		m_particles.back()->SetLifeSpanSeconds(-1.0f);
-		m_particles.back()->m_state.SetMass(GetRandomFloatInRange(0.01f, 0.03f)); //it becomes unstable at high mass
-		m_particles.back()->SetColor(stringColor);
+		particles.push_back(Particle(GetRandomVector3InRange(0.0f, 0.3f), Vector3::ZERO));
+		particles.back().SetLifeSpanSeconds(-1.0f);
+		particles.back().m_state.SetMass(GetRandomFloatInRange(0.01f, 0.03f)); //it becomes unstable at high mass
+		particles.back().SetColor(stringColor);
 	}
 
-	m_particles.push_back(new Particle(GetRandomVector3InRange(0.0f, 1.3f), Vector3::ZERO));
-	m_particles.back()->SetLifeSpanSeconds(-1.0f);
-	m_particles.back()->m_state.SetMass(GetRandomFloatInRange(0.01f, 0.03f)); //it becomes unstable at high mass
-	m_particles.back()->SetColor(stringColor);
+	particles.push_back(Particle(GetRandomVector3InRange(0.0f, 1.3f), Vector3::ZERO));
+	particles.back().SetLifeSpanSeconds(-1.0f);
+	particles.back().m_state.SetMass(GetRandomFloatInRange(0.01f, 0.03f)); //it becomes unstable at high mass
+	particles.back().SetColor(stringColor);
 }
 
 void ParticleString::InitializeParticleStringVAO(){
@@ -555,11 +547,11 @@ void ParticleString::UpdateParticleString(double deltaSeconds){
 	UpdateParticleStringInput(m_particles, deltaSeconds);
 
 	for (ParticlesIterator pIter = m_particles.begin(); pIter != m_particles.end();){
-		Particle& particle = (**pIter);
+		Particle& particle = (*pIter);
 
 		//spring coll with particle neighbor
 		if (pIter + 1 != m_particles.end()){
-			Particle& particle2 = (**std::next(pIter, 1));
+			Particle& particle2 = (*std::next(pIter, 1));
 
 			
 			//unstable at very low L0, high K //good values 0.15, 15.5, 0.5
@@ -581,7 +573,7 @@ void ParticleString::UpdateParticleString(double deltaSeconds){
 	}//end of for loop
 
 	for (ParticlesIterator pIter = m_particles.begin(); pIter != m_particles.end(); ++pIter){
-		Particle& particle = (**pIter);
+		Particle& particle = (*pIter);
 
 		particle.Update(deltaSeconds);
 
@@ -590,10 +582,10 @@ void ParticleString::UpdateParticleString(double deltaSeconds){
 
 void ParticleString::RenderParticleString(OpenGLRenderer* renderer, const Rgba& viewColor){
 	for (ParticlesIterator pIter = m_particles.begin(); pIter != m_particles.end(); ++pIter){
-		Particle& particle = (**pIter);
+		Particle& particle = (*pIter);
 
 		if (pIter + 1 != m_particles.end()){
-			Particle& particle2 = (**std::next(pIter, 1));
+			Particle& particle2 = (*std::next(pIter, 1));
 
 			renderer->DrawLineSegment3D(LineSegment3(particle.GetPosition(), particle2.GetPosition()), viewColor);
 		}
@@ -615,7 +607,7 @@ void ParticleString::RenderParticleStringMesh(OpenGLRenderer* renderer, Camera3D
 
 	//GenerateParticleStringVertexArray(particlesVertexArray, viewColor);
 	for (ParticlesIterator pIter = m_particles.begin(); pIter != m_particles.end(); ++pIter){
-		Particle& particle = (**pIter);
+		Particle& particle = (*pIter);
 
 		if (theParticleSystem){
 			particlesVertexArray.push_back(theParticleSystem->GenerateParticleVertexPoint(particle));
@@ -650,12 +642,12 @@ void ParticleString::RenderParticleStringVAO(OpenGLRenderer* renderer, Camera3D&
 
 void ParticleString::GenerateParticleStringVertexArray(Vertex3Ds& out_vertexArray, const Rgba& viewColor ){
 	out_vertexArray.clear();
-	out_vertexArray.reserve(10000);
+	out_vertexArray.reserve(m_particles.size());
 	//push stuff back to the out vertex
 	
 	for (ParticlesIterator pIter = m_particles.begin(); pIter != m_particles.end(); ++pIter){
 
-		Particle& particle = (**pIter);
+		Particle& particle = (*pIter);
 		Vertex3D particleVertexData;
 		particleVertexData.m_position = particle.GetPosition();
 		particleVertexData.m_color = viewColor;//particle.GetColor();
@@ -666,9 +658,9 @@ void ParticleString::GenerateParticleStringVertexArray(Vertex3Ds& out_vertexArra
 	
 }
 
-void ParticleString::UpdateParticleStringInput(Particles& m_particles, double deltaSeconds){
+void ParticleString::UpdateParticleStringInput(Particles& particles, double deltaSeconds){
 	const float moveSpeed = -4.5f;
-	Particle& particleToMove = (*m_particles[0]);
+	Particle& particleToMove = *(particles.begin());
 	if (theInputSystem){
 		if (theInputSystem->IsKeyDown('I')){
 			Vector3 newPos = particleToMove.GetPosition();

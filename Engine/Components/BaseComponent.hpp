@@ -9,8 +9,8 @@
 #define _included_BaseComponent__
 
 #include "Engine/Core/Utilities.hpp"
-#include <stack>
 #include "Engine/Core/XML/XMLUtils.hpp"
+#include "Engine/Core/EventCallback.hpp"
 
 class ComponentRegistration;
 class BaseComponent;
@@ -37,14 +37,14 @@ class ComponentRegistration{
 		//friend methods
 		friend ComponentRegistration* FindComponentByName(const std::string& name);
 		
-private:
+protected:
 		//vars
 		ComponentCreationFunc* m_creationFunc;
 		std::string m_name;
 		static ComponentRegistry* s_ComponentRegistryMap;
 		
+		EventCallback* m_onDestroyEventCallback;
 };
-
 
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods
@@ -97,7 +97,11 @@ public:
 	//vars
 	std::string m_name;
 	size_t m_id;
+
 };
+
+typedef std::vector<BaseComponent*> BaseComponents;
+typedef std::vector<BaseComponent*>::iterator BaseComponentsIterator;
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
@@ -109,7 +113,6 @@ m_id(s_componentID)
 {
 	s_componentID++;
 }
-
 
 //===========================================================================================================
 

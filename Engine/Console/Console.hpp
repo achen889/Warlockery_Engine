@@ -9,6 +9,7 @@
 
 #include <assert.h>
 #include <wtypes.h>
+
 #include "Engine/Console/LogFile.hpp"
 #include "Engine/Core/Performance.hpp"
 

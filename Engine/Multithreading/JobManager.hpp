@@ -22,8 +22,6 @@ enum JobType{
 	JOB_TYPE_FILEIO,
 	JOB_TYPE_INPUT,
 	JOB_TYPE_SOUND,
-	JOB_TYPE_NET_SERVER,
-	JOB_TYPE_NET_CLIENT,
 	NUM_JOB_TYPES
 };
 
@@ -39,10 +37,6 @@ inline std::string JobTypeToString(const JobType& jobType){
 		return "INPUT";
 	case JOB_TYPE_SOUND:
 		return "SOUND";
-	case JOB_TYPE_NET_SERVER:
-		return "NETWORK SERVER";
-	case JOB_TYPE_NET_CLIENT:
-		return "NETWORK CLIENT";
 	}
 	return "INVALID";
 }

@@ -13,8 +13,7 @@ seperated timers into a new class
 added a ton of math stuff including scene graph
 
 To Add
-Full UI support for 2D - semi ready
-Particles to Danmaku system
+
 
 
 ------------------------------------------------------------------------------------------------

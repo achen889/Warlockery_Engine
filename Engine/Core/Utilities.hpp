@@ -110,11 +110,14 @@ inline int CompareCStr(const char* a, const char* b){
 ///getters
 
 inline int GetCStrLength(const char* c){
-	return (int)strlen((char*)c);
+	return (int)strlen((char*)c); //gets the loc of the /0
 }
 
 
 inline int GetUCStrLength(const unsigned char* c){
+	
+	//it seems there is no real way to do this
+	
 	return (int)strlen((char*)c);
 }
 
@@ -131,8 +134,8 @@ inline const std::string IntToString(const int& i , int numberBase ){
 	char stringIntValue[33]; 
 	_itoa_s(i,stringIntValue, 33 ,numberBase );
 
-	std::string s = stringIntValue;
-	return s;
+	return std::string(stringIntValue);
+
 }
 
 inline const std::string UIntToString(const unsigned int& i, int numberBase){

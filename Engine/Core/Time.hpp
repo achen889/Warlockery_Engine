@@ -9,14 +9,15 @@
 #define _included_Time__
 
 #include <vector>
-#include "SystemClockWin32.hpp"
+
+struct SystemClockWin32;
 	
 	void InitializeTime();
 	double GetCurrentSeconds();
 	double GetCurrentMilliSeconds();
 	double GetCurrentMicroSeconds();
 	double GetDeltaSeconds();
-	float GetFramesPerSecond();
+	double GetFramesPerSecond();
 	std::string GetSystemClockWin32Time();
 
 #endif

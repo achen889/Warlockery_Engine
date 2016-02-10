@@ -161,7 +161,6 @@ void JobManager::ShutDown(){
 
 void JobManager::Update(double maxTimeMs){
 	UNUSED(maxTimeMs);
-	PROFILE_SECTION();
 	
 	if (m_threads.empty()) {
 		RunJob();

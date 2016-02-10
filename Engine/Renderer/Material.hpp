@@ -22,12 +22,15 @@ public:
 	~Material();
 	
 	void InitializeMaterial(const char* vert_file, const char* frag_file);
+	void InitializeMaterial(const char* shaderName); //uses shader wizard
 	void InitializeShaderFromShaderName(const std::string& shaderName);
 
 	//other initializers
 	void InitializeDefaultTexturedMaterial(const char* filePath);
 	void InitializeDefaultMaterial();
 	void InitializeShaderProgram(const char* vert_file, const char* frag_file);
+	void InitializeShaderProgram(const char* shaderName); //uses shader wizard
+
 	void InitializeDefaultSampler();
 
 	void SetTextureInMap(const std::string& texName, const std::string& filePath);

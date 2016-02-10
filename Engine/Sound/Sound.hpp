@@ -11,7 +11,7 @@
 #include <string>
 #include <map>
 
-#pragma comment(lib, "ck.lib")
+//#pragma comment(lib, "ck.lib")
 
 //===========================================================================================================
 

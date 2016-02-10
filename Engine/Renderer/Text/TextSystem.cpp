@@ -8,6 +8,7 @@
 #include "Engine\Console\DevConsole.hpp"
 #include "Engine\Math\MathCommands.hpp"
 #include "Engine\Core\BinaryUtils.hpp"
+#include "..\OpenGLRenderer.hpp"
 
 TextSystem* theTextSystem = NULL;
 
@@ -96,6 +97,19 @@ CONSOLE_COMMAND(calcTextWidth){
 	}
 }
 
+CONSOLE_COMMAND(profile) {
+	UNUSED_COMMAND_ARGS
+
+	ProfileSection::s_doDebugProfiling = !ProfileSection::s_doDebugProfiling;
+	if (ProfileSection::s_doDebugProfiling) {
+		OUTPUT_STRING_TO_CONSOLE("Debug Profiling ON.", 1000);
+	}
+	else {
+		OUTPUT_STRING_TO_CONSOLE("Debug Profiling OFF.", 1000);
+	}
+	
+}
+
 ///----------------------------------------------------------------------------------------------------------
 ///constructor
 TextSystem::TextSystem():m_IsDevelopmentConsoleActive(false){
@@ -147,6 +161,7 @@ void TextSystem::RegisterDefaultCommands(){
 	REGISTER_CONSOLE_COMMAND(printArgs, "Print Console Args to Output.");
 	REGISTER_CONSOLE_COMMAND(messageBox, "Creates a MessageBox for the Console Args.");
 	REGISTER_CONSOLE_COMMAND(calcTextWidth, "Calc the text width with the current font.");
+	REGISTER_CONSOLE_COMMAND(profile, "Toggles debug profiling.");
 }
 
 //===========================================================================================================
@@ -203,7 +218,7 @@ void TextSystem::InitializeFontMeshRenderer(FontSystem& fontSystem){
 void TextSystem::InitializeFontVAO(VertexArrayObject& myVAO){
 	std::string texturePath = "Data/Fonts/" + m_fontSystem.m_FontSummary.m_fileName;
 
-	myVAO.m_glSampler.SetTexture(texturePath);
+	myVAO.m_glSampler.SetTextureInMap("gTexture",texturePath);
 	myVAO.SetDrawMode(GL_QUADS);
 	m_OGLRenderer->InitializeVAO(myVAO, "Data/Shaders/basicSampler.vert", "Data/Shaders/basicSampler.frag"); //load prog
 	m_OGLRenderer->CreateVAOSampler(myVAO, GL_LINEAR, GL_LINEAR, GL_REPEAT, GL_REPEAT);
@@ -238,6 +253,7 @@ void TextSystem::Update(double deltaSeconds){
 
 //-----------------------------------------------------------------------------------------------------------
 
+//does not use VAO at all
 std::string TextSystem::InputTextToBuffer(std::string& bufferText){
 		//text input
 		if (theInputSystem){
@@ -280,38 +296,67 @@ bool TextSystem::IsKeyPressedDevConsoleHotkey(const unsigned int& keyPressedID )
 
 void TextSystem::ProcessDevConsoleHotkeys(std::string& bufferText){
 	if (theInputSystem){
-		static unsigned int textHistoryOffset = 1;
-		//can get last command, but not before that, well the correct stuff is in the buffer but I can't get it to display
-// 		if (theInputSystem->WasKeyJustReleased(KEY_ARROW_UP)){
-// 			bufferText = "";
-// 			//textHistoryOffset++;
-// 			unsigned int indexToScan = m_textHistory.size() - textHistoryOffset;
-// 			bufferText = m_textHistory[indexToScan];
-// 
-// 			if(textHistoryOffset < m_textHistory.size())textHistoryOffset++;
-// 		}
-// 		if (theInputSystem->WasKeyJustReleased(KEY_ARROW_DOWN)){
-// 			
-// 		}
-
-		//skipping a line with enter works yay!
-		if (theInputSystem->WasKeyJustReleased(KEY_ENTER)){
-			m_textHistory.push_back(bufferText);
-			ProcessConsoleCommands(bufferText);
-
-
-
-			
-		}
-		//deleting chars
-		if (theInputSystem->WasKeyJustReleased(KEY_BACKSPACE)){
-			DeleteDevConsoleChar(m_textIn, bufferText);
-		}
 		
+		//UP, DOWN to cycle text history
+		ProcessTextHistoryHotkeys(bufferText);
+
+		//press ENTER to use command
+		ConfirmDevConsoleCommand(bufferText);
+
+		//press BACKSPACE to delete chars
+		DeleteDevConsoleChar(bufferText);
+		
+		//Use Mouse Wheel to Scroll
 		ProcessDevConsoleScrolling(bufferText);
 
 	}//end of is inputSystem
 
+}
+
+//===========================================================================================================
+///----------------------------------------------------------------------------------------------------------
+///dev console hotkey helpers
+
+//-----------------------------------------------------------------------------------------------------------
+
+void TextSystem::ConfirmDevConsoleCommand(std::string& bufferText) {
+	//skip a line with enter
+	if (theInputSystem->WasKeyJustReleased(KEY_ENTER)) {
+		m_textHistory.push_back(bufferText);
+		ProcessConsoleCommands(bufferText); //may use vao
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void TextSystem::ProcessTextHistoryHotkeys(std::string& bufferText) {
+	static unsigned int textHistoryOffset = 1;
+	//can get last command, but not before that, well the correct stuff is in the buffer but I can't get it to display
+	if (theInputSystem->WasKeyJustReleased(KEY_ARROW_UP)) {
+		bufferText = "";
+		//textHistoryOffset++;
+		unsigned int indexToScan = m_textHistory.size() - textHistoryOffset;
+		bufferText = m_textHistory[indexToScan];
+
+		if (textHistoryOffset < m_textHistory.size())textHistoryOffset++;
+	}
+	if (theInputSystem->WasKeyJustReleased(KEY_ARROW_DOWN)) {
+		bufferText = "";
+
+		unsigned int indexToScan = m_textHistory.size() - textHistoryOffset;
+		bufferText = m_textHistory[indexToScan];
+		if (textHistoryOffset > 0)textHistoryOffset--;
+	}
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void TextSystem::DeleteDevConsoleChar(std::string& bufferText) {
+	//deleting chars
+	if (theInputSystem->WasKeyJustReleased(KEY_BACKSPACE)) {
+		DeleteDevConsoleChar(m_textIn, bufferText); //uses textIn
+	}
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -359,7 +404,7 @@ void TextSystem::ResetDevConsoleScrollHeight(){
 
 void TextSystem::DevConsoleScrollUp(std::string& bufferText, const int& scrollAmount){
 	for (int i = 0; i < scrollAmount; i++){
-		SkipConsoleLine(m_textIn, true);
+		SkipConsoleLine(m_textIn, true); //uses VAO
 		bufferText = "";
 		//SetVAOStringTextureCoords(m_textVAO, DEV_CONSOLE_CURSOR_START_POSITION, bufferText, DEV_CONSOLE_INPUT_COLOR);
 	}
@@ -370,7 +415,7 @@ void TextSystem::DevConsoleScrollUp(std::string& bufferText, const int& scrollAm
 
 void TextSystem::DevConsoleScrollDown(std::string& bufferText, const int& scrollAmount){
 	for (int i = 0; i < scrollAmount; i++){
-		SkipConsoleLine(m_textIn, false);
+		SkipConsoleLine(m_textIn, false); //uses vao
 		bufferText = "";
 		//SetVAOStringTextureCoords(m_textVAO, DEV_CONSOLE_CURSOR_START_POSITION, bufferText, DEV_CONSOLE_INPUT_COLOR);
 	}
@@ -409,24 +454,31 @@ void TextSystem::DeleteDevConsoleChar(VertexArrayObject& myVAO, std::string& buf
 
 void TextSystem::SkipConsoleLine(VertexArrayObject& myVAO, bool skipDown){
 	//skip everything down a line
-	for (int i = 0; i < (int)myVAO.m_vertexArray.size()/*textInputBuffer.length()*/; i++){
-		if (skipDown){
-			DEV_CONSOLE_SCROLL_LEVEL -= DEV_CONSOLE_LINE_SPACING;
-			float Yoffset = myVAO.m_vertexArray[i].m_position.y - DEV_CONSOLE_LINE_SPACING;
+	SkipConsoleLine(myVAO.m_vertexArray, skipDown);
+}
 
-			if (myVAO.m_vertexArray[i].m_position.y > Yoffset)//using const values for this is neat
-				myVAO.m_vertexArray[i].m_position.y -= DEV_CONSOLE_LINE_SPACING;
+//-----------------------------------------------------------------------------------------------------------
+
+void TextSystem::SkipConsoleLine(Vertex3Ds& in_vertexArray, bool skipDown) {
+	//skip everything down a line
+	for (int i = 0; i < (int)in_vertexArray.size()/*textInputBuffer.length()*/; i++) {
+		if (skipDown) {
+			DEV_CONSOLE_SCROLL_LEVEL -= DEV_CONSOLE_LINE_SPACING;
+			float Yoffset = in_vertexArray[i].m_position.y - DEV_CONSOLE_LINE_SPACING;
+
+			if (in_vertexArray[i].m_position.y > Yoffset)//using const values for this is neat
+				in_vertexArray[i].m_position.y -= DEV_CONSOLE_LINE_SPACING;
 
 		}
-		else{
+		else {
 			DEV_CONSOLE_SCROLL_LEVEL += DEV_CONSOLE_LINE_SPACING;
-			float Yoffset = myVAO.m_vertexArray[i].m_position.y + DEV_CONSOLE_LINE_SPACING;
+			float Yoffset = in_vertexArray[i].m_position.y + DEV_CONSOLE_LINE_SPACING;
 
-			if (myVAO.m_vertexArray[i].m_position.y < Yoffset)//using const values for this is neat
-				myVAO.m_vertexArray[i].m_position.y += DEV_CONSOLE_LINE_SPACING;
+			if (in_vertexArray[i].m_position.y < Yoffset)//using const values for this is neat
+				in_vertexArray[i].m_position.y += DEV_CONSOLE_LINE_SPACING;
 
 		}//end of if/else
-		
+
 	}
 }
 
@@ -637,7 +689,8 @@ AABB2 TextSystem::GetTextureCoordinatesForChar(FontSystem& fontSystem, const cha
 
 void TextSystem::RenderTextString(const std::string& myString){
 	m_OGLRenderer->SetTextureViewTransparent();
-	m_OGLRenderer->DisableModelViewDepthTest();
+	//m_OGLRenderer->DisableModelViewDepthTest();
+
 	SetMeshRendererStringTextureCoords(m_textRenderer, Vector2(50.0f, 50.0f), myString, Rgba::WHITE, 10000);
 	//m_textRenderer.BindVertexArray();
 	RenderTextMesh2D(m_textRenderer);
@@ -681,13 +734,18 @@ void TextSystem::RenderChar(const char& myChar, const Vector2& startingPosition,
 //===========================================================================================================
 
 void TextSystem::Render(){
+		
 		Render(m_textIn);
+
 }
+
+//-----------------------------------------------------------------------------------------------------------
 
 void TextSystem::Render(VertexArrayObject& myVAO){
 	if (m_IsDevelopmentConsoleActive){
 		m_OGLRenderer->DisableModelViewDepthTest();
-		m_OGLRenderer->SetTextureViewTransparent();
+		m_OGLRenderer->DisableModelCullFaceMode();
+		//m_OGLRenderer->SetTextureViewTransparent();
 
 		//static std::string prevTextBuffer = "";
 
@@ -718,14 +776,16 @@ void TextSystem::RenderText(VertexArrayObject& myVAO){
 	m_OGLRenderer->BindViewMatricesToProgram(programToRenderWith, IDENTITY_MATRIX, m_OGLRenderer->MakeDefaultOrthographicProjectionMatrix());
 	m_OGLRenderer->ProgramBindFloat(programToRenderWith, "gTime", (float)GetCurrentSeconds());
 	
-	GLuint texIndex = 0;
-	m_OGLRenderer->ProgramBindSamplerIndex(programToRenderWith, "gTexture", texIndex);
-	glActiveTexture(GL_TEXTURE0 + texIndex);
+// 	GLuint texIndex = 0;
+// 	m_OGLRenderer->ProgramBindSamplerIndex(programToRenderWith, "gTexture", texIndex);
+// 	glActiveTexture(GL_TEXTURE0 + texIndex);
+// 
+// 	glEnable(GL_TEXTURE_2D);
+// 
+// 	glBindTexture(GL_TEXTURE_2D, myVAO.m_glSampler.m_texture->GetPlatformHandle());
+// 	glBindSampler(texIndex, myVAO.m_samplerID);
 
-	glEnable(GL_TEXTURE_2D);
-
-	glBindTexture(GL_TEXTURE_2D, myVAO.m_glSampler.m_texture->GetPlatformHandle());
-	glBindSampler(texIndex, myVAO.m_samplerID);
+	myVAO.m_glSampler.BindTextureMapToShader(programToRenderWith);
 
 	m_OGLRenderer->DrawVertexArray(myVAO.m_drawMode, myVAO.m_vaoID, myVAO.m_vertexArray.size());
 
@@ -791,6 +851,7 @@ void TextSystem::RenderDevConsoleBackground(VertexArrayObject& myVAO){
 
 	m_OGLRenderer->DisableShaderProgram();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
 }
 
 //===========================================================================================================

@@ -22,7 +22,7 @@ Sound::Sound(const std::string& absoluteSoundPath )
 
 	  //make a sound implementation
 	  m_soundImpl = new SoundImpl();
-	  m_soundImpl->m_sound = CkSound::newStreamSound(absoluteSoundPath.c_str(), kCkPathType_FileSystem );
+	  //m_soundImpl->m_sound = CkSound::newStreamSound(absoluteSoundPath.c_str(), kCkPathType_FileSystem );
 	  if(m_soundImpl->m_sound == NULL){
 		  std::string errorMessageText = "ERROR: Sound File failed to Load! FilePath -> "+absoluteSoundPath;
 		  std::string errorMessageTitle = "DEBUG: Sound is missing or broken. ";

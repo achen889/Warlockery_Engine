@@ -1,0 +1,1 @@
+<Emitter name = "Example Data Emitter" effect ="Rings" position ="500, 200" maxParticles ="5000" lifespan ="1.5" intervals ="15" magnitude ="10.0" spread="3.0" is2D ="1" />

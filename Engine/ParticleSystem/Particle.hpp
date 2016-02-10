@@ -65,14 +65,14 @@ struct ParticleTraceResult{
 
 struct State{
 	//vars
-	//Vector3 position;
-	//Rgba color;
+
 	Vertex3D vertex;
+
 	float radius = 0.01f;
 
 	//physics integration stuff
 	Vector3 prevPrevPosition; //for verlet integration
-	Vector3 velocity;
+	Vector3 velocity = Vector3::ZERO;
 	Vector3 acceleration = Vector3::ZERO;
 	Vector3 forces = Vector3::ZERO;
 	
@@ -114,7 +114,7 @@ struct State{
 		//forces = Vector3::ZERO;
 	}
 
- 	void UpdateAcceleration(double deltaSeconds){
+ 	void UpdateAcceleration(const double& deltaSeconds){
 		UNUSED(deltaSeconds);
 		CalcAccelerationFromForces();
 		//add anything else
@@ -124,7 +124,7 @@ struct State{
 		DoLockZ(acceleration);
  	}
 
-	void UpdateVelocity(double deltaSeconds){
+	void UpdateVelocity(const double& deltaSeconds){
 		velocity += acceleration * (float)deltaSeconds;
 
 		DoLockX(velocity);
@@ -132,7 +132,7 @@ struct State{
 		DoLockZ(velocity);
 	}
 
-	void UpdatePosition(double deltaSeconds){
+	void UpdatePosition(const double& deltaSeconds){
 		vertex.m_position += velocity * (float)deltaSeconds;
 	}
 
@@ -181,6 +181,7 @@ struct State{
 		lockZ = false;
 	}
 
+
 };
 
 //===========================================================================================================
@@ -195,18 +196,15 @@ public:
 	Particle(const Vector3& position, const Vector3& initVel, const Rgba& color = Rgba::BLACK, bool is2DMode = false);
 
 	Particle(){
-		//do nothing
-		//m_state = NULL;
-		
+		//do nothing	
 	}
 
 	~Particle(){
 		//delete m_state;
-		//m_state = NULL;
 	}
 	
 	//Upkeep methods
-	void Update(double deltaSeconds);
+	void Update(const double& deltaSeconds);
 	
 	//accessors
 	void SetState(const Vector3& newPosition, const Vector3&  newVelocity, const float& newlifespan = 10.0f, const float& newmass = 1.0f);
@@ -225,14 +223,8 @@ public:
 	Vector3 GetForces(){ return m_state.forces; }
 	float GetMass(){ return m_state.mass; }
 
-	void LockX(){}
-	//queries
-	bool IsDead(){ 
-		//if (m_state){
-			return m_state.IsDead();
-		//}
-		//return true;
-	}
+	//queries	
+	bool IsDead(){ return m_state.IsDead(); }
 	
 	//friend methods //mostly integration stuff
 	friend void UpdateParticleVerletIntegration(Particle& particle, double deltaSeconds);
@@ -245,15 +237,13 @@ public:
 
 	//collision response
 	friend void CollisionResponseBounce(Particle& p1, Particle& q1, const float& bounciness, double deltaSeconds);
-
 	friend void CollisionResponseSpring(Particle& originParticle, Particle& endParticle, bool hasGravity = true, const float& unstretchedLengthConstraint = 1.0f, const float& springConstantK = 10.0f, const float& dampingConstantC = 0.5f);
-	
 };
 
 //===========================================================================================================
 
-typedef std::vector<Particle*> Particles; //somehow frame rate does silly things when not by ptr
-typedef std::vector<Particle*>::iterator ParticlesIterator;
+typedef std::vector<Particle> Particles; //somehow frame rate does silly things when not by ptr
+typedef std::vector<Particle>::iterator ParticlesIterator;
 
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods

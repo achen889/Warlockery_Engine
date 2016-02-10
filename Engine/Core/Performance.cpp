@@ -5,12 +5,15 @@
 
 #include "Performance.hpp"
 #include "Utilities.hpp"
+#include "..\Renderer\Text\TextSystem.hpp"
 
 //===========================================================================================================
 
 ProfileMap s_profileMap = ProfileMap();
 
 bool doDebugProfile = true;
+
+bool ProfileSection::s_doDebugProfiling = false;
 
 //===========================================================================================================
 
@@ -100,7 +103,18 @@ void ProfileSection::AddProfileToMap(const std::string& profileName){
 
 //-----------------------------------------------------------------------------------------------------------
 
+void RenderProfileMapToScreen(){
 
+	if (ProfileSection::s_doDebugProfiling) {
+		//std::string profileResults = GetProfileMapString();
+		std::string profileResults = OutputProfileMapToScreen();
+		//ConsolePrintString(profileResults);
+		OUTPUT_STRING_TO_SCREEN(profileResults, theOGLRenderer->GetDisplayWidth() * 0.65f, 850);
+	}
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
 
 //printing the report
 std::string OutputProfileMapToScreen(){
