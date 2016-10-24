@@ -16,6 +16,10 @@ Camera3D::Camera3D(const Vector3& position, const EulerAngles& orientation){
 
 //do fancy stuff here
 Matrix4 Camera3D::LookAt(const Vector3& pointToLookAt){
+
+	Vector3 vectorIofCamera;
+	Vector3 vectorJofCamera;
+	Vector3 vectorKofCamera;
 	
 	vectorKofCamera = m_position- pointToLookAt;
 	vectorKofCamera.Normalize();
@@ -60,7 +64,7 @@ void Camera3D::UpdateCameraFromInput(float deltaSeconds, const float& moveSpeed)
 	cameraForwardXY = GetForwardVector();
 	cameraForwardXY.Normalize();
 
-	cameraForwardXY = Vector3::FORWARD;
+	//cameraForwardXY = Vector3::FORWARD;
 
 	//move camera left according to yaw
 	Vector3 cameraLeftXY = Vector3(-cameraForwardXY.y, cameraForwardXY.x, 0);
@@ -156,6 +160,16 @@ Matrix4 Camera3D::GetCameraViewMatrix(){
 }
 
 //-----------------------------------------------------------------------------------------------------------
+
+ModelViewMatrix Camera3D::GetCameraModelViewMatrix() {
+
+	ModelViewMatrix outViewMat;
+	outViewMat.m_translationMatrix = GetCameraViewMatrix();
+	outViewMat.m_rotationMatrix = GetCameraRotationMatrix();
+
+	return outViewMat;
+	//return ModelViewMatrix(m_position, Vector3(1,1,1), m_orientation);
+}
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------

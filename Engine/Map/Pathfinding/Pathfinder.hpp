@@ -39,7 +39,7 @@ const float CalcHypotheticalGCostToAdjacentNodePosition(PathNode* currentActiveN
 //-----------------------------------------------------------------------------------------------------------
 
 //render A* path
-void RenderDebugPathMeshOnMap(OpenGLRenderer* renderer, MeshRenderer& pathMeshRenderer, Path& pathToRender, Map* map);
+void RenderDebugPathMeshOnMap2D(OpenGLRenderer* renderer, MeshRenderer& pathMeshRenderer, Path& pathToRender, Map* map);
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------

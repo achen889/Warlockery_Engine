@@ -11,10 +11,9 @@
 #include <wtypes.h>
 
 #include "Engine/Console/LogFile.hpp"
-#include "Engine/Core/Performance.hpp"
 
 #define SIZE_OF(name) sizeof(name)
-#define UNUSED(x) (void)(x)
+#define UNUSED(x) (void)(x) //removes the unreferenced formal param warning
 #define STRINGIFY(name) (std::string)#name
 #define TOKEN_PASTE(a, b) a ## b
 #define CONCAT_TOKENS(a, b) TOKEN_PASTE(a, b)
@@ -28,6 +27,8 @@
 #define FILE_NAME __FILE__
 
 #define LINE_NUM __LINE__
+
+#define CONSOLE_PRINT_ERROR(errorText) ConsolePrintError(errorText, FILE_NAME, FUNCTION_NAME, LINE_NUM)
 
 #define BUILD_ERROR(errorText) BuildError(errorText, FILE_NAME, FUNCTION_NAME, LINE_NUM)
 
@@ -46,7 +47,13 @@
 ///printf for console
 void ConsolePrintString(const std::string& messageString);
 
-void ConsolePrintf( const char* messageFormat, ... );
+void ConsoleLogPrintString(const std::string& messageString);
+
+void ConsolePrintf(const char* messageFormat, ...);
+
+void ConsoleLogPrintf(const char* messageFormat, ...);
+
+std::string Stringf(const char* messageFormat, ...);
 
 int ConsoleGenericMessageBox(const char* messageText, const char* messageTitle = "", const UINT& messageBoxProperties = MB_OK );
 
@@ -54,6 +61,9 @@ int ConsoleGenericMessageBox(const std::string& messageText, const std::string& 
 
 void ConsoleBeep(unsigned int frequency = 500, unsigned int duration = 1);
 
+void ConsolePrintError(const std::string& errorText, const char* fileName, const char* functionName, int lineNum);
+
+void ToggleEnableLog();
 ///----------------------------------------------------------------------------------------------------------
 ///error handling
 

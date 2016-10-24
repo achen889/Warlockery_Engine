@@ -44,7 +44,7 @@ void ConsoleArguments::TokenizeArgList(){
 void RunCommandFromBufferText(std::string& bufferText) {
 	AdjustBufferTextForExecution(bufferText);
 	if (bufferText != "") {
-		char* cStringBufferText = StringToWritableCString(bufferText);
+		char* cStringBufferText = StringToWritableCStr(bufferText);
 		char* currentValue;
 		char* tokenInBuffer;
 		currentValue = strtok_s(cStringBufferText, " ", &tokenInBuffer);

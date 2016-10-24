@@ -84,6 +84,19 @@ int ReadXMLAttributeAsInt(const XMLNode& node, const char* attributeName, int de
 
 //-----------------------------------------------------------------------------------------------------------
 
+unsigned int ReadXMLAttributeAsUInt(const XMLNode& node, const char* attributeName, unsigned int defaultValue) {
+	XMLCSTR attrCStr = node.getAttribute(attributeName);
+	if (attrCStr) {
+		std::string attrString = (std::string)attrCStr;
+
+		return StringToUInt(attrString);
+	}
+	else
+		return defaultValue;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
 float ReadXMLAttributeAsFloat(const XMLNode& node, const char* attributeName, const float& defaultValue){
 	XMLCSTR attrCStr = node.getAttribute(attributeName);
 	if (attrCStr){

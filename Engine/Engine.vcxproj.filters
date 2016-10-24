@@ -13,9 +13,6 @@
     <Filter Include="Core">
       <UniqueIdentifier>{37646724-2a12-4f68-a5a7-e2514fa30699}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Input">
-      <UniqueIdentifier>{2e7edc3d-e340-4dfa-bc2c-a953d4021a67}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Sound">
       <UniqueIdentifier>{a87a47df-a045-4ae4-ba53-48491fc536f6}</UniqueIdentifier>
     </Filter>
@@ -27,9 +24,6 @@
     </Filter>
     <Filter Include="Math\Geometry">
       <UniqueIdentifier>{3468cc5f-61f8-46a6-b4c8-72b1ae029075}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Math\Vectors">
-      <UniqueIdentifier>{407d1628-d3c0-4cf4-892a-9bba1a4d8cd4}</UniqueIdentifier>
     </Filter>
     <Filter Include="ParticleSystem">
       <UniqueIdentifier>{3f88c4ac-680f-4dd1-aaf3-ce9d269d5429}</UniqueIdentifier>
@@ -48,9 +42,6 @@
     </Filter>
     <Filter Include="Renderer\Textures">
       <UniqueIdentifier>{63ba5df8-7668-4f55-9e5c-78d8fa304894}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Input\GUI">
-      <UniqueIdentifier>{9efa3472-2edf-494a-bc73-61d1cec14fe0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Core\Utilities">
       <UniqueIdentifier>{0b2c66dd-e084-454a-8ee4-7dc84f019464}</UniqueIdentifier>
@@ -85,8 +76,65 @@
     <Filter Include="Components\Collision">
       <UniqueIdentifier>{9895dc16-14f7-4c13-8e95-0e8d192c0e11}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Components\Physics">
+    <Filter Include="Components\Transform">
       <UniqueIdentifier>{ef447e86-2d5c-429c-a0be-ed046286958f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Event\Properties">
+      <UniqueIdentifier>{c6d89946-93fb-443b-8d01-0aacdc1e7e3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface">
+      <UniqueIdentifier>{f6ba5e6d-be14-4a58-8077-a9600f4e8c3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface\GUI_old">
+      <UniqueIdentifier>{9efa3472-2edf-494a-bc73-61d1cec14fe0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface\Widgets">
+      <UniqueIdentifier>{8b338b01-4833-48ca-9d9f-293137000b46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface\KeyFrameAnimation">
+      <UniqueIdentifier>{a704a8b4-1db4-4df1-a778-40f3de6e6f8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface\Widgets\Base">
+      <UniqueIdentifier>{fadaa3a7-8529-4e1f-9520-4b6fb3caef33}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface\WidgetState">
+      <UniqueIdentifier>{f3714dba-bad7-4db7-89f1-3f6116549815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface\Styles">
+      <UniqueIdentifier>{b6c10474-6496-44aa-9eb7-818a14a202c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Metrics">
+      <UniqueIdentifier>{db612c5d-c07a-4254-8db7-74a2ff4a1e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UserInterface\Widgets\Types">
+      <UniqueIdentifier>{d931c504-6e5a-416b-ab2d-d69f8bfd4716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Input">
+      <UniqueIdentifier>{2e7edc3d-e340-4dfa-bc2c-a953d4021a67}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\FMOD">
+      <UniqueIdentifier>{2bd99741-9d8f-48a8-aee9-df46ccc24ad1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core\Utilities\String">
+      <UniqueIdentifier>{db18af89-b462-4255-b8ea-3fca5c645e9a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\AudioSystem">
+      <UniqueIdentifier>{4309cf6c-70db-40af-b2da-455d9dc4a0ea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Spline">
+      <UniqueIdentifier>{076ec4c3-3205-4627-b1b0-46a0ea4e1f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math\Vectors">
+      <UniqueIdentifier>{407d1628-d3c0-4cf4-892a-9bba1a4d8cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map">
+      <UniqueIdentifier>{873dce69-0192-4e2a-969a-b18a269de73a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Pathfinding">
+      <UniqueIdentifier>{52ba6847-d892-4957-85b1-6c678a77b7c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Map\Visibility">
+      <UniqueIdentifier>{a2f0afaa-8a6c-4f09-b8db-f43dc32d3a0d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -226,30 +274,24 @@
       <Filter>Core\Utilities\XML</Filter>
     </ClInclude>
     <ClInclude Include="Input\GUI\UIElement.hpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClInclude>
     <ClInclude Include="Input\GUI\UIProgressBar.hpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClInclude>
     <ClInclude Include="Input\GUI\UIButton.hpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClInclude>
     <ClInclude Include="Input\GUI\UIText.hpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClInclude>
     <ClInclude Include="Console\LogFile.hpp">
       <Filter>Console</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Utilities.hpp">
-      <Filter>Core\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Core\FileWizard.hpp">
       <Filter>Core\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Core\BinaryUtils.hpp">
-      <Filter>Core\Utilities</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\StringTable.hpp">
       <Filter>Core\Utilities</Filter>
     </ClInclude>
     <ClInclude Include="Core\Time.hpp">
@@ -263,9 +305,6 @@
     </ClInclude>
     <ClInclude Include="ParticleSystem\ParticlePhysics.hpp">
       <Filter>ParticleSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\BaseGameState.hpp">
-      <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="Core\SystemClockWin32.hpp">
       <Filter>Core\Time</Filter>
@@ -315,15 +354,6 @@
     <ClInclude Include="Networking\NetworkSystem.hpp">
       <Filter>Networking</Filter>
     </ClInclude>
-    <ClInclude Include="Sound\EngineSound.hpp">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\Sound.hpp">
-      <Filter>Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="Sound\SoundSystem.hpp">
-      <Filter>Sound</Filter>
-    </ClInclude>
     <ClInclude Include="Networking\NetworkSession.hpp">
       <Filter>Networking</Filter>
     </ClInclude>
@@ -351,9 +381,6 @@
     <ClInclude Include="Components\ClockComponent.hpp">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="Components\DestructibleComponent.hpp">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="Components\RenderComponents\Render2DComponent.hpp">
       <Filter>Components\RenderComponents</Filter>
     </ClInclude>
@@ -364,13 +391,184 @@
       <Filter>Components\RenderComponents</Filter>
     </ClInclude>
     <ClInclude Include="Components\TransformComponents\RigidBodyComponent.hpp">
-      <Filter>Components\Physics</Filter>
+      <Filter>Components\Transform</Filter>
     </ClInclude>
     <ClInclude Include="Components\TransformComponents\TransformComponent.hpp">
-      <Filter>Components\Physics</Filter>
+      <Filter>Components\Transform</Filter>
     </ClInclude>
     <ClInclude Include="Components\CollisionComponents\ColliderComponent.hpp">
       <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Networking\ReliableTracker.hpp">
+      <Filter>Networking</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionComponents\Collider2DComponent.hpp">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\HealthComponent.hpp">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TransformComponents\Transform2DComponent.hpp">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\TransformComponents\PhysicsMotion2DComponent.hpp">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\KeyBindingSystem.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Event\EventSystem.hpp">
+      <Filter>Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\BitArray.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Event\NamedProperties.hpp">
+      <Filter>Core\Event\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Event\TypedProperty.hpp">
+      <Filter>Core\Event\Properties</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Event\EventUtilities.hpp">
+      <Filter>Core\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Utilities.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\BaseGameState.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UICommon.hpp">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\KeyFrameAnimation\AnimatedProperty.hpp">
+      <Filter>UserInterface\KeyFrameAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\KeyFrameAnimation\KeyFrameSequence.hpp">
+      <Filter>UserInterface\KeyFrameAnimation</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\WidgetStates\WidgetStateProperties.hpp">
+      <Filter>UserInterface\WidgetState</Filter>
+    </ClInclude>
+    <ClInclude Include="Components\CollisionComponents\UICollider2DComponent.hpp">
+      <Filter>Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\BaseWidget.hpp">
+      <Filter>UserInterface\Widgets\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UISystem.hpp">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\WidgetFactory.hpp">
+      <Filter>UserInterface\Widgets\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\WidgetStyle.hpp">
+      <Filter>UserInterface\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\WidgetStyleFactory.hpp">
+      <Filter>UserInterface\Styles</Filter>
+    </ClInclude>
+    <ClInclude Include="Input\InputCommon.hpp">
+      <Filter>Input</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\UIScreen.hpp">
+      <Filter>UserInterface</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\RandomUtils.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\MathCommon.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Metrics\GameplayMetric.hpp">
+      <Filter>Core\Metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Metrics\GameplayMetricLog.hpp">
+      <Filter>Core\Metrics</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\ObjectFactory.hpp">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\ButtonWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\CheckBoxWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\CursorWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\DropDownWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\EditLineWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\GroupWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\LabelWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\LayoutWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\ProgressBarWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\SliderWidget.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterface\Widgets\WidgetTypes.hpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Dice.hpp">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\SoundSystemFMOD.hpp">
+      <Filter>Sound\FMOD</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\StringTable.hpp">
+      <Filter>Core\Utilities\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\StringUtils.hpp">
+      <Filter>Core\Utilities\String</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\SortingUtils.hpp">
+      <Filter>Core\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer\FrameBuffer.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound\AudioSystem.hpp">
+      <Filter>Sound\AudioSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Spline\CubicHermiteCurve.hpp">
+      <Filter>Math\Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="Math\Spline\CubicHermiteSpline.hpp">
+      <Filter>Math\Spline</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Map.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Tile.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\TileState.hpp">
+      <Filter>Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Pathfinding\Path.hpp">
+      <Filter>Map\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Pathfinding\Pathfinder.hpp">
+      <Filter>Map\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Pathfinding\PathNode.hpp">
+      <Filter>Map\Pathfinding</Filter>
+    </ClInclude>
+    <ClInclude Include="Map\Visibility\Visibility.hpp">
+      <Filter>Map\Visibility</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -492,16 +690,16 @@
       <Filter>Core\Utilities\XML</Filter>
     </ClCompile>
     <ClCompile Include="Input\GUI\UIElement.cpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClCompile>
     <ClCompile Include="Input\GUI\UIProgressBar.cpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClCompile>
     <ClCompile Include="Input\GUI\UIButton.cpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClCompile>
     <ClCompile Include="Input\GUI\UIText.cpp">
-      <Filter>Input\GUI</Filter>
+      <Filter>UserInterface\GUI_old</Filter>
     </ClCompile>
     <ClCompile Include="Math\IntVec2.cpp">
       <Filter>Math\Vectors</Filter>
@@ -509,16 +707,10 @@
     <ClCompile Include="Console\LogFile.cpp">
       <Filter>Console</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Utilities.cpp">
-      <Filter>Core\Utilities</Filter>
-    </ClCompile>
     <ClCompile Include="Core\BinaryUtils.cpp">
       <Filter>Core\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Core\FileWizard.cpp">
-      <Filter>Core\Utilities</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\StringTable.cpp">
       <Filter>Core\Utilities</Filter>
     </ClCompile>
     <ClCompile Include="Core\Time.cpp">
@@ -532,9 +724,6 @@
     </ClCompile>
     <ClCompile Include="ParticleSystem\ParticlePhysics.cpp">
       <Filter>ParticleSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\BaseGameState.cpp">
-      <Filter>Core</Filter>
     </ClCompile>
     <ClCompile Include="Core\Performance.cpp">
       <Filter>Core\Time</Filter>
@@ -572,12 +761,6 @@
     <ClCompile Include="Networking\NetworkSystem.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
-    <ClCompile Include="Sound\Sound.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="Sound\SoundSystem.cpp">
-      <Filter>Sound</Filter>
-    </ClCompile>
     <ClCompile Include="Networking\NetworkSession.cpp">
       <Filter>Networking</Filter>
     </ClCompile>
@@ -602,9 +785,6 @@
     <ClCompile Include="Components\ClockComponent.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="Components\DestructibleComponent.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="Components\RenderComponents\Render2DComponent.cpp">
       <Filter>Components\RenderComponents</Filter>
     </ClCompile>
@@ -615,13 +795,151 @@
       <Filter>Components\RenderComponents</Filter>
     </ClCompile>
     <ClCompile Include="Components\TransformComponents\RigidBodyComponent.cpp">
-      <Filter>Components\Physics</Filter>
+      <Filter>Components\Transform</Filter>
     </ClCompile>
     <ClCompile Include="Components\TransformComponents\TransformComponent.cpp">
-      <Filter>Components\Physics</Filter>
+      <Filter>Components\Transform</Filter>
     </ClCompile>
     <ClCompile Include="Components\CollisionComponents\ColliderComponent.cpp">
       <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CollisionComponents\Collider2DComponent.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\HealthComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TransformComponents\Transform2DComponent.cpp">
+      <Filter>Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\TransformComponents\PhysicsMotion2DComponent.cpp">
+      <Filter>Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="Input\KeyBindingSystem.cpp">
+      <Filter>Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Event\EventSystem.cpp">
+      <Filter>Core\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Event\NamedProperties.cpp">
+      <Filter>Core\Event\Properties</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Utilities.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\BaseGameState.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\WidgetStates\WidgetStateProperties.cpp">
+      <Filter>UserInterface\WidgetState</Filter>
+    </ClCompile>
+    <ClCompile Include="Components\CollisionComponents\UICollider2DComponent.cpp">
+      <Filter>Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\BaseWidget.cpp">
+      <Filter>UserInterface\Widgets\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UISystem.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\WidgetFactory.cpp">
+      <Filter>UserInterface\Widgets\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\WidgetStyle.cpp">
+      <Filter>UserInterface\Styles</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\WidgetStyleFactory.cpp">
+      <Filter>UserInterface\Styles</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UIScreen.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\UICommon.cpp">
+      <Filter>UserInterface</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\RandomUtils.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\ObjectFactory.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\ButtonWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\CheckBoxWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\CursorWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\DropDownWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\EditLineWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\GroupWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\LabelWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\LayoutWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\ProgressBarWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterface\Widgets\SliderWidget.cpp">
+      <Filter>UserInterface\Widgets\Types</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Dice.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\SoundSystemFMOD.cpp">
+      <Filter>Sound\FMOD</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\StringTable.cpp">
+      <Filter>Core\Utilities\String</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\StringUtils.cpp">
+      <Filter>Core\Utilities\String</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer\FrameBuffer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound\AudioSystem.cpp">
+      <Filter>Sound\AudioSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Spline\CubicHermiteCurve.cpp">
+      <Filter>Math\Spline</Filter>
+    </ClCompile>
+    <ClCompile Include="Math\Spline\CubicHermiteSpline.cpp">
+      <Filter>Math\Spline</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Map.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Tile.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\TileState.cpp">
+      <Filter>Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Pathfinding\Path.cpp">
+      <Filter>Map\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Pathfinding\Pathfinder.cpp">
+      <Filter>Map\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Pathfinding\PathNode.cpp">
+      <Filter>Map\Pathfinding</Filter>
+    </ClCompile>
+    <ClCompile Include="Map\Visibility\Visibility.cpp">
+      <Filter>Map\Visibility</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Metrics\GameplayMetricLog.cpp">
+      <Filter>Core\Metrics</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

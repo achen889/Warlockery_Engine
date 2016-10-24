@@ -25,8 +25,6 @@ RenderComponent::RenderComponent(const XMLNode& node): BaseComponent(node){
 
 RenderComponent::RenderComponent(const std::string& name) : BaseComponent(name){
 
-	//InitializeMeshRenderer("", "basicSampler", GL_TRIANGLE_STRIP);
-
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -64,15 +62,12 @@ void RenderComponent::SetTextureInMaterial(const std::string& texBindName, const
 
 void RenderComponent::SetRenderMesh2D(const Vector2& screenPosition, const Vector2& newSize, const Rgba& elementColor, const std::string& diffuseTexturePath , const std::string& shaderName){
 	m_renderCoordinates = ToVector3(screenPosition);
-	renderScale = ToVector3(newSize);
+	renderSize = ToVector3(newSize);
 	m_color = elementColor;
 
 	SetRenderBounds();
 
 	InitializeMeshRenderer(diffuseTexturePath, shaderName);
-
-	//gives it a basic 2D quad mesh
-	m_meshRenderer->m_mesh->InitializeQuad2DMesh(ToAABB2(m_renderBounds), m_color);
 
 }
 
@@ -80,15 +75,12 @@ void RenderComponent::SetRenderMesh2D(const Vector2& screenPosition, const Vecto
 
 void RenderComponent::SetRenderMesh3D(const Vector3& screenPosition, const Vector3& newSize, const Rgba& elementColor, const std::string& diffuseTexturePath, const std::string& shaderName){
 	m_renderCoordinates = screenPosition;
-	renderScale = newSize;
+	renderSize = newSize;
 	m_color = elementColor;
 
 	SetRenderBounds();
 
 	InitializeMeshRenderer(diffuseTexturePath, shaderName);
-
-	//sets render box
-	m_meshRenderer->m_mesh->InitializeQuad3DMesh(m_renderBounds, m_color); //box
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -106,12 +98,13 @@ void RenderComponent::OnDestroy(){
 //-----------------------------------------------------------------------------------------------------------
 
 void RenderComponent::Render2D(OpenGLRenderer* renderer, ModelViewMatrix* modelView, Light* light){
-	//PROFILE_SECTION();
 
 	UNUSED(renderer);
 
 	if (m_meshRenderer){
-		
+		//gives it a basic 2D quad mesh
+		m_meshRenderer->m_mesh->InitializeQuad2DMesh(ToAABB2(m_renderBounds), m_color);
+
 		m_meshRenderer->RenderMesh2D(modelView, light);
 	}
 }
@@ -119,15 +112,13 @@ void RenderComponent::Render2D(OpenGLRenderer* renderer, ModelViewMatrix* modelV
 //-----------------------------------------------------------------------------------------------------------
 
 void RenderComponent::Render3D(OpenGLRenderer* renderer, Camera3D& camera, bool isPerspective, Lights* lights, ModelViewMatrix* modelView){
-	//PROFILE_SECTION();
-	
 	UNUSED(renderer);
 
 	if (m_meshRenderer){
 
-		//sets render sphere
-		//m_meshRenderer->m_mesh->InitializeSphereMesh(Sphere3(m_renderBounds.CalcCenter(), renderSize.x), Rgba::BLUE); //sphere
-		
+		m_meshRenderer->m_mesh->InitializeQuad3DMesh(m_renderBounds, m_color); //box
+
+		//meshRenderer->m_mesh->InitializeSphereMesh(Sphere3(m_screenCoordinates, renderSize.x), Rgba::BLUE); //sphere
 		if (lights){
 			m_meshRenderer->RenderMeshWithLights(camera, isPerspective, *lights, modelView);
 		}

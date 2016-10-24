@@ -73,6 +73,9 @@ public:
 
 	Texture* m_FontTextureAtlas = NULL;
 	MeshRenderer* m_fontRenderer = NULL;
+
+	Material m_fontMat;
+
 	std::string m_fontTexturePath;
 	bool m_isLoaded = false;
 
@@ -104,6 +107,9 @@ public:
 	
 	void GetFontTexturePath();
 
+	//assumes font mat already exists
+	const Material& GetFontMaterial() { return m_fontMat; }
+
 	void CreateFontTexture();
 
 	void InitializeFontMeshRenderer();
@@ -129,6 +135,12 @@ public:
 
 inline FontSystem::~FontSystem(){
 	//do nothing
+
+// 	if (m_fontRenderer != NULL) {
+// 		delete m_fontRenderer;
+// 		m_fontRenderer = NULL;
+// 	}
+
 }
 
 //-----------------------------------------------------------------------------------------------------------

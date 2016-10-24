@@ -19,10 +19,11 @@
 
 #define EXECUTE_CONSOLE_COMMAND(name) if (theTextSystem){ theTextSystem->ExecuteConsoleString(STRINGIFY(name)); }
 
+#define EXECUTE_CONSOLE_COMMAND_STR(name) if (theTextSystem){ theTextSystem->ExecuteConsoleString(name); }
+
 #define CONSOLE_COMMAND(name) static void ConsoleCommand_##name##(ConsoleArguments* args) //MUST BE USED IN SOURCE FILES
 
 //===========================================================================================================
-
 
 void AppendHelpText(const std::string& info);
 
@@ -37,6 +38,7 @@ void AppendHelpText(const std::string& info);
 #define ARG_TOKEN_F(i) args->GetTokenAsFloat(i)
 #define ARG_TOKEN_I(i) args->GetTokenAsInt(i)
 #define ARG_TOKEN_S(i) args->GetTokenAsString(i)
+#define ARG_TOKEN_B(i) args->GetTokenAsByte(i)
 
 struct ConsoleArguments{
 	
@@ -59,6 +61,10 @@ struct ConsoleArguments{
 
 	int GetTokenAsInt(int i){
 		return CStringToInt(argTokens[i]);
+	}
+
+	Byte GetTokenAsByte(int i) {
+		return (Byte)argTokens[i][0];
 	}
 
 	std::string GetTokenAsString(int i){
@@ -113,8 +119,6 @@ typedef std::map<std::string, ConsoleCommand*> ConsoleCommandMap;
 
 
 //===========================================================================================================
-
-const ConsoleCommand* GetCommand(const std::string& commandName);
 
 //-----------------------------------------------------------------------------------------------------------
 

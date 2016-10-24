@@ -9,17 +9,25 @@
 #define _included_Material__
 
 #include "Engine/Renderer/ShaderWizard.hpp"
+#include "Light.hpp"
+
+//===========================================================================================================
+
+class Material;
+
+typedef std::map<std::string, Material*> MaterialMap;
+typedef std::map<std::string, Material*>::iterator MaterialMapIterator;
+typedef std::pair<std::string, Material*> MaterialMapEntry;
 
 //===========================================================================================================
 
 class Material{
 public:
-	GLShader m_glProgram;
-	GLSampler m_glSampler;
-	bool m_samplerInUse = false;
 
 	Material();
 	~Material();
+
+	Material(const std::string& name);
 	
 	void InitializeMaterial(const char* vert_file, const char* frag_file);
 	void InitializeMaterial(const char* shaderName); //uses shader wizard
@@ -49,6 +57,8 @@ public:
 	void SetSpecularTexture(const std::string& filePath);
 
 	void SetEmissiveTexture(const std::string& filePath);
+
+	const std::string GetName() { return std::string(m_name); }
 	
 	void BindTextureIndexToShader(unsigned int texIndex, const std::string& texName, Texture* myTexture = NULL);
 
@@ -56,8 +66,29 @@ public:
 
 	void BindMaterialTextures();
 
+	void BindUnifiedLights(Lights& lights);
+
 	void PrepareShaderForRendering(Camera3D& camera, bool isPerspective, ModelViewMatrix* modelView = NULL);
+
+	void SetShaderToUse();
 	void PrepareShaderForRendering2D(ModelViewMatrix* modelView = NULL);
+
+	void BindModelViewMatrix(ModelViewMatrix* modelView);
+
+	friend void ClearGlobalMaterials();
+
+	//vars
+	GLShader m_glProgram;
+	GLSampler m_glSampler;
+	bool m_samplerInUse = false;
+	char* m_name;
+
+	static MaterialMap s_globalMaterials;
+
+	//static methods
+	static Material* CreateOrGetMaterial(const std::string& matName, bool allowNullMat = false);
+
+
 };
 
 
@@ -69,6 +100,17 @@ m_samplerInUse(false)
 {
 	
 }
+
+//-----------------------------------------------------------------------------------------------------------
+
+inline Material::Material(const std::string& name) : 
+	m_name(StringToWritableCStr(name)),
+	m_samplerInUse(false)
+{
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
 
 inline Material::~Material(){
 	//do nothing

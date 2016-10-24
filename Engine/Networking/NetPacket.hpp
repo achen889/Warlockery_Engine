@@ -10,6 +10,7 @@
 
 #include "NetAddress.hpp"
 #include "Engine/Core/BinaryUtils.hpp"
+#include <stdint.h>
 
 //===========================================================================================================
 
@@ -25,7 +26,9 @@ struct NetPacket : ByteBuffer{
 	
 	//constructors
 	NetPacket();	
-	~NetPacket() { 
+	NetPacket(const uint16_t& ackID, const Byte& connID = 0xff );
+
+	~NetPacket() {
 		//do nothing
 		//ByteBuffer::~ByteBuffer(); 
 	}
@@ -36,7 +39,7 @@ struct NetPacket : ByteBuffer{
 
 	void Init();
 
-	void WriteInitHeaderBytes();
+	void WriteInitHeaderBytes(const uint16_t& ackID = 0xffff, const Byte& connID = 0xff );
 
 	void SetAddress(sockaddr* addr, size_t addrLen) {
 		m_address.Init(addr, addrLen);
@@ -48,7 +51,11 @@ struct NetPacket : ByteBuffer{
 
 	NetAddress* GetAddress(){ return (NetAddress*)&m_address; }
 
-	const unsigned short GetAckID();
+	const uint16_t GetAckID();
+
+	const Byte GetConnIndex() {
+		return packetBuffer[0];
+	}
 
 	const Byte GetMessageCount();
 
@@ -65,10 +72,11 @@ struct NetPacket : ByteBuffer{
 	bool IsValid();
 
 	size_t GetLength() { return (size_t)*messageCountPtr; }
-
+	size_t GetHeaderLength() { return SIZE_OF_SHORT + SIZE_OF_CHAR + SIZE_OF_CHAR; }
+	
 	Byte* GetBuffer() { /*buffer[writeIndex] = (Byte)'/0';*/ return buffer; }
 
-	bool AddMessage(const NetMessage& msgToAdd); //write this to the end of the buffer and update message count
+	bool AddMessage( NetMessage& msgToAdd); //write this to the end of the buffer and update message count
 	
 	bool ValidatePacketSize() {
 		if (curSize < maxSize) {

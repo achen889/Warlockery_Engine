@@ -9,7 +9,7 @@
 #define _included_RenderComponent__
 
 #include "BaseComponent.hpp"
-#include "Engine/Renderer/OGLRenderingUtils.hpp"
+//#include "Engine/Renderer/OGLRenderingUtils.hpp"
 #include "Engine/Renderer/OpenGLRenderer.hpp"
 #include "Engine/Math/AABB2.hpp"
 
@@ -51,7 +51,7 @@ private:
 	Rgba m_color;
 	AABB3 m_renderBounds;
 	Vector3 m_renderCoordinates;
-	Vector3 renderScale; //sphere uses renderSize.x
+	Vector3 renderSize; //sphere uses renderSize.x
 
 };
 
@@ -68,7 +68,7 @@ inline RenderComponent::~RenderComponent(){
 
 inline void RenderComponent::SetRenderBounds(){
 	Vector3 renderMins = Vector3(m_renderCoordinates);
-	Vector3 renderMaxs = Vector3(m_renderCoordinates + renderScale);
+	Vector3 renderMaxs = Vector3(m_renderCoordinates + renderSize);
 
 	m_renderBounds = AABB3(renderMins, renderMaxs);
 }

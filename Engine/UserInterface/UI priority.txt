@@ -1,0 +1,22 @@
+
+priority
+
+tier 1
+
+widget anims, no transitions
+states
+
+tier 2
+widget types and widget 
+
+tier 3
+
+transitions
+
+//==============
+
+progress bar
+-fill color
+
+-fill direction?
+

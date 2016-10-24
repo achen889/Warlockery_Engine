@@ -8,11 +8,12 @@ Game Engine
 by Albert Chen
 
 Recently Added
-UI Icon, still need to figure out how to improve
-seperated timers into a new class
-added a ton of math stuff including scene graph
 
-To Add
+Required
+-Font
+-ui.settings.xml
+-stuff for stuff
+
 
 
 

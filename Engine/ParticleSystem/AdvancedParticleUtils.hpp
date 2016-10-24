@@ -7,6 +7,7 @@
 
 #include "Engine\ParticleSystem\ParticleSystem.hpp"
 #include <vector>
+#include "Engine/UserInterface/KeyFrameAnimation/KeyFrameSequence.hpp"
 
 #ifndef _included_AdvancedParticleUtils__
 #define _included_AdvancedParticleUtils__
@@ -40,12 +41,9 @@ struct SpringLink{
 
 //single particle node
 struct ParticleNode{
-	Particle* m_particle;
+	Particle m_particle;
 
-	// 	ParticleGridNode* m_north;
-	// 	ParticleGridNode* m_south;
-	// 	ParticleGridNode* m_east;
-	// 	ParticleGridNode* m_west;
+	float m_zOffset = 0.0f;
 
 	Vector2 m_location;
 
@@ -57,25 +55,30 @@ struct ParticleNode{
 	~ParticleNode();
 
 	void SetBoundingSphere(){
-		m_boundingSphere = Sphere3(m_particle->GetPosition(), m_particle->m_state.radius);
+		m_boundingSphere = Sphere3(m_particle.GetPosition(), m_particle.m_state.radius);
 	}
 
 };
 
-typedef std::vector<ParticleNode*>ParticleNodes;
+typedef std::vector<ParticleNode>ParticleNodes;
+typedef std::vector<ParticleNode>::iterator ParticleNodesIterator;
+
+//===========================================================================================================
 
 //so far this grid simulates surface water ripples
 struct ParticleGrid{
 	ParticleNodes m_particleGrid;
 
-	std::vector<SpringLink*> m_springLinks;
+	std::vector<SpringLink> m_springLinks;
 	
 	int m_rows;
 	int m_cols;
 
 	float m_spacing;
 
-	MeshRenderer* m_particleGridRenderer = NULL;
+	MeshRenderer m_particleGridRenderer;
+
+	KeyFrameSequence<Rgba> m_colorOverZOffset; //allows lerping of color based on z offset
 
 	ParticleGrid();
 	~ParticleGrid();

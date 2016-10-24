@@ -9,6 +9,7 @@
 #include "Engine\Math\MathCommands.hpp"
 #include "Engine\Core\BinaryUtils.hpp"
 #include "..\OpenGLRenderer.hpp"
+#include "..\FrameBuffer.hpp"
 
 TextSystem* theTextSystem = NULL;
 
@@ -100,8 +101,8 @@ CONSOLE_COMMAND(calcTextWidth){
 CONSOLE_COMMAND(profile) {
 	UNUSED_COMMAND_ARGS
 
-	ProfileSection::s_doDebugProfiling = !ProfileSection::s_doDebugProfiling;
-	if (ProfileSection::s_doDebugProfiling) {
+	doDebugProfile = !doDebugProfile;
+	if (doDebugProfile) {
 		OUTPUT_STRING_TO_CONSOLE("Debug Profiling ON.", 1000);
 	}
 	else {
@@ -110,21 +111,67 @@ CONSOLE_COMMAND(profile) {
 	
 }
 
+CONSOLE_COMMAND(memory) {
+	UNUSED_COMMAND_ARGS
+
+		doDebugMemory = !doDebugMemory;
+	if (doDebugMemory) {
+		OUTPUT_STRING_TO_CONSOLE("Debug Memory ON.", 1000);
+	}
+	else {
+		OUTPUT_STRING_TO_CONSOLE("Debug Memory OFF.", 1000);
+	}
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+CONSOLE_COMMAND(fire_event) {
+	
+	if (COMMAND_HAS_ARGS) {
+		std::string eventNameStr = ARG_TOKEN_S(0);
+		NamedProperties params;
+
+		params.Set("fromConsole", true);
+
+		int argMax = NUMBER_OF_ARG_TOKENS;
+		for (int i = 1; i < NUMBER_OF_ARG_TOKENS-1; i++){
+			if (i + 1 < argMax) {
+				params.Set(ARG_TOKEN_S(i), ARG_TOKEN_S(i + 1));
+			}
+		}
+
+		EventSystem::GetInstance().FireEvent(eventNameStr, params);
+	}
+}
+
+CONSOLE_COMMAND(toggleLog) {
+	//toggles log
+	ToggleEnableLog();
+	if (g_enableLog) {
+		OUTPUT_STRING_TO_CONSOLE("Log Enabled!", 1000);
+	}
+	else {
+		OUTPUT_STRING_TO_CONSOLE("Log Disabled!", 1000);
+	}
+}
+
 ///----------------------------------------------------------------------------------------------------------
 ///constructor
-TextSystem::TextSystem():m_IsDevelopmentConsoleActive(false){
-
+TextSystem::TextSystem():
+	m_IsDevelopmentConsoleActive(false){
+	
 	RegisterDefaultCommands();
 
 	m_mathCommands = MathCommands();
 
 	textInputBuffer = "";
-	
-	if (!theTextSystem){
-		theTextSystem = this;
-	}
 
 	m_textCamera = Camera3D(Vector3::ZERO, EulerAngles(0.0f, 0.0f, 0.0f));
+
+	if (!theTextSystem) {
+		theTextSystem = this;
+	}
 
 }
 
@@ -132,14 +179,19 @@ TextSystem::TextSystem():m_IsDevelopmentConsoleActive(false){
 
 //starts up with a default font texture
 void TextSystem::StartUp(const std::string& defaultFontFilePath, OpenGLRenderer* renderer){
-	LoadFontSystem(defaultFontFilePath);
+	//create default font system
+	m_fontSystem = FontSystem(defaultFontFilePath);
 
 	m_OGLRenderer = renderer;
 
 	InitializeQuads();
 	InitializeFontVAO(m_textIn);
 	InitializeFontVAO(m_textOut);
+
 	InitializeFontMeshRenderer();
+
+	//register text events
+	RegisterEventMethodCallback("RenderText", &TextSystem::EventRenderText, *this);
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -162,6 +214,9 @@ void TextSystem::RegisterDefaultCommands(){
 	REGISTER_CONSOLE_COMMAND(messageBox, "Creates a MessageBox for the Console Args.");
 	REGISTER_CONSOLE_COMMAND(calcTextWidth, "Calc the text width with the current font.");
 	REGISTER_CONSOLE_COMMAND(profile, "Toggles debug profiling.");
+	REGISTER_CONSOLE_COMMAND(memory, "Toggles debug memory.");
+	REGISTER_CONSOLE_COMMAND(fire_event, "Fires an event defined in the event system.");
+	REGISTER_CONSOLE_COMMAND(toggleLog, "Toggles logging data to text files. Default: disabled");
 }
 
 //===========================================================================================================
@@ -181,18 +236,21 @@ void TextSystem::LoadFontSystem(FontSystem& fontSystem, const std::string& fontF
 //-----------------------------------------------------------------------------------------------------------
 
 void TextSystem::InitializeFontMeshRenderer(){
-	//m_textRenderer = MeshRenderer();
+	//m_textRenderer = MeshRenderer("GameText",true, true);
+	//m_devConsoleTextRenderer = MeshRenderer("DevConsoleText", true, true);
 	//m_textRenderer.m_material = new Material();
 	//m_textRenderer.m_mesh = new Mesh();
 
 	std::string texturePath = "Data/Fonts/" + m_fontSystem.m_FontSummary.m_fileName;
 
-	//m_textRenderer.m_material->m_glSampler.SetTexture(texturePath);
-	m_textRenderer.m_material->SetTextureInMap("gTexture", texturePath);
+	m_textRenderer.SetMaterial(m_fontSystem.GetFontMaterial());
 	m_textRenderer.m_mesh->SetDrawMode(GL_QUADS);
-	m_textRenderer.m_material->InitializeMaterial( "Data/Shaders/basicSampler.vert", "Data/Shaders/basicSampler.frag"); //load prog
-
 	m_textRenderer.BindVertexArray();
+
+	//set dev console mesh renderer
+	m_devConsoleTextRenderer.SetMaterial(m_fontSystem.GetFontMaterial());
+	m_devConsoleTextRenderer.m_mesh->SetDrawMode(GL_QUADS);
+	m_devConsoleTextRenderer.BindVertexArray();
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -202,7 +260,7 @@ void TextSystem::InitializeFontMeshRenderer(FontSystem& fontSystem){
 	m_textRenderer.m_material = new Material();
 	m_textRenderer.m_mesh = new Mesh();
 
-	std::string texturePath = "Data/Fonts/" + fontSystem.m_FontSummary.m_fileName;
+	const std::string texturePath = "Data/Fonts/" + fontSystem.m_FontSummary.m_fileName;
 
 	//m_textRenderer.m_material->m_glSampler.SetTexture(texturePath);
 	m_textRenderer.m_material->SetTextureInMap("gTexture", texturePath);
@@ -216,7 +274,7 @@ void TextSystem::InitializeFontMeshRenderer(FontSystem& fontSystem){
 //===========================================================================================================
 
 void TextSystem::InitializeFontVAO(VertexArrayObject& myVAO){
-	std::string texturePath = "Data/Fonts/" + m_fontSystem.m_FontSummary.m_fileName;
+	const std::string texturePath = "Data/Fonts/" + m_fontSystem.m_FontSummary.m_fileName;
 
 	myVAO.m_glSampler.SetTextureInMap("gTexture",texturePath);
 	myVAO.SetDrawMode(GL_QUADS);
@@ -228,11 +286,19 @@ void TextSystem::InitializeFontVAO(VertexArrayObject& myVAO){
 //-----------------------------------------------------------------------------------------------------------
 
 void TextSystem::InitializeQuads(){
-	static const AABB2 BACKGROUND_QUAD(Vector2::ZERO, Vector2(m_OGLRenderer->GetDisplayWidth(), m_OGLRenderer->GetDisplayHeight()));
-	m_textBackgroundQuads.SetDrawMode(GL_QUADS);
-	m_OGLRenderer->GenerateVertexArrayAABB2(m_textBackgroundQuads.m_vertexArray, BACKGROUND_QUAD, DEV_CONSOLE_BACKGROUND_COLOR);
-	m_OGLRenderer->InitializeVAO(m_textBackgroundQuads, "Data/Shaders/basic.vert", "Data/Shaders/basic.frag");
-	
+// 	static const AABB2 BACKGROUND_QUAD(Vector2::ZERO, Vector2(m_OGLRenderer->GetDisplayWidth(), m_OGLRenderer->GetDisplayHeight()));
+// 	m_textBackgroundQuads.SetDrawMode(GL_QUADS);
+// 	m_OGLRenderer->GenerateVertexArrayAABB2(m_textBackgroundQuads.m_vertexArray, BACKGROUND_QUAD, DEV_CONSOLE_BACKGROUND_COLOR);
+// 	m_OGLRenderer->InitializeVAO(m_textBackgroundQuads, "Data/Shaders/basic.vert", "Data/Shaders/basic.frag");
+
+	m_devConsoleBgRenderer.m_material->InitializeDefaultMaterial();
+	m_devConsoleBgRenderer.m_mesh->InitializeQuad2DMesh(DISPLAY_BACKGROUND_AABB2, DEV_CONSOLE_BACKGROUND_COLOR);
+	m_devConsoleBgRenderer.BindVertexArray();
+
+	m_devConsoleCursorRenderer.m_material->InitializeDefaultMaterial();
+	m_devConsoleCursorRenderer.m_mesh->SetDrawMode(GL_QUADS);
+	m_devConsoleCursorRenderer.BindVertexArray();
+
 	m_textCursor.SetDrawMode(GL_QUADS);
 	m_OGLRenderer->InitializeVAO(m_textCursor, "Data/Shaders/basic.vert", "Data/Shaders/basic.frag");
 }
@@ -304,7 +370,7 @@ void TextSystem::ProcessDevConsoleHotkeys(std::string& bufferText){
 		ConfirmDevConsoleCommand(bufferText);
 
 		//press BACKSPACE to delete chars
-		DeleteDevConsoleChar(bufferText);
+		ProcessDeleteDevConsoleCharInput(bufferText);
 		
 		//Use Mouse Wheel to Scroll
 		ProcessDevConsoleScrolling(bufferText);
@@ -331,6 +397,7 @@ void TextSystem::ConfirmDevConsoleCommand(std::string& bufferText) {
 
 void TextSystem::ProcessTextHistoryHotkeys(std::string& bufferText) {
 	static unsigned int textHistoryOffset = 1;
+	if (m_textHistory.empty())return;
 	//can get last command, but not before that, well the correct stuff is in the buffer but I can't get it to display
 	if (theInputSystem->WasKeyJustReleased(KEY_ARROW_UP)) {
 		bufferText = "";
@@ -352,45 +419,59 @@ void TextSystem::ProcessTextHistoryHotkeys(std::string& bufferText) {
 
 //-----------------------------------------------------------------------------------------------------------
 
-void TextSystem::DeleteDevConsoleChar(std::string& bufferText) {
+void TextSystem::ProcessDeleteDevConsoleCharInput(std::string& bufferText) {
 	//deleting chars
 	if (theInputSystem->WasKeyJustReleased(KEY_BACKSPACE)) {
-		DeleteDevConsoleChar(m_textIn, bufferText); //uses textIn
+		//DeleteDevConsoleChar(m_textIn, bufferText); //uses textIn
+		DeleteDevConsoleChar(m_devConsoleTextVerts, bufferText); //deleting chars is buggy with meshRenderer
+		m_devConsoleTextRenderer.m_mesh->CopyMeshVertexData(m_devConsoleTextVerts);
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
-void TextSystem::ProcessDevConsoleScrolling(std::string& bufferText){
-	static int consoleScrollAmount;
-	if (theInputSystem->IsKeyDown(KEY_CTRL)){
+void TextSystem::ProcessDevConsoleScrollingKeyInput(std::string& bufferText, int& consoleScrollAmount) {
+	if (theInputSystem->IsKeyDown(KEY_CTRL)) {
 		consoleScrollAmount = 10;
 	}
-	else{
+	else {
 		consoleScrollAmount = 1;
 	}
-	
+
+	if (theInputSystem->WasKeyJustReleased(KEY_PAGE_UP)) {
+		DevConsoleScrollUp(bufferText, consoleScrollAmount);
+	}
+	else if (theInputSystem->WasKeyJustReleased(KEY_PAGE_DOWN)) {
+		DevConsoleScrollDown(bufferText, consoleScrollAmount);
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void TextSystem::ProcessDevConsoleScrollingMouseInput(std::string& bufferText, int& consoleScrollAmount) {
 	//scrolling through stuff, sorta works but likely causes extra mem allocated
-	if (theInputSystem->IsMouseWheelPresent()){
-		if (!theInputSystem->m_isMouseWheelStopped){
-			if (theInputSystem->IsMouseWheelScrollingUp()){
+	if (theInputSystem->IsMouseWheelPresent()) {
+		if (!theInputSystem->m_isMouseWheelStopped) {
+			if (theInputSystem->IsMouseWheelScrollingUp()) {
 				DevConsoleScrollUp(bufferText, consoleScrollAmount);
 			}
-			else{
+			else {
 				DevConsoleScrollDown(bufferText, consoleScrollAmount);
 			}//end of if/else
 		}//end of is stopped
 	}//end of mouse wheel
+}
 
-	if (theInputSystem->WasKeyJustReleased(KEY_PAGE_UP)){
-		DevConsoleScrollUp(bufferText, consoleScrollAmount);
-	}
-	else if (theInputSystem->WasKeyJustReleased(KEY_PAGE_DOWN)){
-		DevConsoleScrollDown(bufferText, consoleScrollAmount);
-	}
 
-	//std::string scrollLV = "scroll level: " + FloatToString(DEV_CONSOLE_SCROLL_LEVEL) + "\n";
-	//ConsolePrintf(scrollLV.c_str());
+//-----------------------------------------------------------------------------------------------------------
+
+void TextSystem::ProcessDevConsoleScrolling(std::string& bufferText){
+	static int consoleScrollAmount;
+	
+	IF_INPUT_SYSTEM_EXISTS{
+		ProcessDevConsoleScrollingKeyInput(bufferText, consoleScrollAmount);
+		ProcessDevConsoleScrollingMouseInput(bufferText, consoleScrollAmount);
+	}
 
 }
 
@@ -404,7 +485,9 @@ void TextSystem::ResetDevConsoleScrollHeight(){
 
 void TextSystem::DevConsoleScrollUp(std::string& bufferText, const int& scrollAmount){
 	for (int i = 0; i < scrollAmount; i++){
-		SkipConsoleLine(m_textIn, true); //uses VAO
+		SkipConsoleLine(m_devConsoleTextVerts, true);
+		m_devConsoleTextRenderer.m_mesh->CopyMeshVertexData(m_devConsoleTextVerts);
+		//SkipConsoleLine(m_textIn, true); //uses VAO
 		bufferText = "";
 		//SetVAOStringTextureCoords(m_textVAO, DEV_CONSOLE_CURSOR_START_POSITION, bufferText, DEV_CONSOLE_INPUT_COLOR);
 	}
@@ -415,7 +498,9 @@ void TextSystem::DevConsoleScrollUp(std::string& bufferText, const int& scrollAm
 
 void TextSystem::DevConsoleScrollDown(std::string& bufferText, const int& scrollAmount){
 	for (int i = 0; i < scrollAmount; i++){
-		SkipConsoleLine(m_textIn, false); //uses vao
+		SkipConsoleLine(m_devConsoleTextVerts, false);
+		m_devConsoleTextRenderer.m_mesh->CopyMeshVertexData(m_devConsoleTextVerts);
+		//SkipConsoleLine(m_textIn, false); //uses vao
 		bufferText = "";
 		//SetVAOStringTextureCoords(m_textVAO, DEV_CONSOLE_CURSOR_START_POSITION, bufferText, DEV_CONSOLE_INPUT_COLOR);
 	}
@@ -436,16 +521,41 @@ void TextSystem::DeleteDevConsoleChar(VertexArrayObject& myVAO, std::string& buf
 		m_textIn.m_vertexArray.pop_back();
 		m_textIn.m_vertexArray.pop_back();
 	}
-		if (bufferText.length() > 0){
-			unsigned int charBeingDeleted = bufferText[bufferText.length() - 1];
 
-			float charAdvance = (float)m_fontSystem.GetCharXAdvance(charBeingDeleted);
-			cursorPosition.x -= charAdvance * TEXT_SCALE_FACTOR;
+	if (bufferText.length() > 0){
+		unsigned int charBeingDeleted = bufferText[bufferText.length() - 1];
 
-			bufferText.resize(bufferText.size() - 1);
+		float charAdvance = (float)m_fontSystem.GetCharXAdvance(charBeingDeleted);
+		cursorPosition.x -= charAdvance * TEXT_SCALE_FACTOR;
 
-			indexOfCurrentTextBuffer -= 4;
-		}
+		bufferText.resize(bufferText.size() - 1);
+
+		indexOfCurrentTextBuffer -= 4;
+	}
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void TextSystem::DeleteDevConsoleChar(Vertex3Ds& in_vertexArray, std::string& bufferText) {
+
+	if (!in_vertexArray.empty() && in_vertexArray.size() > 4) {
+		in_vertexArray.pop_back();
+		in_vertexArray.pop_back();
+		in_vertexArray.pop_back();
+		in_vertexArray.pop_back();
+	}
+
+	if (bufferText.length() > 0) {
+		unsigned int charBeingDeleted = bufferText[bufferText.length() - 1];
+
+		float charAdvance = (float)m_fontSystem.GetCharXAdvance(charBeingDeleted);
+		cursorPosition.x -= charAdvance * TEXT_SCALE_FACTOR;
+
+		bufferText.resize(bufferText.size() - 1);
+
+		indexOfCurrentTextBuffer -= 4;
+	}
 
 
 }
@@ -486,15 +596,16 @@ void TextSystem::SkipConsoleLine(Vertex3Ds& in_vertexArray, bool skipDown) {
 ///----------------------------------------------------------------------------------------------------------
 ///create text Vertex array
 
-AABB2 TextSystem::CalcCharTextBox(const Vector2& cursorPos, const unsigned int& charID){
+AABB2 TextSystem::CalcCharTextBox(const Vector2& cursorPos, const unsigned int& charID, const float& localTextScaleFactor ){
 	AABB2 textBox;
 	textBox.mins = cursorPos;
 	//apply char offset
-	textBox.mins += m_fontSystem.GetCharOffset(charID) * TEXT_SCALE_FACTOR;
+	textBox.mins += m_fontSystem.GetCharOffset(charID) * TEXT_SCALE_FACTOR * localTextScaleFactor;
 
 	Vector2 charGlyphSize = m_fontSystem.GetCharGlyphSize(charID);
 
-	textBox.maxs = textBox.mins + Vector2(TEXT_SCALE_FACTOR * charGlyphSize.x, TEXT_SCALE_FACTOR * charGlyphSize.y);
+	textBox.maxs = textBox.mins + Vector2(TEXT_SCALE_FACTOR * localTextScaleFactor * charGlyphSize.x,
+		TEXT_SCALE_FACTOR * localTextScaleFactor * charGlyphSize.y);
 
 	return textBox;
 }
@@ -625,8 +736,10 @@ void TextSystem::SetFontSystemCharTextureCoords(FontSystem& fontSystem, Vertex3D
 
 //===========================================================================================================
 
-Vector2 TextSystem::SetMeshRendererStringTextureCoords(MeshRenderer& myTextRenderer, const Vector2& startingPosition, const std::string& myText, const Rgba& textColor, const unsigned int& lineSkipValue ){
-	UNUSED(lineSkipValue);
+Vector2 TextSystem::SetMeshRendererStringTextureCoords(MeshRenderer& myTextRenderer, const Vector2& startingPosition, const std::string& myText, 
+	const Rgba& textColor, const unsigned int& lineSkipValue, bool clearVerts, float localTextScaleFactor ){
+ 	UNUSED(lineSkipValue);
+ 	UNUSED(clearVerts);
 	
 	float startPointMinsX = startingPosition.x;
 	
@@ -639,13 +752,13 @@ Vector2 TextSystem::SetMeshRendererStringTextureCoords(MeshRenderer& myTextRende
 
 		for (int i = 0; i < (int)myText.length(); i++){
 			unsigned int nextCharID = (unsigned int)myText[i];
-			SetMeshRendererCharTextureCoords(textQuads, tempCursorPos, nextCharID, textColor);
+			SetMeshRendererCharTextureCoords(textQuads, tempCursorPos, nextCharID, textColor, false,  localTextScaleFactor);
 			indexOfCurrentTextBuffer += 4;
 			float nextCharAdvance = (float)m_fontSystem.GetCharXAdvance(nextCharID) + m_fontSystem.GetCharOffset(nextCharID).x;
-			tempCursorPos.x += nextCharAdvance * TEXT_SCALE_FACTOR;
+			tempCursorPos.x += nextCharAdvance * TEXT_SCALE_FACTOR * localTextScaleFactor;
 			if ((unsigned char)nextCharID == '\n'){
 				tempCursorPos.x = startPointMinsX;
-				tempCursorPos.y -= DEV_CONSOLE_LINE_SPACING;
+				tempCursorPos.y -= DEV_CONSOLE_LINE_SPACING * localTextScaleFactor;
 			}
 		}//end of for
 	
@@ -655,18 +768,61 @@ Vector2 TextSystem::SetMeshRendererStringTextureCoords(MeshRenderer& myTextRende
 	return tempCursorPos;
 }
 
+Vector2 TextSystem::SetDevConsoleMeshStringTextureCoords(MeshRenderer& myTextRenderer, const Vector2& startingPosition, const std::string& myText, const Rgba& textColor, const unsigned int& lineSkipValue, bool clearVerts) {
+	UNUSED(lineSkipValue);
+
+	float startPointMinsX = startingPosition.x;
+
+	static std::string prevText = "";
+
+	if (startingPosition == DEV_CONSOLE_OUTPUT_POSITION) {
+		cursorPosition = DEV_CONSOLE_OUTPUT_POSITION;
+		prevText = "";
+	}
+
+	if (clearVerts)
+		m_devConsoleTextVerts.clear();
+	
+	//textQuads.reserve(myText.size() * 4);
+	if (myText != prevText) {
+		for (int i = prevText.length(); i < (int)myText.length(); i++) {
+			//for (int i = 0; i < (int)myText.length(); i++) {
+			unsigned int nextCharID = (unsigned int)myText[i];
+			SetMeshRendererCharTextureCoords(m_devConsoleTextVerts, cursorPosition, nextCharID, textColor);
+			indexOfCurrentTextBuffer += 4;
+			float nextCharAdvance = (float)m_fontSystem.GetCharXAdvance(nextCharID) + m_fontSystem.GetCharOffset(nextCharID).x;
+			cursorPosition.x += nextCharAdvance * TEXT_SCALE_FACTOR;
+			if ((unsigned char)nextCharID == '\n') {
+				cursorPosition.x = startPointMinsX;
+				cursorPosition.y -= DEV_CONSOLE_LINE_SPACING;
+			}
+		}//end of for
+
+		CURSOR_QUAD.mins = cursorPosition;
+		CURSOR_QUAD.maxs.x = CURSOR_QUAD.mins.x + DEV_CONSOLE_CURSOR_WIDTH;
+
+	}
+	prevText = myText;
+	
+	myTextRenderer.m_mesh->CopyMeshVertexData(m_devConsoleTextVerts);
+
+	return cursorPosition;
+}
+
 //-----------------------------------------------------------------------------------------------------------
 
-void TextSystem::SetMeshRendererCharTextureCoords(Vertex3Ds& textQuads, const Vector2& cursorPos, const unsigned int& charID, const Rgba& textColor, bool clearOtherChars){
+void TextSystem::SetMeshRendererCharTextureCoords(Vertex3Ds& textQuads, const Vector2& cursorPos, const unsigned int& charID, 
+	const Rgba& textColor, bool clearOtherChars, float localTextScaleFactor){
 
 	AABB2 charTextureCoords = m_fontSystem.GetCharTextureCoords(charID);
 
-	AABB2 textBox = CalcCharTextBox(cursorPos, charID);
+	AABB2 textBox = CalcCharTextBox(cursorPos, charID, localTextScaleFactor);
 
-	if (clearOtherChars)
-		textQuads.clear();
+	if (clearOtherChars)textQuads.clear();
 
+	//try to consolidate some of these texture quad functions
 	m_OGLRenderer->GenerateVertexArrayTextureQuad(textQuads, textBox, charTextureCoords, textColor);
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -688,21 +844,22 @@ AABB2 TextSystem::GetTextureCoordinatesForChar(FontSystem& fontSystem, const cha
 //-----------------------------------------------------------------------------------------------------------
 
 void TextSystem::RenderTextString(const std::string& myString){
-	m_OGLRenderer->SetTextureViewTransparent();
+	//m_OGLRenderer->SetTextureViewTransparent();
 	//m_OGLRenderer->DisableModelViewDepthTest();
 
 	SetMeshRendererStringTextureCoords(m_textRenderer, Vector2(50.0f, 50.0f), myString, Rgba::WHITE, 10000);
-	//m_textRenderer.BindVertexArray();
+	
 	RenderTextMesh2D(m_textRenderer);
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 void TextSystem::RenderTextString(const std::string& myString, const Vector2& startingPosition, const Rgba& textColor, const float& localTextScaleFactor ){
-	UNUSED(localTextScaleFactor);
+	//UNUSED(localTextScaleFactor);
 	//m_OGLRenderer->SetTextureViewTransparent();
-	m_OGLRenderer->DisableModelViewDepthTest();
-	SetMeshRendererStringTextureCoords(m_textRenderer, startingPosition, myString, textColor, 10000);
+	//m_OGLRenderer->DisableModelViewDepthTest();
+	
+	SetMeshRendererStringTextureCoords(m_textRenderer, startingPosition, myString, textColor, 10000, false, localTextScaleFactor);
 	//m_textRenderer.BindVertexArray();
 
 	RenderTextMesh2D(m_textRenderer);
@@ -710,7 +867,8 @@ void TextSystem::RenderTextString(const std::string& myString, const Vector2& st
 
 //-----------------------------------------------------------------------------------------------------------
 
-void TextSystem::RenderTextString(FontSystem& fontSystem, const std::string& myString, const Vector2& startingPosition, const Rgba& textColor, const float& localTextScaleFactor){
+void TextSystem::RenderTextString(FontSystem& fontSystem, const std::string& myString, const Vector2& startingPosition, 
+	const Rgba& textColor, const float& localTextScaleFactor){
 	UNUSED(localTextScaleFactor);
 
 	SetFontSystemStringTextureCoords(fontSystem, startingPosition, myString, textColor, 10000);
@@ -733,20 +891,48 @@ void TextSystem::RenderChar(const char& myChar, const Vector2& startingPosition,
 
 //===========================================================================================================
 
-void TextSystem::Render(){
+void TextSystem::RenderDevConsole(){
+	
+	//RenderDevConsole(m_textIn);
+
+	static const Rgba devConsoleInputColor = Rgba::VIOLET;
+
+	if (m_IsDevelopmentConsoleActive) {
+  		m_OGLRenderer->DisableModelViewDepthTest();
+  		//m_OGLRenderer->DisableModelCullFaceMode();
+ 		//m_OGLRenderer->SetTextureViewTransparent();
+
+		currentCursorPos = DEV_CONSOLE_CURSOR_START_POSITION;
+		currentCursorPos = SetDevConsoleMeshStringTextureCoords(m_devConsoleTextRenderer, 
+						   DEV_CONSOLE_CURSOR_START_POSITION, textInputBuffer,
+						   devConsoleInputColor, TEXT_CHARACTERS_PER_LINE, false);
+
+//FrameBuffer fb(theOGLRenderer->GetDisplayWidth(), theOGLRenderer->GetDisplayHeight());
 		
-		Render(m_textIn);
+		RenderDevConsoleBackground(m_devConsoleBgRenderer);
+
+		RenderCursorQuad(m_devConsoleCursorRenderer);
+
+		RenderTextMesh2D(m_devConsoleTextRenderer);
+
+// 		MeshRenderer devConsoleFrame("DevConsoleFrame", true, true);
+// 		devConsoleFrame.m_mesh->InitializeQuad2DMesh(DISPLAY_BACKGROUND_AABB2);
+// 		fb.RenderToNewMaterial(devConsoleFrame.m_material, "basicSampler");
+// 
+// 		theOGLRenderer->UnbindFrameBuffer();
+// 
+// 		devConsoleFrame.RenderMesh2D();
+	}
 
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
-void TextSystem::Render(VertexArrayObject& myVAO){
+void TextSystem::RenderDevConsole(VertexArrayObject& myVAO){
 	if (m_IsDevelopmentConsoleActive){
 		m_OGLRenderer->DisableModelViewDepthTest();
-		m_OGLRenderer->DisableModelCullFaceMode();
+		//m_OGLRenderer->DisableModelCullFaceMode();
 		//m_OGLRenderer->SetTextureViewTransparent();
-
 		//static std::string prevTextBuffer = "";
 
 		currentCursorPos = DEV_CONSOLE_CURSOR_START_POSITION;
@@ -773,7 +959,7 @@ void TextSystem::RenderText(VertexArrayObject& myVAO){
 	GLuint& programToRenderWith = myVAO.m_Program;
 	m_OGLRenderer->SetShaderProgramToUse(programToRenderWith);
 	
-	m_OGLRenderer->BindViewMatricesToProgram(programToRenderWith, IDENTITY_MATRIX, m_OGLRenderer->MakeDefaultOrthographicProjectionMatrix());
+	m_OGLRenderer->BindViewMatricesToProgram(programToRenderWith, IDENTITY_MATRIX, m_OGLRenderer->GetCurrentOrthographicProjectionMatrix());
 	m_OGLRenderer->ProgramBindFloat(programToRenderWith, "gTime", (float)GetCurrentSeconds());
 	
 // 	GLuint texIndex = 0;
@@ -803,7 +989,7 @@ void TextSystem::RenderTextMesh2D(MeshRenderer& myTextRenderer){
 	if (theOGLRenderer)
 		theOGLRenderer->SetTextureViewTransparent();
 
-	myTextRenderer.RenderMesh2D();// (m_textCamera, false);
+	myTextRenderer.RenderMesh2D();//(m_textCamera, false);
 }
 
 ///----------------------------------------------------------------------------------------------------------
@@ -811,8 +997,8 @@ void TextSystem::RenderTextMesh2D(MeshRenderer& myTextRenderer){
 
 void TextSystem::RenderCursorQuad(VertexArrayObject& myVAO){
 	static float cursorAlphaBlinkValue = 0.0f;
-	const float alphaBlinkBlendValA = 80.0f;
-	cursorAlphaBlinkValue = alphaBlinkBlendValA + abs( (255.0f -alphaBlinkBlendValA) * sin((float)GetCurrentSeconds() * 12.0f) );
+	const float alphaBlinkBlendA = 80.0f;
+	cursorAlphaBlinkValue = alphaBlinkBlendA + abs( (255.0f -alphaBlinkBlendA) * sin((float)GetCurrentSeconds() * 12.0f) );
 	//std::string cursorBlinkText = "\nAlpha Val = " + FloatToString(cursorAlphaBlinkValue);
 	//ConsolePrintf(cursorBlinkText.c_str());
 	DEV_CONSOLE_CURSOR_COLOR.a = (unsigned char)(cursorAlphaBlinkValue);// *255.0f);
@@ -839,18 +1025,46 @@ void TextSystem::RenderCursorQuad(VertexArrayObject& myVAO){
 
 //-----------------------------------------------------------------------------------------------------------
 
+void TextSystem::RenderCursorQuad(MeshRenderer& myCursorRenderer) {
+	UNUSED(myCursorRenderer);
+
+	static float cursorAlphaBlinkValue = 0.0f;
+	const float alphaBlinkBlendA = 80.0f;
+	cursorAlphaBlinkValue = alphaBlinkBlendA + abs((255.0f - alphaBlinkBlendA) * sin((float)GetCurrentSeconds() * 8.0f));
+
+	DEV_CONSOLE_CURSOR_COLOR.a = (unsigned char)(cursorAlphaBlinkValue);// *255.0f);
+
+	Vertex3Ds cursorVerts;
+	//cursorVerts.clear();
+	//cursorVerts.reserve(4);
+
+	m_OGLRenderer->GenerateVertexArrayAABB2(cursorVerts, CURSOR_QUAD, DEV_CONSOLE_CURSOR_COLOR);
+
+	m_devConsoleCursorRenderer.m_mesh->CopyMeshVertexData(cursorVerts);
+
+	m_devConsoleCursorRenderer.RenderMesh2D();
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
 //render BG quad
 void TextSystem::RenderDevConsoleBackground(VertexArrayObject& myVAO){
 	GLuint& programToRenderWithT = myVAO.m_Program;
 	m_OGLRenderer->SetShaderProgramToUse(programToRenderWithT);
 
-	m_OGLRenderer->BindViewMatricesToProgram(programToRenderWithT, IDENTITY_MATRIX, m_OGLRenderer->MakeDefaultOrthographicProjectionMatrix());
+	m_OGLRenderer->BindViewMatricesToProgram(programToRenderWithT, IDENTITY_MATRIX, m_OGLRenderer->GetCurrentOrthographicProjectionMatrix());
 	m_OGLRenderer->ProgramBindFloat(programToRenderWithT, "gTime", (float)GetCurrentSeconds());
 
 	m_OGLRenderer->DrawVertexArray(myVAO.m_drawMode, myVAO.m_vaoID, myVAO.m_vertexArray.size());
 
 	m_OGLRenderer->DisableShaderProgram();
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+}
+
+void TextSystem::RenderDevConsoleBackground(MeshRenderer& backgroundRenderer) {
+
+	m_devConsoleBgRenderer.RenderMesh2D();
 
 }
 
@@ -862,7 +1076,7 @@ void TextSystem::ProcessConsoleCommands(std::string& bufferText){
 	AdjustBufferTextForExecution(bufferText);
 	if (bufferText != ""){
 
-		char* cStringBufferText = StringToWritableCString(bufferText);
+		char* cStringBufferText = StringToWritableCStr(bufferText);
 		char* currentValue;
 		char* tokenInBuffer;
 		currentValue = strtok_s(cStringBufferText, " ", &tokenInBuffer);
@@ -872,7 +1086,10 @@ void TextSystem::ProcessConsoleCommands(std::string& bufferText){
 		currentValue = strtok_s(NULL, "\0", &tokenInBuffer);
 		//ConsoleGenericMessageBox(currentValue, "loading token, current value = ");
 		if (currentValue != NULL){
-			RunCommand(commandName, new ConsoleArguments(currentValue));
+			ConsoleArguments* newConsoleArgs = new ConsoleArguments(currentValue);
+			RunCommand(commandName, newConsoleArgs);
+
+			delete newConsoleArgs;
 		}
 		else{
 			RunCommand(bufferText, NULL);
@@ -886,7 +1103,7 @@ void TextSystem::ProcessConsoleCommands(std::string& bufferText){
 
 //-----------------------------------------------------------------------------------------------------------
 
-void TextSystem::ExecuteConsoleString(std::string& bufferText){
+void TextSystem::ExecuteConsoleString(std::string bufferText){
 	ProcessConsoleCommands(bufferText);
 }
 
@@ -916,7 +1133,7 @@ void TextSystem::ProcessCommandLine(std::string& commandLineBuffer){
 //-----------------------------------------------------------------------------------------------------------
 
 void TextSystem::ProcessCommandBuffer(const std::string& commandBuffer){
-	char* cStringBufferText = StringToWritableCString(commandBuffer);
+	char* cStringBufferText = StringToWritableCStr(commandBuffer);
 	char* currentValue;
 	char* tokenInBuffer;
 	currentValue = strtok_s(cStringBufferText, " ", &tokenInBuffer);
@@ -953,9 +1170,19 @@ void InitializeTextSystem(TextSystem*& textSystemObject, const std::string& bitm
 
 void OutputStringToConsole(const std::string& name, const unsigned int& lineLength){
 
-	if (theTextSystem){
-		theTextSystem->SkipConsoleLine(theTextSystem->m_textIn, false);
-		theTextSystem->SetVAOStringTextureCoords(theTextSystem->m_textIn, DEV_CONSOLE_OUTPUT_POSITION, name, DEV_CONSOLE_OUTPUT_COLOR, lineLength);
+// 	if (theTextSystem){
+// 		theTextSystem->SkipConsoleLine(theTextSystem->m_textIn, false);
+// 		theTextSystem->SetVAOStringTextureCoords(theTextSystem->m_textIn, DEV_CONSOLE_OUTPUT_POSITION, name, DEV_CONSOLE_OUTPUT_COLOR, lineLength);
+// 		//theTextSystem->SkipConsoleLine(theTextSystem->m_textIn, false);
+// 		theTextSystem->ResetCursorPosition();
+// 	}
+
+	if (theTextSystem) {
+		theTextSystem->SkipConsoleLine(theTextSystem->m_devConsoleTextVerts, false);
+		theTextSystem->SetDevConsoleMeshStringTextureCoords(theTextSystem->m_devConsoleTextRenderer, 
+				DEV_CONSOLE_OUTPUT_POSITION, name, 
+				DEV_CONSOLE_OUTPUT_COLOR, lineLength, false);
+
 		//theTextSystem->SkipConsoleLine(theTextSystem->m_textIn, false);
 		theTextSystem->ResetCursorPosition();
 	}

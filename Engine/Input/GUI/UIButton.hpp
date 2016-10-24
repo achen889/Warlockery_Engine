@@ -62,7 +62,7 @@ public:
 
 	void ExecuteButtonEvent(){
 		if (m_buttonEventCallback)
-			m_buttonEventCallback->CallEventFunction();
+			m_buttonEventCallback->Execute();
 	}
 	
 	void SetEventCallback(EventCallbackFunc* func, const std::string& name, void* data){

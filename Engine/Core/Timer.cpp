@@ -7,7 +7,6 @@
 
 //===========================================================================================================
 
-static unsigned int newID = 0;
 
 //===========================================================================================================
 
@@ -29,6 +28,7 @@ timerEventCallback(EventCallback("", NULL, NULL))
 		isElapsedTimer = true;
 	else
 		isElapsedTimer = false;
+
 	isPeriodic = isTimerPeriodic;
 }
 
@@ -42,7 +42,7 @@ elapsedTime(countdownTime),
 timerComplete(false),
 isActive(true),
 isPeriodic(isTimerPeriodic),
-id(newID)
+id(s_newTimerID)
 {
 	if (countdownTime == 0.0f)
 		isElapsedTimer = true;
@@ -50,7 +50,23 @@ id(newID)
 		isElapsedTimer = false;
 	isPeriodic = isTimerPeriodic;
 	
-	newID++;
+	s_newTimerID++;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+Timer::Timer(const float& countdownFromTime, const std::string& eventName, 
+	NamedProperties& eventProperties, bool isTimerPeriodic ):
+	timerEventCallback(EventCallback(eventName, eventProperties)),
+	countdownTime(countdownFromTime),
+	elapsedTime(countdownTime),
+	timerComplete(false),
+	isActive(true),
+	isPeriodic(isTimerPeriodic),
+	id(s_newTimerID){
+
+  s_newTimerID++;
+
 }
 
 
@@ -61,12 +77,12 @@ void Timer::Update(double deltaSeconds){
 	if(isActive){
 		if(!isElapsedTimer){
 	
-			if(elapsedTime> 0.0f){
+			if(elapsedTime > 0.0f){
 				elapsedTime -= (float)deltaSeconds;
-			}else if( !timerComplete && elapsedTime < 0.0f){
+			}
+			else if( !timerComplete && elapsedTime <= 0.0f){
 
 				TriggerAlarm();
-
 			
 			}//end of countdown timer block
 		}
@@ -82,7 +98,7 @@ void Timer::Update(double deltaSeconds){
 void Timer::TriggerAlarm(){
 	timerComplete = true;
 	
-	timerEventCallback.CallEventFunction();
+	timerEventCallback.Execute();
 
 	//reset if periodic timer
 	ResetIfPeriodic();

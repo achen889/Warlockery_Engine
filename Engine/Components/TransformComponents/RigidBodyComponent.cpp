@@ -5,7 +5,7 @@
 
 #include "RigidBodyComponent.hpp"
 
-ComponentRegistration RigidBodyComponent::s_PhysicsMotionComponentRegistration("PhysicsMotion", &RigidBodyComponent::CreateComponent);
+ComponentRegistration RigidBodyComponent::s_TransformComponentRegistration("PhysicsMotion", &RigidBodyComponent::CreateComponent);
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
@@ -35,6 +35,7 @@ void RigidBodyComponent::OnDestroy(){
 //-----------------------------------------------------------------------------------------------------------
 
 void RigidBodyComponent::Update(double deltaSeconds){
+
 	switch (m_physicsIntegrationType) {
 	case PHYSICS_FWD_EULER:
 		UpdateForwardEulerIntegration(deltaSeconds);
@@ -51,7 +52,7 @@ void RigidBodyComponent::Update(double deltaSeconds){
 
 void RigidBodyComponent::UpdateForwardEulerIntegration(double deltaSeconds) {
 	//fwd euler integration
-	UpdateAccelerationWithForces();
+	//UpdateAccelerationWithForces();
 	UpdateVelocityWithAcceleration(deltaSeconds);
 	UpdatePositionWithVelocity(deltaSeconds);
 }

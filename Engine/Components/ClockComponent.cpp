@@ -18,7 +18,12 @@ ClockComponent::ClockComponent(const XMLNode& node): BaseComponent(node){
 //-----------------------------------------------------------------------------------------------------------
 
 ClockComponent::ClockComponent(const std::string& name) : BaseComponent(name){
+	if (!m_clock) {
+		m_clock = new Clock(name, &GetGameClock());
+	}
 
+
+	AddToGameClock();
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -37,7 +42,8 @@ void ClockComponent::OnDestroy(){
 
 void ClockComponent::Update(double deltaSeconds){
 	UNUSED(deltaSeconds);
-	
+	//m_clock.AdvanceTime(deltaSeconds);
+
 
 
 }

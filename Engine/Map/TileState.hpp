@@ -30,6 +30,14 @@ struct TileVisibility{
 		m_visibility = visibility;
 	}
 
+	//accessors
+	void SetHasBeenSeen(bool hasBeenSeen) {
+		m_hasBeenSeen = hasBeenSeen;
+	}
+	void SetIsVisible(bool isVisible) {
+		m_isVisible = isVisible;
+	}
+
 };
 
 //===========================================================================================================

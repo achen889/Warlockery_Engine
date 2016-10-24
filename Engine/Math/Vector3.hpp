@@ -8,7 +8,8 @@
 #ifndef _included_Vector3__
 #define _included_Vector3__
 
-#include "MathUtils.hpp"
+//#include "MathUtils.hpp"
+#include "Vector2.hpp"
 #include <vector>
 
 
@@ -37,6 +38,12 @@ public:
 	Vector3();
 	~Vector3();
 	Vector3(const Vector3& copy);
+	Vector3(float initialAll) :
+		x(initialAll),
+		y(initialAll),
+		z(initialAll){
+
+	}
 	explicit Vector3(float initialX, float initialY, float initialZ);
 	//accessors
 	void GetXYZ(float& out_x, float& out_y, float& out_z );
@@ -60,9 +67,9 @@ public:
 	const Vector3 operator-(const Vector3& vectorToSubtract) const;
 	void operator-=(const Vector3& vectorToSubtract);
 	//multiply scale operators
-	const Vector3 operator*(const float scale) const;
+	const Vector3 operator*(const float& scale) const;
 	void operator*=(const float scale);
-	//multiply peraxisScale operators
+	//multiply per axisScale operators
 	const Vector3 operator*(const Vector3& perAxisScaleFactors) const;
 	void operator*=(const Vector3& perAxisScaleFactors);
 	//inverse scale operator
@@ -200,7 +207,7 @@ inline void Vector3::operator-=(const Vector3& vectorToSubtract){
 }
 ///----------------------------------------------------------------------------------------------------------
 ///multiply operator with scalar val
-inline const Vector3 Vector3::operator*(const float scale) const { 
+inline const Vector3 Vector3::operator*(const float& scale) const { 
 	return Vector3( x * scale, y * scale, z * scale );
 }
 inline void Vector3::operator*=(const float scale){ 

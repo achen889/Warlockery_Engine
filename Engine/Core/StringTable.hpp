@@ -10,6 +10,10 @@
 
 #include <map>
 #include <string>
+#include <vector>
+
+typedef std::vector<std::string> Strings;
+typedef std::vector<std::string>::iterator StringsIterator;
 
 static unsigned int s_newID = 0;
 

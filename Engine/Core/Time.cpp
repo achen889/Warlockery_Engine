@@ -13,7 +13,7 @@ double g_secondsPerTick;
 CONSOLE_COMMAND(time){
 	UNUSED_COMMAND_ARGS
 	const unsigned int timeTextLineSkipValue = 500;
-	std::string appTimeText = "Seconds since Application Start up = " + FloatToString((float)GetCurrentSeconds()) + "";
+	std::string appTimeText = "Seconds since Application Start Up = " + FloatToString((float)GetCurrentSeconds()) + "";
 	
 	OUTPUT_STRING_TO_CONSOLE(appTimeText, timeTextLineSkipValue);
 }
@@ -60,7 +60,19 @@ double GetDeltaSeconds(){
 //===========================================================================================================
 
 double GetFramesPerSecond(){
-	return 1.0 / GetDeltaSeconds();
+
+	static double lastFPS = 1.0 / GetDeltaSeconds();
+
+	double curFPS = 1.0 / GetDeltaSeconds();
+
+	double lastFPSBlend = 0.9;
+	double curFPSBlend = 1.0 - lastFPSBlend;
+
+	double blendFPS = (curFPS * curFPSBlend) + (lastFPS * lastFPSBlend);
+
+	lastFPS = curFPS;
+
+	return blendFPS;
 }
 
 //===========================================================================================================

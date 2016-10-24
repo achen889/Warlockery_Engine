@@ -63,6 +63,13 @@ PFNGLDELETESAMPLERSPROC glDeleteSamplers = nullptr;
 PFNGLACTIVETEXTUREPROC glActiveTexture = nullptr;
 PFNGLBINDSAMPLERPROC glBindSampler = nullptr;
 
+PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer = nullptr;
+PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer = nullptr;
+PFNGLCHECKFRAMEBUFFERSTATUSPROC glCheckFramebufferStatus = nullptr;
+PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers = nullptr;
+PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D = nullptr;
+PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers = nullptr;
+
 //===========================================================================================================
 
 OpenGLRenderer* theOGLRenderer = NULL;
@@ -127,6 +134,15 @@ void OpenGLRenderer::InitializeAdvancedOpenGLFunctions()
 	glDeleteSamplers = (PFNGLDELETESAMPLERSPROC)wglGetProcAddress("glDeleteSamplers");
 	glActiveTexture = (PFNGLACTIVETEXTUREPROC)wglGetProcAddress("glActiveTexture");
 	glBindSampler = (PFNGLBINDSAMPLERPROC)wglGetProcAddress("glBindSampler");
+
+	//frame buffer
+	glBindFramebuffer = (PFNGLBINDFRAMEBUFFERPROC)wglGetProcAddress("glBindFramebuffer");
+	glBlitFramebuffer = (PFNGLBLITFRAMEBUFFERPROC)wglGetProcAddress("glBlitFramebuffer");
+	glCheckFramebufferStatus = (PFNGLCHECKFRAMEBUFFERSTATUSPROC)wglGetProcAddress("glCheckFramebufferStatus");
+	glDeleteFramebuffers = (PFNGLDELETEFRAMEBUFFERSPROC)wglGetProcAddress("glDeleteFramebuffers");
+	glFramebufferTexture2D = (PFNGLFRAMEBUFFERTEXTURE2DPROC)wglGetProcAddress("glFramebufferTexture2D");
+	glGenFramebuffers = (PFNGLGENFRAMEBUFFERSPROC)wglGetProcAddress("glGenFramebuffers");
+
 }
 
 ///----------------------------------------------------------------------------------------------------------
@@ -145,7 +161,7 @@ bool OpenGLRenderer::CheckCompatability(){
 	std::string GLVerTitle = "**Running OpenGL**";
 
 	//ConsoleGenericMessageBox(GLVerText, GLVerTitle);
-	ConsolePrintf(GLVerText.c_str());
+	ConsoleLogPrintf(GLVerText.c_str());
 
 	// But, if you want to be thorough, check first on bootup, and fail 
 	// when it's not supported
@@ -187,11 +203,12 @@ void OpenGLRenderer::GLCheckError(const char* file, int lineNum){
 		std::string shader_version = (char const*)glGetString(GL_SHADING_LANGUAGE_VERSION);
 		std::string GLVerText = "OpenGL Version: " + gl_version + "\nShader Version: " + shader_version + "\n";
 
-		std::string errorText = GLVerText + "GL Error in "+(std::string)file + "At Line #"+ IntToString(lineNum) + "\nGL Error Code: 0x" + IntToString(error, 16) + "\n";
+		std::string errorText = GLVerText + "GL Error in "+(std::string)file + " at Line #"+ IntToString(lineNum) + "\nGL Error Code: 0x" + IntToString(error, 16) + "\n";
 		errorText += GLTranslateErrorCode(error);
 
 		//std::string errorTitle = "*DEBUG* OpenGL Error!\n";
 		//ConsoleGenericMessageBox(errorText, errorTitle);
+		ConsolePrintf("\n===GL_ERROR===\n%s(%d): %s\n", file, lineNum, errorText.c_str());
 		ERROR_RECOVERABLE(errorText);
 	}
 }
@@ -222,6 +239,8 @@ void OpenGLRenderer::InitializeShaders(){
 }
 
 //===========================================================================================================
+///----------------------------------------------------------------------------------------------------------
+///legacy code
 
 void OpenGLRenderer::InitializeVAO(VertexArrayObject& myVAO, const char* vertFile, const char* fragFile){
 	InitializeVAOWithShader(myVAO, vertFile, fragFile);
@@ -237,6 +256,33 @@ void OpenGLRenderer::InitializeVAOWithShader(VertexArrayObject& myVAO, const cha
 	myVAO.m_Program = LoadProgram(vertFile, fragFile);
 }
 
+void OpenGLRenderer::DestroyVAO(VertexArrayObject& myVAO) {
+	//destroy VAO!
+	//glDeleteSamplers(1, &myVAO.m_samplerID);
+
+	glDeleteBuffers(1, &myVAO.m_vboID);
+	//g_BufferCount--;
+	//if (myVAO.m_Program != NULL) {
+	//	glDeleteProgram(myVAO.m_Program);
+	//	}
+
+	if (myVAO.m_vaoID != NULL) {
+		glDeleteVertexArrays(1, &myVAO.m_vaoID);
+	}
+}
+
+
+void OpenGLRenderer::CreateVAOVertexArrayWithShader(VertexArrayObject& myVAO) {
+	CreateVertexArrayWithShader(myVAO.m_Program, myVAO.m_vboID, myVAO.m_vaoID);
+}
+
+void OpenGLRenderer::CreateVAOBuffer(VertexArrayObject& myVAO) {
+	myVAO.m_vboID = CreateBuffer(myVAO.m_vboID, myVAO.m_vertexArray.data(), myVAO.CalcVAOSize());
+
+}
+
+//===========================================================================================================
+
 void VertexArrayObject::SetSampler(unsigned int minFilter, unsigned int magFilter, unsigned int uWrap, unsigned int vWrap) {
 	m_glSampler.SetGLSamplerData(minFilter, magFilter, uWrap, vWrap);
 	if (theOGLRenderer) {
@@ -245,45 +291,36 @@ void VertexArrayObject::SetSampler(unsigned int minFilter, unsigned int magFilte
 }
 
 int g_BufferCount = 0;
+int g_ArrayCount = 0;
 
-void OpenGLRenderer::DestroyVAO(VertexArrayObject& myVAO){
-	//destroy VAO!
-	//glDeleteSamplers(1, &myVAO.m_samplerID);
+unsigned int OpenGLRenderer::CreateVertexArrayObject(unsigned int& vaoID) {
+	glGenVertexArrays(1, &vaoID);
 
-	glDeleteBuffers(1, &myVAO.m_vboID);
-	g_BufferCount--;
-	//if (myVAO.m_Program != NULL) {
-	//	glDeleteProgram(myVAO.m_Program);
-//	}
+	g_ArrayCount++;
 
-	if (myVAO.m_vaoID != NULL) {
-		glDeleteVertexArrays(1, &myVAO.m_vaoID);
-	}
+	return (unsigned int)vaoID;
 }
 
-/*
-void OpenGLRenderer::DestroyMeshVertexArray(MeshRenderer& myMeshRenderer){
-	glDeleteBuffers(1, &myMeshRenderer.m_mesh->m_vboID);
-	g_BufferCount--;
+//-----------------------------------------------------------------------------------------------------------
 
-	if (myMeshRenderer.m_vaoID != NULL) {
-		glDeleteVertexArrays(1, &myMeshRenderer.m_vaoID);
-	}
+void OpenGLRenderer::DestroyVertexBufferObject(unsigned int& vboID) {
+	glDeleteBuffers(1, &vboID);
+	g_BufferCount--;
 }
-*/
+
+void OpenGLRenderer::DestroyIndexBufferObject(unsigned int& iboID) {
+	glDeleteBuffers(1, &iboID);
+}
+
+void OpenGLRenderer::DestroyVertexArrayObject(unsigned int& vaoID) {
+	glDeleteVertexArrays(1, &vaoID);
+	g_ArrayCount--;
+}
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
-///VBO Shader Drawing Helpers
+///Vertex array object Shader Drawing Helpers
 
-void OpenGLRenderer::CreateVAOVertexArrayWithShader(VertexArrayObject& myVAO){
-	CreateVertexArrayWithShader(myVAO.m_Program, myVAO.m_vboID, myVAO.m_vaoID);
-}
-
-void OpenGLRenderer::CreateVAOBuffer(VertexArrayObject& myVAO){
-	myVAO.m_vboID = CreateBuffer(myVAO.m_vboID, myVAO.m_vertexArray.data(), myVAO.CalcVAOSize());
-	
-}
 
 GLuint OpenGLRenderer::InitializeVertexBuffer(GLuint& out_vboID){
 	//Create buffer
@@ -760,9 +797,9 @@ void OpenGLRenderer::DisableShaderProgram(){
 ///----------------------------------------------------------------------------------------------------------
 ///program binding wrapper functions
 
-void OpenGLRenderer::BindViewMatricesToProgram(GLuint& programBinding, const Matrix4& viewMatrix, const Matrix4& perspectiveMatrix){
+void OpenGLRenderer::BindViewMatricesToProgram(GLuint& programBinding, const Matrix4& viewMatrix, const Matrix4& projectionMatrix){
 	ProgramBindMatrix(programBinding, "gView", viewMatrix);
-	ProgramBindMatrix(programBinding, "gProj", perspectiveMatrix);
+	ProgramBindMatrix(programBinding, "gProj", projectionMatrix);
 	ProgramBindMatrix(programBinding, "gModel", IDENTITY_MATRIX);
 }
 
@@ -773,11 +810,11 @@ void OpenGLRenderer::BindCameraTransformToProgram(GLuint& programBinding, Camera
 
 void OpenGLRenderer::DrawVertexArray(GLenum drawMode, GLint vaoID, size_t vaoSize){
 	
-	glBindVertexArray(vaoID);
+	//glBindVertexArray(vaoID);
 
 	glDrawArrays(drawMode, 0, vaoSize);
 
-	glBindVertexArray(0);
+	//glBindVertexArray(0);
 }
 
 void OpenGLRenderer::DrawVertexElements(GLenum drawMode, GLint iboID, size_t iboSize, size_t indexStartDraw){
@@ -904,6 +941,99 @@ void OpenGLRenderer::RenderParticlesWithVAO(VertexArrayObject& myVAO, Camera3D& 
 
 //===========================================================================================================
 
+///----------------------------------------------------------------------------------------------------------
+///frame buffer helpers
+
+GLuint OpenGLRenderer::GenerateFrameBuffer() {
+	GLuint fbo_id = 0;
+	glGenFramebuffers(1, &fbo_id);
+	if (fbo_id == NULL) {
+		GLCheckError();
+		return fbo_id;
+	}
+	return fbo_id;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void OpenGLRenderer::DeleteFrameBuffer(GLuint fbo_id ) {
+	//takes GLsizei and GLuint*
+	//no clue if I'm using it right
+	glDeleteFramebuffers(GL_FRAMEBUFFER, &fbo_id);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void OpenGLRenderer::BindFrameBuffer(GLuint fbo_id, GLuint width, GLuint height) {
+	glBindFramebuffer(GL_FRAMEBUFFER, fbo_id);
+	glViewport(0, 0, width, height);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void OpenGLRenderer::FrameBufferColorTexture(Texture* color_texture, GLuint width, GLuint height) {
+	
+	color_texture->CreateNullTexture(width, height);
+	if (color_texture != NULL) {
+		glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, color_texture->m_platformHandle, 0);
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void OpenGLRenderer::FrameBufferDepthTexture(GLuint depth_texture) {
+	if (depth_texture != NULL) {
+		//renderer doesn't recognize depth texture, there is a depth tex mode, hope it works
+		//glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_TEXTURE_MODE, depth_texture, 0);
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+GLenum OpenGLRenderer::CheckFrameBufferStatus() {
+	GLenum status = glCheckFramebufferStatus(GL_FRAMEBUFFER);
+	return status;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+bool OpenGLRenderer::VerifyFrameBufferStatus() {
+	GLenum status = CheckFrameBufferStatus();
+	//GLCheckError();
+	if (status != GL_FRAMEBUFFER_COMPLETE) {
+		return false;
+	}
+	return true;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void OpenGLRenderer::UnbindFrameBuffer(){
+	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	// be sure to reset your viewport to your backbuffers resolutions
+	glViewport(0, 0, (GLsizei)m_displayWidth, (GLsizei)m_displayHeight);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void OpenGLRenderer::CopyFrameBufferToBack(GLuint fbo_id, GLuint width, GLuint height) {
+	if (!VerifyFrameBufferStatus())
+		return;
+
+	// Copy my Framebuffer wholesale [no fx] to the front buffer
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, fbo_id);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+
+	glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_NEAREST);
+
+	glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
+	glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
+
+	GLCheckError();
+}
+
+//===========================================================================================================
+
 CONSOLE_COMMAND(OGLVER){
 	UNUSED_COMMAND_ARGS
 	const unsigned int GLVERLineSkipValue = 500;
@@ -952,9 +1082,19 @@ CONSOLE_COMMAND(GET_PERSPECTIVE_MATRIX){
 
 //===========================================================================================================
 
+
+const Vector3 startPosition = Vector3(-3.0f, -1.0f, 0.5f);
+const EulerAngles startOrientation = EulerAngles(0.0f, 0.0f, 0.0f);
+
 ///----------------------------------------------------------------------------------------------------------
 ///Set up
-OpenGLRenderer::OpenGLRenderer(): m_windowHandle( NULL), m_deviceContext( NULL), m_renderingContext( NULL){
+OpenGLRenderer::OpenGLRenderer(): 
+	m_windowHandle( NULL), 
+	m_deviceContext( NULL), 
+	m_renderingContext( NULL),
+	m_mainCamera(new Camera3D(startPosition, startOrientation))
+	{
+
 	//do nothing
 	REGISTER_CONSOLE_COMMAND(OGLVER, "Displays OpenGL Version.");
 
@@ -971,6 +1111,10 @@ OpenGLRenderer::OpenGLRenderer(): m_windowHandle( NULL), m_deviceContext( NULL),
 
 OpenGLRenderer::~OpenGLRenderer(){
 	//do nothing
+	if (m_mainCamera) {
+		delete m_mainCamera;
+		m_mainCamera = NULL;
+	}
 }
 
 ///----------------------------------------------------------------------------------------------------------
@@ -979,15 +1123,26 @@ void OpenGLRenderer::StartUp( HWND windowHandle ){
 	m_windowHandle = windowHandle;
 	m_deviceContext = GetDC( windowHandle );
 
-	ConsolePrintf("\n===OpenGL Renderer Start Up===\n");
+	ConsoleLogPrintf("\n===OpenGL Renderer Start Up===\n");
 
 	CreateOpenGLRenderingContext();
+
+	//sets current to default ortho matrix
+	m_currentOrthoProjectionMatrix = MakeDefaultOrthographicProjectionMatrix();
 
 	InitializeAdvancedOpenGLFunctions();
 
  	CheckCompatability();
 
 	CreateCommonEngineTextures();
+
+	ConsoleLogPrintf("===Loading All Shaders===\n");
+
+	LoadAllShadersFromFiles();
+
+	ConsoleLogPrintf("===Shaders Loaded===");
+
+	RegisterEventMethodCallback("RenderMesh2D", &OpenGLRenderer::EventRenderMesh2D, *theOGLRenderer);
 
 }
 ///----------------------------------------------------------------------------------------------------------
@@ -1272,6 +1427,8 @@ void OpenGLRenderer::DrawQuad3D(const Vector3s& vertices ){
 	}
 	glEnd();
 }
+
+
 
 ///----------------------------------------------------------------------------------------------------------
 ///draw points
@@ -1674,6 +1831,62 @@ void OpenGLRenderer::DrawCoordinateAxes(float length ){
 }
 
 //===========================================================================================================
+//simple mesh draw functions
+
+void OpenGLRenderer::DrawMeshQuad2D(const AABB2& boxQuad, const Rgba& viewColor, bool isSolid, ModelViewMatrix* modelView ) {
+	MeshRenderer boxMeshRenderer;
+	boxMeshRenderer.SetDefaultMaterial();
+	boxMeshRenderer.m_mesh->InitializeQuad2DMesh(boxQuad, viewColor);
+	boxMeshRenderer.m_mesh->SetDrawMode(GL_LINE_STRIP);
+	if (isSolid) {
+		boxMeshRenderer.m_mesh->SetDrawMode(GL_TRIANGLES);
+	}
+	boxMeshRenderer.BindVertexArray();
+
+	boxMeshRenderer.RenderMesh2D(modelView);
+
+
+}
+
+//-----
+
+void OpenGLRenderer::DrawMeshPoint2D(const Vector2& point, const Rgba& viewColor, ModelViewMatrix* modelView) {
+	
+	//little bit of render state bleed with this one
+
+	MeshRenderer boxMeshRenderer;
+	boxMeshRenderer.SetDefaultMaterial();
+
+	Vertex3Ds m_vertexArray;
+	m_vertexArray.clear();
+	m_vertexArray.reserve(1);
+	m_vertexArray.push_back(Vertex3D(ToVector3(point), viewColor));
+
+	boxMeshRenderer.m_mesh->CopyMeshVertexData(m_vertexArray);
+	boxMeshRenderer.m_mesh->SetDrawMode(GL_POINTS);
+	boxMeshRenderer.BindVertexArray();
+
+	boxMeshRenderer.RenderMesh2D(modelView);
+
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void OpenGLRenderer::DrawMeshDisc2(const Disc2& discToDraw, const Rgba& viewColor, ModelViewMatrix* modelView ) {
+
+	MeshRenderer discMeshRenderer;
+	discMeshRenderer.SetDefaultMaterial();
+	discMeshRenderer.m_mesh->InitializeDisc2DMesh(discToDraw, viewColor);
+	discMeshRenderer.m_mesh->SetDrawMode(GL_LINE_LOOP);
+	discMeshRenderer.BindVertexArray();
+
+	discMeshRenderer.RenderMesh2D(modelView);
+
+}
+
+
+//===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///draw texture with specified texture coordinates
 void OpenGLRenderer::DrawTextureQuad( const Texture& texture, const Vector2s& vertices, const Vector2s& textureCoordinates, bool isOpaque ){
@@ -1782,6 +1995,19 @@ void OpenGLRenderer::PopMatrix(){
 	glPopMatrix();
 }
 
+///----------------------------------------------------------------------------------------------------------
+///event helpers
+
+void OpenGLRenderer::EventRenderMesh2D(NamedProperties& params) {
+	MeshRenderer* meshRenderer = NULL;
+	params.Get("meshRenderer", meshRenderer);
+	ModelViewMatrix* mat = NULL;
+	params.Get("modelViewMatrix", mat);
+	if (meshRenderer) {
+		meshRenderer->RenderMesh2D(mat);
+	}
+}
+
 //===========================================================================================================
 
 //===========================================================================================================
@@ -1792,6 +2018,9 @@ void OpenGLRenderer::GenerateVertexArrayAndVBO(){
 	//create a vertex array
 	Vertex3Ds vertexArray;
 	PopulateVertexArray(vertexArray);
+
+	GLuint m_vboID = 0;
+	GLuint m_numOFVBOVertexes = 0;
 
 	//Create buffer
 	glGenBuffers(1, &m_vboID);
@@ -1951,6 +2180,7 @@ void OpenGLRenderer::GenerateVertexArrayTextureQuad(Vertex3Ds& out_vertexArray, 
 	//out_vertexArray.push_back(Vertex3D(Vector3(boxCoords.mins.x, boxCoords.mins.y, 0), Rgba::WHITE, samplerDefaultTextureCoords[0]));
 }
 
+//legacy code
 void OpenGLRenderer::PopulateVertexArray(Vertex3Ds& out_vertexArray){
 	out_vertexArray.clear();
 	out_vertexArray.reserve(10000);
@@ -1969,6 +2199,9 @@ void OpenGLRenderer::PopulateVertexArray(Vertex3Ds& out_vertexArray){
 ///old vbo function
 void OpenGLRenderer::DrawVBO(){
 	//glDisable(GL_CULL_FACE);
+	GLuint m_vboID = 0;
+	GLuint m_numOFVBOVertexes = 0;
+
 	glBindBuffer(GL_ARRAY_BUFFER, m_vboID);
 
 	glEnableClientState(GL_VERTEX_ARRAY);

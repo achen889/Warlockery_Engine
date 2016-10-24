@@ -6,6 +6,8 @@
 #include "BaseGameState.hpp"
 #include "..\Renderer\OpenGLRenderer.hpp"
 
+#include "Engine/UserInterface/UIScreen.hpp"
+
 GameStateRegistry* GameStateRegistration::s_gameStateRegistryMap;
 
 //===========================================================================================================
@@ -25,7 +27,6 @@ GameStateRegistration* FindGameStateByName(const std::string& name){
 	return NULL;
 }
 
-
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///Base Game State
@@ -41,13 +42,17 @@ m_name(name)
 ///virtual methods
 
 void BaseGameState::Enter(){
+	
+	UIScreen& gameStateUIScreen = FindUIScreenByName(m_name);
+	gameStateUIScreen.ShowScreen();
 
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 void BaseGameState::Exit(){
-
+	UIScreen& gameStateUIScreen = FindUIScreenByName(m_name);
+	gameStateUIScreen.HideScreen();
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -61,13 +66,34 @@ void BaseGameState::ProcessInput(double deltaSeconds){
 void BaseGameState::Update(double deltaSeconds){
 	UNUSED(deltaSeconds);
 
+	UIScreen& gameStateUIScreen = FindUIScreenByName(m_name);
+	gameStateUIScreen.Update();
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 void BaseGameState::Render(OpenGLRenderer* renderer){
-	UNUSED(renderer);
 
+	//RenderUIScreen(renderer);
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void BaseGameState::RenderUIScreen(OpenGLRenderer* renderer) {
+
+	UIScreen& gameStateUIScreen = FindUIScreenByName(m_name);
+	gameStateUIScreen.Render(renderer);
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+UIScreen* BaseGameState::GetUIScreen() {
+	UIScreen* gameStateUIScreen = &FindUIScreenByName(m_name);
+
+	return gameStateUIScreen;
 }
 
 //===========================================================================================================
@@ -87,6 +113,7 @@ void UpdateCurrentState(double deltaSeconds ){
 }
 
 void RenderCurrentState(OpenGLRenderer* renderer ){
+	//PROFILE_SECTION();
 	//if (IsCurrentStateValid()){
 		GetCurrentState()->Render(renderer);
 	//}
@@ -102,3 +129,14 @@ void SetCurrentGameState(const std::string& stateName){
 	//enter new state
 	GetCurrentState()->Enter();
 }
+
+void ReturnToPreviousState() {
+	if (IsCurrentStateValid())
+		GetCurrentState()->Exit();
+	//pop state off
+	g_currentState.pop();
+	//enter old state
+	GetCurrentState()->Enter();
+}
+
+//===========================================================================================================\

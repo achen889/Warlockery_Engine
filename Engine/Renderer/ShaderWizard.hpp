@@ -35,7 +35,7 @@ struct GLSampler{
 
 	TextureMap m_textureMap;
 
-	//legacy
+	//legacy code, some old rendering stuff requires this
 	Texture* m_texture    = NULL;
 	Texture* m_diffuseTex = NULL;
 	Texture* m_normalTex  = NULL;
@@ -53,9 +53,11 @@ struct GLSampler{
 
 	void BindTextureMapToShader(unsigned int programID);
 
+	void BindTextureToShader(Texture* myTexture, const std::string& texName, unsigned int programID, int& texIndex);
+
 	void SetGLSamplerData(unsigned int newminFilter, unsigned int newmagFilter, unsigned int newuWrap, unsigned int newvWrap);
 	
-	//legacy
+	//legacy code
 	void SetTexture(std::string texturePath){
 		m_texture = Texture::CreateOrGetTexture(texturePath);
 	}
@@ -97,7 +99,7 @@ struct GLShader{
 			++shaderIt;
 		}
 
-		//ConsolePrintf("shaders are gone!");
+		ConsolePrintf("shaders are gone!");
 	}
 
 	std::string GetName(){ return m_name; }
@@ -160,8 +162,8 @@ struct LoadShaderFileJob : Job{
 	void Execute(){
 		
 		//does loading shaders need to be on the same thread as the rendering context?
-		std::string vertFullDef = vertFileDefinition.GetDefinition();
-		std::string fragFullDef = fragFileDefinition.GetDefinition();
+		std::string vertFullDef = vertFileDefinition.ToString();
+		std::string fragFullDef = fragFileDefinition.ToString();
 
 		GLShader::CreateOrGetShader(vertFileDefinition.m_fileName, vertFullDef, fragFullDef );
 

@@ -10,7 +10,7 @@
 
 #include "Engine\Math\Vector3.hpp"
 #include "Engine\Math\EulerAngles.hpp"
-#include "Engine\Math\Matrix4.hpp"
+#include "Engine\Math\MatrixUtils.hpp"
 #include <math.h>
 //#include "Engine\Console\DevConsole.hpp"
 
@@ -33,17 +33,19 @@ public:
 	Matrix4 LookAt(const Vector3& pointToLookAt);
 	std::string ToString();
 	void UpdateCameraFromInput(float deltaSeconds, const float& moveSpeed = 16.0f);
+
 	Matrix4 GetCameraRotationMatrix();
 	Matrix4 GetCameraViewMatrix();
-		
-public:
+
+	ModelViewMatrix GetCameraModelViewMatrix();
+
+	void SetPosition(const Vector3& newPos) { m_position = newPos; }
+	void Translate(const Vector3& translation) { m_position += translation; }
+
 	//camera location in space
 	Vector3 m_position;
 	EulerAngles m_orientation;
-	
-	Vector3 vectorIofCamera;
-	Vector3 vectorJofCamera;
-	Vector3 vectorKofCamera;
+
 };
 
 ///----------------------------------------------------------------------------------------------------------

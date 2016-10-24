@@ -1,5 +1,5 @@
 //==============================================================================================================
-//Render3DComponent.hpp
+//Render3DComponent.MPp
 //by Albert Chen Jan-26-2016.
 //==============================================================================================================
 
@@ -19,7 +19,7 @@ public:
 	Render3DComponent(){
 
 	}
-	~Render3DComponent();
+	
 	Render3DComponent(const std::string& name);
 
 	Render3DComponent(const XMLNode& node);
@@ -49,10 +49,6 @@ private:
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods
-
-inline Render3DComponent::~Render3DComponent(){
-	//do nothing
-}
 
 inline void Render3DComponent::SetRenderBounds(){
 	Vector3 renderMins = Vector3(m_renderCoordinates);

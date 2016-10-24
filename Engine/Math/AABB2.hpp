@@ -20,30 +20,37 @@ public:
 	//constructors
 	AABB2();
 	~AABB2();
-	AABB2(const AABB2& copy );
+	AABB2(const AABB2& copy, float paddingX = 0.0f, float paddingY = 0.0f);
 	explicit AABB2(float initialX, float initialY );
 	explicit AABB2(const Vector2& mins, const Vector2& maxs );
 	explicit AABB2(const Vector2& center, float radiusX, float radiusY );
+	explicit AABB2(const Vector2& center, float radius );
 	//mutators
 	void StretchToIncludePoint(const Vector2& point );
 	void AddPadding(float xPaddingRadius, float yPaddingRadius );
 	void Translate(const Vector2& translation );
+	void RotateDegrees(float rotationDegrees);
 	//void ScaleNonUniform(const Vector2& scaleFactor);
 	//accessors/queries
 	bool isPointInside(const Vector2& point );
 	const Vector2 CalcSize() const; //this is the last thing to do for aabb2
-	const Vector2 CalcCenter() const;
-	const Vector2 CalcLengthOfSides(){
+	Vector2 CalcCenter() const;
+	Vector2 CalcLengthOfSides() const {
 		Vector2 tempVecLength;
 		tempVecLength.x = abs(maxs.x - mins.x);
 		tempVecLength.y = abs(maxs.y - mins.y);
 
 		return tempVecLength;
 	}
+	float CalcArea() const {
+		Vector2 boxSides = CalcLengthOfSides();
+		return boxSides.x * boxSides.y;
+	}
 	Vector2s GetAABB2Vertices();
 	const Vector2 GetPointAtNormalizedPositionWithinBox( const Vector2& normalizedPosition ) const;
 	const Vector2 GetNormalizedPositionForPointWithinBox( const Vector2& point ) const;
 	//const Vector2s GetVerticesOfAABB2();
+
 	//operators
 	bool operator==(const AABB2& boxToEqual) const;
 	bool operator!=(const AABB2& boxToNotEqual) const;
@@ -66,9 +73,11 @@ inline AABB2::AABB2(){
 inline AABB2::~AABB2(){
 	//do nothing
 }
-inline AABB2::AABB2(const AABB2& copy ){
+inline AABB2::AABB2(const AABB2& copy, float paddingX, float paddingY ){
 	mins = copy.mins;
 	maxs = copy.maxs;
+
+	AddPadding(paddingX, paddingY);
 }
 inline AABB2::AABB2(float initialX, float initialY ){
 	mins = Vector2(initialX, initialY);
@@ -85,6 +94,14 @@ inline AABB2::AABB2(const Vector2& center, float radiusX, float radiusY ){
 	maxs.x = center.x + radiusX;
 	maxs.y = center.y + radiusY;
 }
+inline AABB2::AABB2(const Vector2& center, float radius) {
+	//do something
+	mins.x = center.x - radius;
+	mins.y = center.y - radius;
+	maxs.x = center.x + radius;
+	maxs.y = center.y + radius;
+}
+
 //mutators
 ///----------------------------------------------------------------------------------------------------------
 ///add padding to each side of the box
@@ -98,6 +115,25 @@ inline void AABB2::Translate(const Vector2& translation ){
 	mins += translation;
 	maxs += translation;
 }
+
+///----------------------------------------------------------------------------------------------------------
+///rotate box by this degrees
+inline void AABB2::RotateDegrees(float rotationDegrees){
+
+// 	Vector2 myCenter = CalcCenter();
+// 	Vector2 myRadius = CalcLengthOfSides() * 0.5f;
+// 	//rotate center
+// 	myCenter.RotateDegrees(rotationDegrees);
+// 	//*this = AABB2(myCenter, myRadius.x, myRadius.y);
+// 
+// 	mins = myCenter - myRadius;
+// 	maxs = myCenter + myRadius;
+
+  mins.RotateDegrees(rotationDegrees);
+  maxs.RotateDegrees(rotationDegrees);
+
+}
+
 ///----------------------------------------------------------------------------------------------------------
 ///returns width and height of box
 inline const Vector2 AABB2::CalcSize() const{
@@ -107,7 +143,7 @@ inline const Vector2 AABB2::CalcSize() const{
 }
 ///----------------------------------------------------------------------------------------------------------
 ///returns center of AABB
-inline const Vector2 AABB2::CalcCenter() const{
+inline Vector2 AABB2::CalcCenter() const{
 	float BoxXWidth = maxs.x - mins.x;
 	float BoxYHeight = maxs.y - mins.y;
 	float CenterX = mins.x + (BoxXWidth * 0.5f );

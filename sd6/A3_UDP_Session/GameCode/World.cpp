@@ -54,7 +54,7 @@ void World::StartUp(){
 
 	EXECUTE_CONSOLE_COMMAND(add_connection MEW77-PC 1777);
 
-	EXECUTE_CONSOLE_COMMAND(add_connection 10.8.128.129 12345);
+	EXECUTE_CONSOLE_COMMAND(add_connection 10.8.138.31 12345);
 
 	//EXECUTE_CONSOLE_COMMAND(add_connection 10.8.154.107 111);
 	

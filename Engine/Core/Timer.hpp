@@ -12,6 +12,8 @@
 #include "StringTable.hpp"
 #include "EventCallback.hpp"
 
+#include "Utilities.hpp"
+
 //===========================================================================================================
 
 struct Timer;
@@ -23,28 +25,38 @@ typedef std::map<std::string,  Timer*> TimerMap;
 typedef std::map<std::string,  Timer*>::iterator TimerMapIterator;
 typedef std::pair<std::string, Timer*> TimerMapEntry;
 
+static unsigned int s_newTimerID = 0;
+
 //===========================================================================================================
 
 struct Timer{
 	//alarm data
-	StringID id;
-	double countdownTime;
-	double elapsedTime;
+	StringID id = 0;
+	double countdownTime = 0;
+	double elapsedTime = 0;
 
 	//alarm flags
 	//consider changing to bit flags later
-	bool  timerComplete;
-	bool  isPeriodic;
-	bool  isActive;
-	bool  isElapsedTimer;
-	//event stuff
+	bool  timerComplete = false;
+	bool  isPeriodic = false;
+	bool  isActive = false;
+	bool  isElapsedTimer = false;
+
+	//old event stuff
 	EventCallback timerEventCallback;
+
+	//new event stuff
 
 	//methods
 	Timer();
 	Timer(const float& countdownFromTime, bool isTimerPeriodic = false);
+	
+	//using old event callback stuff
 	Timer(const float& countdownFromTime, const std::string& eventName, 
 		  EventCallbackFunc* func, void* data, bool isTimerPeriodic = false);
+
+	//how to use new one?
+	Timer(const float& countdownFromTime, const std::string& eventName, NamedProperties& args , bool isTimerPeriodic = false);
 	
 	//upkeep
 	void Update(double deltaSeconds);
@@ -53,14 +65,26 @@ struct Timer{
 
 	void UpdateElapsedTimer(double deltaSeconds);
 	void ResetIfPeriodic();
+    void Reset();
 
+	void Revive() { isActive = true; }
 	void Kill(){ isActive = false; }
+
+	void SetCountdownTime(double new_countdownTime) {
+		countdownTime = new_countdownTime;
+	}
 
 	//queries
 	double GetSecondsElapsed(){ return elapsedTime; }
 	double GetSecondsRemaining(){ return countdownTime - elapsedTime; }
-	double GetPercentElapsed(){ return (elapsedTime / countdownTime) * 100.0; } //premultiplied by 100
-	double GetPercentRemaining(){ return ( 1.0 - (elapsedTime / countdownTime) ) * 100.0; } //premultiplied by 100
+	double GetPercentRemaining(){ 
+		return (elapsedTime / countdownTime); 
+	}
+	double GetPercentElapsed(){ 
+		return (1.0 - (elapsedTime / countdownTime));
+	}
+
+	bool IsComplete() { return timerComplete; }
 
 	friend void UpdateTimers(double deltaSeconds, Timers& alarmsToUpdate);
 	friend Timer* FindTimerByName(const std::string& name, Timers& timersToCheck);
@@ -68,6 +92,7 @@ struct Timer{
 };
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods
+
 //-----------------------------------------------------------------------------------------------------------
 inline void Timer::UpdateElapsedTimer(double deltaSeconds){
 	elapsedTime += (float)deltaSeconds;
@@ -76,14 +101,21 @@ inline void Timer::UpdateElapsedTimer(double deltaSeconds){
 //-----------------------------------------------------------------------------------------------------------
 inline void Timer::ResetIfPeriodic(){
 	if(isPeriodic){
-		elapsedTime = countdownTime;
-		if (timerComplete)
-			timerComplete = false;
+		Reset();
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
+inline void Timer::Reset() {
+	elapsedTime = countdownTime;
+	if (timerComplete)
+		timerComplete = false;
+}
 
+//-----------------------------------------------------------------------------------------------------------
+
+
+//===========================================================================================================
 
 #endif

@@ -45,10 +45,11 @@ void Map::GenerateMap(const int& width, const int& height, bool is3DMode){
 	for (int x = 0; x < width; x++){
 		for (int y = 0; y < height; y++){
 
-			Tile newTile = Tile(currentIndex, MapPosition(x, y), TILE_TYPE_AIR);
+
+			Tile newTile = Tile(currentIndex, MapPosition(x, y), GetRandomTileType());
 			
 			//debug give tile random color
-			newTile.m_color = RANDOM_COLOR;
+			//newTile.m_color = RANDOM_COLOR;
 
 			m_tiles.push_back(newTile);
 			if (is3DMode){
@@ -282,6 +283,24 @@ TilePtrs Map::GetAllTilesWithinBoxOfTile(const Tile& tileToCheck, const int& wid
 		}
 	}
 
+	return tilesToReturn;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+TilePtrs Map::GetAllTilesWithinRadiusOfTile(const Tile& tileToCheck, const float& radius) {
+	MapPosition tileMapPos = tileToCheck.m_mapPosition;
+	TilePtrs tilesToReturn;
+	tilesToReturn.reserve(10000);
+	
+	Disc2 tileDisc = Disc2(ToVector2(tileMapPos), radius);
+
+	for (TilesIterator it = m_tiles.begin(); it != m_tiles.end(); ++it) {
+		Tile& tile = (*it);
+		if (IsPointInsideDisc2(tileDisc, ToVector2(tile.m_mapPosition))) {
+			tilesToReturn.push_back(&tile);
+		}
+	}
 	return tilesToReturn;
 }
 
@@ -555,6 +574,8 @@ void Map::RenderTiles(OpenGLRenderer* renderer, bool is3DMode, bool renderInWorl
 	}
 
 }
+
+
 
 //-----------------------------------------------------------------------------------------------------------
 

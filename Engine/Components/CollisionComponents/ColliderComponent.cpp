@@ -36,17 +36,26 @@ void ColliderComponent::OnDestroy(){
 void ColliderComponent::Update(double deltaSeconds){
 	UNUSED(deltaSeconds);
 	
-	if (isActive && IsColliding()) {
-		OnCollisionEventCallback();
-	}
+// 	if (isActive && IsColliding()) {
+// 		ExecuteOnCollisionEventCallback();
+// 	}
 
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
-bool ColliderComponent::IsColliding() {
+void ColliderComponent::SetOnCollisionEventCallback(const std::string& event_name, EventCallbackFunc* func, void* data ){
+	//sets my callback func
+	if (!m_collEventCallback) {
+		m_collEventCallback = new EventCallback(event_name, func, data);
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+bool ColliderComponent::IsColliding(ColliderComponent* otherCollider) {
 	if (isActive) {
-		return true;
+		return DoCollisionCheck(otherCollider);
 	}
 	else {
 		return false;
@@ -55,8 +64,19 @@ bool ColliderComponent::IsColliding() {
 
 //-----------------------------------------------------------------------------------------------------------
 
-void ColliderComponent::OnCollisionEventCallback(){
+bool ColliderComponent::DoCollisionCheck(ColliderComponent* otherCollider) {
+	UNUSED(otherCollider);
+
+	return true;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void ColliderComponent::ExecuteOnCollisionEventCallback(){
 	//do something
+	if (m_collEventCallback) {
+		m_collEventCallback->Execute();
+	}
 }
 
 //-----------------------------------------------------------------------------------------------------------

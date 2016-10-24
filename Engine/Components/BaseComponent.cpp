@@ -25,6 +25,29 @@ ComponentRegistration* FindComponentByName(const std::string& name){
 	return NULL;
 }
 
+void ClearComponentRegistry() {
+	
+	if (ComponentRegistration::s_ComponentRegistryMap) {
+
+		for (ComponentRegistryIterator it = (*ComponentRegistration::s_ComponentRegistryMap).begin(); 
+									   it != (*ComponentRegistration::s_ComponentRegistryMap).end(); ){
+			ComponentRegistration* registration = (it->second);
+			
+			if (registration) {
+				it = (*ComponentRegistration::s_ComponentRegistryMap).erase(it);
+			}
+			else {
+				++it;
+			}
+		}
+
+		ComponentRegistration::s_ComponentRegistryMap->clear();
+		delete ComponentRegistration::s_ComponentRegistryMap;
+		ComponentRegistration::s_ComponentRegistryMap = NULL;
+	}
+
+}
+
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
@@ -32,7 +55,7 @@ ComponentRegistration* FindComponentByName(const std::string& name){
 
 BaseComponent::BaseComponent(const XMLNode& node){
 	//get name of component
-	m_name= ReadXMLAttributeAsString(node, "name");
+	m_name = StringToWritableCStr(ReadXMLAttributeAsString(node, "name"));
 
 }
 

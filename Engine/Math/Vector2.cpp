@@ -41,6 +41,7 @@ const Vector2 Vector2::ONE = Vector2(1.0f, 1.0f);
 		//adding 90 degrees in radians to current heading
 		float newHeadingDegrees = CalcHeadingDegrees() + degrees;
 		float currentLength = CalcLength();
+
 		SetLengthAndHeadingDegrees(currentLength, newHeadingDegrees);
 	}
 	///----------------------------------------------------------------------------------------------------------
@@ -150,6 +151,10 @@ float SetOrientationTowards(const Vector2& myPosition, const Vector2& targetPosi
 
 	return headingDegreesTowardsPosition;
 
+}
+
+Vector2 GetRandomVector2InRange(const float& minRange, const float& maxRange) {
+	return Vector2(GetRandomFloatInRange(minRange, maxRange), GetRandomFloatInRange(minRange, maxRange));
 }
 
 //===========================================================================================================

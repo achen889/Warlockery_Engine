@@ -8,7 +8,8 @@
 #ifndef _included_Vector4__
 #define _included_Vector4__
 
-#include "MathUtils.hpp"
+//#include "MathUtils.hpp"
+#include "Vector3.hpp"
 #include <vector>
 
 class Vector4{

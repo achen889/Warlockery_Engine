@@ -35,6 +35,8 @@ public:
 	void SetMagnitude(const float& newmagnitude){ m_effect->magnitude = newmagnitude; }
 	void SetPosition(const Vector3& newPosition){ m_position = newPosition;  }
 	void SetParticleColor(const Rgba& newColor){ m_color = newColor;  }
+	void SetParticleLifeSpan(const float& newLifespan) { m_particleLifespanSeconds = newLifespan; }
+	void SetParticleImmortal() { m_particleLifespanSeconds = -1.0f; }
 
 	//calc methods
 	float CalcSpawnRate();
@@ -50,7 +52,7 @@ public:
 
 	//vars
 	//Particles m_particles;
-	Effect* m_effect;
+	Effect* m_effect = NULL;
 	bool m_is2D = false;
 	Rgba m_color;
 	float m_lifespanSeconds; //-1 means immortal //*

@@ -6,6 +6,10 @@
 #include "GraphicsUtils.hpp"
 
 //===========================================================================================================
+
+DebugShapes g_debugShapes;
+
+//===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///Debug Shape and DebugShapes
 //===========================================================================================================
@@ -15,14 +19,14 @@
 DebugShape::DebugShape(){
 	//do nothing
 	
-	//m_shapeMeshRenderer->BindVertexArray();
+	InitShapeMeshRenderer();
 }
 
 ///----------------------------------------------------------------------------------------------------------
 ///super constructor
 DebugShape::DebugShape(const ShapeType& newshape, const Vector3&  newpos, const Vector3& newRad, float lifespanSeconds,
 	const Rgba& newstartCol, const Rgba& newendCol,
-	bool isdepthTestOn, bool isDualMode) :
+	bool isdepthTestOn, bool isDualMode) : 
 	shape(newshape),
 	position(newpos),
 	radius(newRad),
@@ -32,7 +36,6 @@ DebugShape::DebugShape(const ShapeType& newshape, const Vector3&  newpos, const 
 	lifespanSeconds(lifespanSeconds),
 	depthTestOn(isdepthTestOn),
 	dualMode(isDualMode)
-
 {
 
 }
@@ -69,17 +72,41 @@ DebugShape::DebugShape(const Sphere3& sphereToDebug, const float& lifespanSecond
 	dualMode(isDualMode)
 
 {
+
+
 	
-	m_shapeMeshRenderer.m_material->InitializeMaterial("Data/basic.vert", "Data/basic.frag");
-	m_shapeMeshRenderer.m_material->m_samplerInUse = false;
+	
 
 	m_shapeMeshRenderer.m_mesh->SetDrawMode(GL_LINE_STRIP);
+
 	m_shapeMeshRenderer.m_mesh->InitializeSphereMesh(sphereToDebug, startColor);
 	
 
-	m_shapeMeshRenderer.BindVertexArray();
+	
 
 	radius.x = sphereToDebug.radius;
+}
+
+DebugShape::DebugShape(const AABB2& boxToDebug, const float& lifespanSeconds,
+	const Rgba& newstartCol, bool isdepthTestOn, bool isDualMode) :
+	shape(SHAPE_TYPE_BOX2D),
+	position(ToVector3(boxToDebug.CalcCenter())),
+	startColor(newstartCol),
+	endColor(Rgba::WHITE),
+	secondsSinceSpawn(0.0f),
+	lifespanSeconds(lifespanSeconds),
+	depthTestOn(isdepthTestOn),
+	dualMode(isDualMode)
+
+{
+
+	radius = ToVector3( boxToDebug.CalcLengthOfSides() * 0.5f);
+
+	m_shapeMeshRenderer.m_mesh->SetDrawMode(GL_LINE_STRIP);
+
+	m_shapeMeshRenderer.m_mesh->InitializeQuad2DMesh(boxToDebug, startColor);
+
+
 }
 
 DebugShape::DebugShape(const Vector3& pointToDebug, const float& lifespanSeconds,
@@ -108,6 +135,16 @@ DebugShape::DebugShape(const AABB3& boxToDebug, const float& lifespanSeconds,
 	depthTestOn(isdepthTestOn),
 	dualMode(isDualMode)
 {
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void DebugShape::InitShapeMeshRenderer() {
+
+	m_shapeMeshRenderer.m_material->InitializeMaterial("basic");
+	m_shapeMeshRenderer.m_material->m_samplerInUse = false;
+	m_shapeMeshRenderer.BindVertexArray();
 
 }
 
@@ -145,10 +182,11 @@ void DebugShape::DrawDebugShape(OpenGLRenderer* renderer, Camera3D* camera){
 	if (shape == SHAPE_TYPE_POINT3D){
 		renderer->DrawPoint3D(position);
 	}
-	if (shape == SHAPE_TYPE_SPHERE3D){
+	else if (shape == SHAPE_TYPE_SPHERE3D){
 		renderer->DrawSphere3D(Sphere3(position, radius.x), 16, 16, startColor);
 		//renderer->DrawVertexArray(m_shapeMeshRenderer.m_mesh.m_drawMode, m_shapeMeshRenderer.m_vaoID, m_shapeMeshRenderer.m_mesh.m_numVerticesToDraw);
 		if (camera){
+
 			m_shapeMeshRenderer.RenderMesh(*camera, true);
 		}
 	}
@@ -161,6 +199,9 @@ void DebugShape::DrawDebugShape(OpenGLRenderer* renderer, Camera3D* camera){
 	}
 	else if (shape == SHAPE_TYPE_ARROW3D){
 		renderer->DrawArrow3D(LineSegment3(position, radius), startColor, endColor);
+	}
+	else if (shape == SHAPE_TYPE_BOX2D) {
+		m_shapeMeshRenderer.RenderMesh2D();
 	}
 }
 

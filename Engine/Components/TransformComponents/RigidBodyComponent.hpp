@@ -1,5 +1,5 @@
 //==============================================================================================================
-//PhysicsMotionComponent.hpp
+//PhysicsMotionComponent.MPp
 //by Albert Chen Aug-25-2015.
 //==============================================================================================================
 
@@ -29,7 +29,7 @@ public:
 	
 	static BaseComponent* CreateComponent(const std::string& name){ return new RigidBodyComponent(name); }
 
-	static ComponentRegistration s_PhysicsMotionComponentRegistration;
+	static ComponentRegistration s_TransformComponentRegistration;
 	
 	virtual void OnCreate();
 	virtual void OnDestroy();
@@ -46,20 +46,21 @@ public:
 	//verlet integration
 	void UpdateVerletIntegration(double deltaSeconds);
 
-
-	
-	//vars - for 2D ignore the z
-	Vector3 m_position;
+	void ZeroThisComponent(){
+		m_velocity = Vector3::ZERO;
+		m_acceleration = Vector3::ZERO;
+		m_forces = Vector3::ZERO;
+	}
 
 	//integration vars
 	PhysicsIntegrationType m_physicsIntegrationType = PHYSICS_FWD_EULER;
 	Vector3 m_prevPrevPosition; //for verlet integration
-	Vector3 m_velocity;
-	Vector3 m_acceleration;
-	Vector3 m_forces;
+	Vector3 m_velocity = Vector3::ZERO;
+	Vector3 m_acceleration = Vector3::ZERO;
+	Vector3 m_forces = Vector3::ZERO;
 
 	//physics properties
-	float m_mass;
+	float m_mass = 1.0f;
 
 };
 
@@ -86,7 +87,7 @@ inline const Vector3& RigidBodyComponent::UpdatePositionWithVelocity(double delt
 
 inline const Vector3& RigidBodyComponent::UpdateVelocityWithAcceleration(double deltaSeconds){
 
-	m_velocity += m_acceleration* (float)deltaSeconds;
+	m_velocity += m_acceleration * (float)deltaSeconds;
 
 	DoLockXYZ(m_velocity);
 

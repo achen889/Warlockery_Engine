@@ -17,7 +17,13 @@
 NetPacket::NetPacket() {
 
 	Init();
-	
+}
+
+NetPacket::NetPacket(const uint16_t& ackID, const Byte& connID) {
+
+	Init();
+	WriteInitHeaderBytes(ackID, connID);
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -32,16 +38,10 @@ NetPacket::NetPacket(void* data, size_t dataLen){
 	if (dataLen == 0) {
 		dataLen = GetUCStrLength(dataAsByteBuffer); //somehow has to do this when len is 0
 	}
-	
-
-	//ping message
-	//NetMessage msg;
-	//msg = NetMessage(0);
-// 	NetMessage msg (0, data, dataLen);
-// 	AddMessage(msg);
 
 	if (data != NULL) {
-		AddMessage(NetMessage(0, data, dataLen));
+		NetMessage netMsg = NetMessage(0, data, dataLen);
+		AddMessage(netMsg);
 	}
 	
 
@@ -73,7 +73,7 @@ void NetPacket::Init() {
 	ByteBuffer::Set(packetBuffer, PACKET_MTU);
 	memset(buffer, 0, PACKET_MTU);
 
-	messageCountPtr = buffer + SIZE_OF_SHORT;
+	messageCountPtr = buffer + SIZE_OF_SHORT + SIZE_OF_CHAR;
 
 	readMessagesPtr = messageCountPtr;
 	++readMessagesPtr;
@@ -81,21 +81,25 @@ void NetPacket::Init() {
 
 //-----------------------------------------------------------------------------------------------------------
 
-void NetPacket::WriteInitHeaderBytes(){
-	unsigned short ackID = (unsigned short)0xffff;
+void NetPacket::WriteInitHeaderBytes( const uint16_t& ackID, const Byte& connID ){
+	//unsigned short ackID = ackID;
+	
+	WRITE_BYTES(connID);
+	
 	WRITE_BYTES(ackID);
 
 	Byte messageCount = 0;
 	WRITE_BYTES(messageCount);
 
-	curSize += SIZE_OF_SHORT + SIZE_OF_CHAR;
+	curSize += GetHeaderLength();
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
-const unsigned short NetPacket::GetAckID() {
+const uint16_t NetPacket::GetAckID() {
 
-	BinaryBufferParser bp(buffer, curSize);
+	BinaryBufferParser bp(&packetBuffer[0], curSize);
+	bp.ReadNextChar();
 	return bp.ReadNextUShort();
 
 }
@@ -103,8 +107,12 @@ const unsigned short NetPacket::GetAckID() {
 //-----------------------------------------------------------------------------------------------------------
 
 const Byte NetPacket::GetMessageCount() {
-
-	return *messageCountPtr;
+	if (messageCountPtr) {
+		//ConsolePrintString(IntToString(*messageCountPtr));
+		return *messageCountPtr;
+	}
+	
+	return 0;
 
 }
 
@@ -115,6 +123,7 @@ bool NetPacket::IsValid() {
 	//validate myself then validate others
 	//BinaryBufferParser bp = BinaryBufferParser(buffer, curSize);
 	unsigned short ackID = GetAckID();
+	UNUSED(ackID);
 	Byte messageCount = GetMessageCount();
 
 // 	if (ackID == 0xffff) {
@@ -142,8 +151,9 @@ bool NetPacket::IsValid() {
 
 	//add all message lengths + 3 should be packet length
 
+
 	//reset read messages
-	readMessagesPtr = buffer + SIZE_OF_SHORT + SIZE_OF_CHAR;
+	readMessagesPtr = buffer + GetHeaderLength();
 
 	if (validMessageCount == messageCount) {
 		return true;
@@ -151,17 +161,20 @@ bool NetPacket::IsValid() {
 
 	
 
-	//return false;
+	return false;
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
-bool NetPacket::AddMessage(const NetMessage& msgToAdd) {
+bool NetPacket::AddMessage(NetMessage& msgToAdd) {
 	//write this to the end of the buffer and update message count
+	//ConsolePrintString(msgToAdd.ToString());
+
+	msgToAdd.owner = this;
+
+	unsigned short messageLen = msgToAdd.GetMessageLength() + (unsigned short)msgToAdd.GetHeaderLength();
 	
-	unsigned short messageLen = msgToAdd.GetMessageLength();
-	//const unsigned short messageHeaderLen = 3;
-	if (messageLen < maxSize) { //somehow packet is null by this point or rather 0xccccccc
+	if (GetBufferLength() + messageLen < maxSize) {
 		//write length
 		WRITE_BYTES(messageLen);
 
@@ -169,8 +182,18 @@ bool NetPacket::AddMessage(const NetMessage& msgToAdd) {
 		Byte messageID = msgToAdd.GetMessageID();
 		WRITE_BYTES(messageID);
 
-		//write message buffer to my buffer
-		WriteBytes((void*)msgToAdd.GetBuffer(), msgToAdd.GetBufferLength());
+		//new bit: reliable id
+		if (msgToAdd.IsReliable()) {
+			WRITE_BYTES(msgToAdd.reliableID);
+		}
+
+		//new bits: order id
+		if (msgToAdd.IsInOrder()) {
+			WRITE_BYTES(msgToAdd.orderID);
+		}
+
+		//write message buffer data to my buffer
+		WriteBytes((void*)msgToAdd.messageBuffer, msgToAdd.GetMessageLength());
 
 		IncrementMessageCount();
 		return true;

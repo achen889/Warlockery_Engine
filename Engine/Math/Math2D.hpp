@@ -13,6 +13,12 @@
 #include "EngineMath.hpp"
 #include "IntVec2.hpp"
 
+//world const directions for vec2
+static const Vector2 WORLD_UP_VEC2(0, 1);
+static const Vector2 WORLD_DOWN_VEC2(0, -1);
+static const Vector2 WORLD_LEFT_VEC2(-1, 0);
+static const Vector2 WORLD_RIGHT_VEC2(1, 0);
+
 struct TraceResult2D{
 	bool didImpact;
 

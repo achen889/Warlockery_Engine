@@ -47,7 +47,7 @@ Matrix4::Matrix4(const Vector4& iBasis, const Vector4& jBasis, const Vector4& kB
 
 //this rows x other columns matrix multiplication
 const Matrix4 Matrix4::operator*(const Matrix4& matrixToTransformWith) const{
-	//
+	
 	Vector4 colOfXBases = Vector4(matrixToTransformWith.m_iBasis.x, matrixToTransformWith.m_jBasis.x, matrixToTransformWith.m_kBasis.x, matrixToTransformWith.m_translation.x);
 	Vector4 colOfYBases = Vector4(matrixToTransformWith.m_iBasis.y, matrixToTransformWith.m_jBasis.y, matrixToTransformWith.m_kBasis.y, matrixToTransformWith.m_translation.y);
 	Vector4 colOfZBases = Vector4(matrixToTransformWith.m_iBasis.z, matrixToTransformWith.m_jBasis.z, matrixToTransformWith.m_kBasis.z, matrixToTransformWith.m_translation.z);
@@ -327,20 +327,10 @@ void Matrix4::RotateDegreesAboutY( float degrees ){
 }
 
 void Matrix4::RotateDegreesAboutZ( float degrees ){
-	float CosineOfDegrees = cos(degrees);
-	float SineOfDegrees = sin(degrees);
 
-	Vector4 tempI = m_iBasis * CosineOfDegrees + m_jBasis * SineOfDegrees;
-	Vector4 tempJ = m_jBasis * CosineOfDegrees - m_iBasis * SineOfDegrees;
+	float radiansFromDegrees = degrees * RadiansPerDegree;
 
-	m_iBasis = tempI;
-	m_jBasis = tempJ;
-
-// 	m_iBasis.x *= CosineOfDegrees;
-// 	m_iBasis.y *= SineOfDegrees;
-// 
-// 	m_jBasis.x *= -1.0f * SineOfDegrees;
-// 	m_jBasis.y *= CosineOfDegrees;
+	RotateRadiansAboutZ(radiansFromDegrees);
 
 }// Possibly also offered as RotateDegrees2D
 
@@ -357,9 +347,16 @@ void Matrix4::RotateRadiansAboutY( float radians ){
 }
 
 void Matrix4::RotateRadiansAboutZ( float radians ){
-	float degreesFromRadians = radians * DegreesPerRadian;
 
-	RotateDegreesAboutZ(degreesFromRadians);
+	float CosineOfDegrees = cos(radians); //takes radians
+	float SineOfDegrees = sin(radians);//takes radians
+
+	Vector4 tempI = m_iBasis * CosineOfDegrees + m_jBasis * SineOfDegrees;
+	Vector4 tempJ = m_jBasis * CosineOfDegrees - m_iBasis * SineOfDegrees;
+
+	m_iBasis = tempI;
+	m_jBasis = tempJ;
+
 }
 
 ///----------------------------------------------------------------------------------------------------------
@@ -454,8 +451,10 @@ Matrix4 Matrix4::CreateRotationDegreesAboutY( float degrees ){
 Matrix4 Matrix4::CreateRotationDegreesAboutZ( float degrees ){
 	Matrix4 newRotationDegreesAboutZ;
 
-	float CosineOfDegrees = cos(degrees);
-	float SineOfDegrees = sin(degrees);
+	float radiansFromDegrees = degrees * RadiansPerDegree;
+
+	float CosineOfDegrees = cos(radiansFromDegrees);
+	float SineOfDegrees = sin(radiansFromDegrees);
 
 	newRotationDegreesAboutZ.m_iBasis.x *= CosineOfDegrees;
 	newRotationDegreesAboutZ.m_iBasis.y *= SineOfDegrees;

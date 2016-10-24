@@ -26,9 +26,6 @@ public:
 
 	NetworkSystem();
 	~NetworkSystem() {
-
-		DestroySession(NetworkSystem::s_gameSession);
-
 	}
 
 	bool StartUp();
@@ -39,13 +36,15 @@ public:
 	NetworkSession* CreateSession();
 	void DestroySession(NetworkSession* session);
 
-	static bool StartHost(NetworkSession*& hostSession, short port);
+	static bool StartSession(NetworkSession*& hostSession, short port);
 
 	UDPSocket* CreateUDPSocket(NetPacketQueue* queue, short port);
 
 	void FreeSocket(UDPSocket* socket);
 
 	static NetworkSession* s_gameSession;
+
+	static Byte GetMyConnIndex(NetConnection* conn);
 
 };
 
@@ -60,10 +59,13 @@ inline UDPSocket* NetworkSystem::CreateUDPSocket(NetPacketQueue* queue, short po
 
 //be sure to call join on the socket before freeing the memory, otherwise thread issues
 inline void NetworkSystem::FreeSocket(UDPSocket* socket){
+
 	if (socket){
+		socket->m_isRunning = false;
 		socket->Join();
 	}
 	socket->Stop();
+
 
 	//then delete socket
 	delete socket;
@@ -84,10 +86,24 @@ inline NetworkSession* NetworkSystem::CreateSession() {
 
 inline void NetworkSystem::DestroySession(NetworkSession* session) {
 
-	delete session;
+	if (session) {
+		delete session;
+		session = NULL;
+	}
 
-	session = NULL;
+}
 
+//-----------------------------------------------------------------------------------------------------------
+
+inline Byte NetworkSystem::GetMyConnIndex(NetConnection* conn) {
+	if (conn) {
+		return conn->GetConnIndex();
+	}
+
+	if (NetworkSystem::s_gameSession && NetworkSystem::s_gameSession->m_connSelf) {
+		return NetworkSystem::s_gameSession->m_connSelf->GetConnIndex();
+	}
+	return 0xff; //assume Invalid otherwise
 }
 
 //===========================================================================================================

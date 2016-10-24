@@ -19,6 +19,8 @@ MemoryUse g_memoryUse;
 
 CriticalSection* memoryCritSec = NULL;
 
+bool doDebugMemory = true;
+
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///new/delete helpers
@@ -142,56 +144,76 @@ void EraseEntryInByteTrackerMap(void* ptr){
 
 void ConsolePrintMemUseInformation(){
 
-	std::string byteUnits = " bytes";
-	
-	SetLogFileName("Warlockery_Memory_Usage.txt");
-	
-	std::string byteTrackingString = "\n//===========================================================================================================";
-	byteTrackingString += "\nMem Use Log created on " + GetSystem32TimeString();
+	if (doDebugMemory && g_byteTrackerMap) {
+		std::string byteUnits = " bytes";
 
-	byteTrackingString += "\n";
-	byteTrackingString += "alloc count: " + IntToString(g_memoryUse.g_allocCount) + "\n";
-	byteTrackingString += "dealloc count: " + IntToString(g_memoryUse.g_deallocCount) + "\n";
+		SetLogFileName("Warlockery_Memory_Usage.txt");
+		WipeLogFile();
 
-	byteTrackingString += "total bytes alloc: " + IntToString(g_memoryUse.g_bytesAllocated) + byteUnits + "\n";
-	byteTrackingString += "total bytes dealloc: " + IntToString(g_memoryUse.g_bytesDeallocated) + byteUnits + "\n";
+		std::string byteTrackingString = "\n//===========================================================================================================";
+		byteTrackingString += "\nMem Use Log created on " + GetSystem32TimeString();
 
-	byteTrackingString += "largest alloc: " + IntToString(g_memoryUse.g_largestAllocRequested) + byteUnits + "\n";
-	byteTrackingString += "average alloc: " + IntToString(g_memoryUse.g_averageAllocRequested) + byteUnits + "\n";
-	
-	g_memoryUse.CalcMemLeaks();
+// 		byteTrackingString += "\n";
+// 		byteTrackingString += "alloc count: " + IntToString(g_memoryUse.g_allocCount) + "\n";
+// 		byteTrackingString += "dealloc count: " + IntToString(g_memoryUse.g_deallocCount) + "\n";
+// 
+// 		byteTrackingString += "total bytes alloc: " + IntToString(g_memoryUse.g_bytesAllocated) + byteUnits + "\n";
+// 		byteTrackingString += "total bytes dealloc: " + IntToString(g_memoryUse.g_bytesDeallocated) + byteUnits + "\n";
+// 
+// 		byteTrackingString += "largest alloc: " + IntToString(g_memoryUse.g_largestAllocRequested) + byteUnits + "\n";
+// 		byteTrackingString += "average alloc: " + IntToString(g_memoryUse.g_averageAllocRequested) + byteUnits + "\n";
 
-	byteTrackingString += "num memory leaks: " + IntToString(g_memoryUse.g_numMemLeaks) + "\n";
-	byteTrackingString += "total bytes of memory leak: " + IntToString(g_memoryUse.g_bytesLeaked) + byteUnits + "\n";
+ 		//g_memoryUse.CalcMemLeaks();
+ 
+		//byteTrackingString += "\nnum memory leaks: " + IntToString(g_memoryUse.g_numMemLeaks) + "";
+ 		//byteTrackingString += "\ntotal bytes of memory leak: " + IntToString(g_memoryUse.g_bytesLeaked) + byteUnits + "";
 
-	byteTrackingString += "num memory leaks in map: " + IntToString(g_byteTrackerMap->size()) + "\n";
+		byteTrackingString += "\nnum memory leaks in map: " + IntToString(g_byteTrackerMap->size()) + "\n";
 
-	ConsolePrintString(byteTrackingString);
-	LogFilePrintString(byteTrackingString);
-	unsigned int memUseBytesLeak = 0;
+		ConsolePrintString(byteTrackingString);
+		LogFilePrintString(byteTrackingString);
+		unsigned int memUseBytesLeak = 0;
 
-	std::string byteTrackerMapString = "";
+		std::string byteTrackerMapString = "";
+		std::string tempByteTrackerString;
+		std::string byteTrackerString;
+		int sameSpotCount = 1;
+		std::string spotCountString;
 
-	if (g_byteTrackerMap){
-		for (ByteTrackerMapIterator it = g_byteTrackerMap->begin(); it != g_byteTrackerMap->end(); ++it){
-			ByteTrackerData& byteTracker = (it->second);
+		for (ByteTrackerMapIterator it = g_byteTrackerMap->begin(); it != g_byteTrackerMap->end(); ++it) {
+				ByteTrackerData& byteTracker = (it->second);
 
-			byteTrackerMapString += "" + byteTracker.fileName + "(" + IntToString(byteTracker.lineNum);
-			byteTrackerMapString += "):memory alloc: " + IntToString(byteTracker.bytesAllocated) + "\n";
-			memUseBytesLeak += byteTracker.bytesAllocated;
+				tempByteTrackerString = "" + byteTracker.fileName + "(" + IntToString(byteTracker.lineNum);
+				tempByteTrackerString += "):memory alloc: " + IntToString(byteTracker.bytesAllocated) + " | ";
 
-		}
+				if (tempByteTrackerString == byteTrackerString) {
+					sameSpotCount++;
+					spotCountString = "times: " + IntToString(sameSpotCount);
+				}
+				else {
+					sameSpotCount = 1;
+					byteTrackerString = tempByteTrackerString;
 
-		byteTrackerMapString += "\nnum bytes of memory leak in map: " + IntToString(memUseBytesLeak) + byteUnits + "\n";
+					byteTrackerMapString += byteTrackerString + spotCountString + "\n";
+				}
 
-		g_byteTrackerMap->clear();
+				memUseBytesLeak += byteTracker.bytesAllocated;
+
+			}
+		
+		byteTrackerMapString += "\nnum bytes of memory leak in map: " + IntToString(memUseBytesLeak) + byteUnits + "";
+
+// 		memoryCritSec->Enter();
+// 		//g_byteTrackerMap->clear();
+// 		memoryCritSec->Exit();
+
+		byteTrackerMapString += "\n//===========================================================================================================\n";
+
+		LogFilePrintString(byteTrackerMapString);
+		ConsolePrintString(byteTrackerMapString);
+
+		//g_byteTrackerMap->clear();
 	}
-
-	
-
-	LogFilePrintString(byteTrackerMapString);
-	ConsolePrintString(byteTrackerMapString);
-
 	
 }
 

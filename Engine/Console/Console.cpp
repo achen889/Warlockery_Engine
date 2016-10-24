@@ -8,7 +8,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "Engine/Input/InputSystem.hpp"
+#include "Engine/Core/StringUtils.hpp"
+//#include "Engine/Core/Performance.hpp"
+
+//#include "Engine/Input/InputSystem.hpp"
 
 //===========================================================================================================
 
@@ -19,18 +22,57 @@ void ConsolePrintString(const std::string& messageString){
 	ConsolePrintf(messageString.c_str());
 }
 
-void ConsolePrintf( const char* messageFormat, ... ){
+void ConsoleLogPrintString(const std::string& messageString) {
+	ConsoleLogPrintf(messageString.c_str());
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void ConsolePrintf(const char* messageFormat, ...) {
 	//static initializations
 	static const size_t BUFFER_SIZE = 2048;
 	static char message[BUFFER_SIZE];
 
 	va_list argumentList;
-	va_start(argumentList, messageFormat );
-		_vsnprintf_s(message, BUFFER_SIZE, BUFFER_SIZE -1, messageFormat, argumentList );
+	va_start(argumentList, messageFormat);
+	_vsnprintf_s(message, BUFFER_SIZE, BUFFER_SIZE - 1, messageFormat, argumentList);
 	va_end(argumentList);
 	//windows specific
 	OutputDebugStringA(message);
-	
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void ConsoleLogPrintf(const char* messageFormat, ...) {
+	//static initializations
+	static const size_t BUFFER_SIZE = 2048;
+	static char message[BUFFER_SIZE];
+
+	va_list argumentList;
+	va_start(argumentList, messageFormat);
+	_vsnprintf_s(message, BUFFER_SIZE, BUFFER_SIZE - 1, messageFormat, argumentList);
+	va_end(argumentList);
+	//windows specific
+	OutputDebugStringA(message);
+
+	message[BUFFER_SIZE - 1] = '\0'; // In case vsnprintf overran (doesn't auto-terminate)
+	AppendTextLineToLogFile(message);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+std::string Stringf(const char* messageFormat, ...) {
+	//static initializations
+	static const size_t BUFFER_SIZE = 2048;
+	static char message[BUFFER_SIZE];
+
+	va_list argumentList;
+	va_start(argumentList, messageFormat);
+	_vsnprintf_s(message, BUFFER_SIZE, BUFFER_SIZE - 1, messageFormat, argumentList);
+	va_end(argumentList);
+
+	return std::string(message);
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -69,6 +111,27 @@ void ConsoleOutputDebugString(const std::string& messageText, const char* file, 
 void ConsoleBeep(unsigned int frequency, unsigned int durationSeconds){
 	Beep(frequency, durationSeconds * 100);
 }
+
+//-----------------------------------------------------------------------------------------------------------
+
+void ConsolePrintError(const std::string& errorText, const char* fileName, const char* functionName, int lineNum) {
+
+	ConsolePrintf("\n%s(%d):%s => %s", fileName, lineNum, functionName, errorText.c_str() );
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void ToggleEnableLog() {
+	g_enableLog = !g_enableLog;
+	if (g_enableLog) {
+		ConsolePrintf("log enabled!");
+	}
+	else {
+		ConsolePrintf("log disabled!");
+	}
+}
+
 
 //-----------------------------------------------------------------------------------------------------------
 

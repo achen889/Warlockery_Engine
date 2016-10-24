@@ -4,10 +4,14 @@
 //==============================================================================================================
 
 #pragma once
-#include <string>
+
 
 #ifndef _included_EventCallback__
 #define _included_EventCallback__
+
+#include <string>
+
+#include "Event/EventSystem.hpp"
 
 //===========================================================================================================
 
@@ -16,23 +20,28 @@ typedef void(EventCallbackFunc)(const char* event_name, void* args);
 
 //===========================================================================================================
 
+//this struct is used to wrap an event call
 struct EventCallback{
 	//timer callback func
 	EventCallback();
 	EventCallback(const std::string& event_name, EventCallbackFunc* func, void* data);
+	EventCallback(const std::string& event_name, NamedProperties& params);
 	~EventCallback();
-
+	
 	//methods
-	void CallEventFunction();
+	void Execute();
 
 	//vars
 	std::string eventName;
-	EventCallbackFunc* m_function;
-	void* args;
-
-	//static std::map<std::string name, EventCallback*> s_eventCallbackMap;
+	EventCallbackFunc* m_function = NULL;
+	void* args = NULL;
+	NamedProperties* m_eventProperties = NULL;
 
 };
+
+//-----------------------------------------------------------------------------------------------------------
+
+
 
 //===========================================================================================================
 

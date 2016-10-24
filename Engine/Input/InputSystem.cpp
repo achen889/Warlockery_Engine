@@ -6,6 +6,9 @@
 #include "InputSystem.hpp"
 #include "Engine\Console\DevConsole.hpp"
 
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
 #include <Windowsx.h>
 #include <Xinput.h> // include the Xinput API
 #pragma comment( lib, "xinput" ) // Link in the xinput.lib static library
@@ -140,7 +143,7 @@ void InputSystem::StartUp(void* platformHandle, const Vector2& clientDisplaySize
 	//set up keyboard
 	for (int i = 0; i < NUMBER_OF_VIRTUAL_KEYS; i++){
 		m_KeyState[i].m_isDown = false;
-		m_KeyState[i].m_wasJustReleased = false;
+		m_KeyState[i].m_wasJustChanged = false;
 	}
 
 	//set up xbox controllers
@@ -164,7 +167,7 @@ void InputSystem::StartUp(void* platformHandle, const Vector2& clientDisplaySize
 
 void InputSystem::Update(){
 	for(int i = 0; i< NUMBER_OF_VIRTUAL_KEYS; i++){
-		m_KeyState[i].m_wasJustReleased = false;
+		m_KeyState[i].m_wasJustChanged = false;
 	}
 
 	for(int i = 0; i< NUMBER_OF_MOUSE_BUTTONS; i++){
@@ -195,10 +198,13 @@ void InputSystem::SetKeyState(int keyData, bool isPressedDown ){
 	if( keyData >=0 && keyData < NUMBER_OF_VIRTUAL_KEYS ){
 
 		if(m_KeyState[keyData ].m_isDown && !isPressedDown){
-		   m_KeyState[keyData ].m_wasJustReleased = true;
+		   m_KeyState[keyData ].m_wasJustChanged = true;
+		}
+		else if (!m_KeyState[keyData].m_isDown && isPressedDown) {
+			m_KeyState[keyData].m_wasJustChanged = true;
 		}
 		else{
-		   m_KeyState[keyData ].m_wasJustReleased = false;
+		   m_KeyState[keyData ].m_wasJustChanged = false;
 		}
 
 		m_KeyState[keyData ].m_isDown = isPressedDown;
@@ -278,6 +284,7 @@ void InputSystem::ProcessXBoxControllerInput(XBoxControllerState& controllerStat
 	DWORD errorStatus = XInputGetState( controllerState.m_controllerID, &xboxControllerState );
 	if( errorStatus == ERROR_SUCCESS ){
 		controllerState.isPluggedIn = true;
+		
 		//get controller states
 		//for buttons
 		controllerState.m_buttonDownStates[XBOX_BUTTON_X ] = (BIT_X_BUTTON & xboxControllerState.Gamepad.wButtons) != 0;
@@ -301,4 +308,55 @@ void InputSystem::ProcessXBoxControllerInput(XBoxControllerState& controllerStat
 	}
 }
 
+///----------------------------------------------------------------------------------------------------------
+///mouse helpers
 
+//uses windows.h...move this
+bool InputSystem::IsMouseWheelPresent() {
+	return (GetSystemMetrics(SM_MOUSEWHEELPRESENT) != 0);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+//uses windows.h...move this
+void InputSystem::ShowMouseCursor() {
+	if (m_mouseCursorHidden)
+		ShowCursor(true);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+//uses windows.h...move this
+void InputSystem::HideMouseCursor() {
+	if (!m_mouseCursorHidden)
+		ShowCursor(false);
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+//uses windows.h...move this
+const Vector2& InputSystem::GetMousePosition() {
+	POINT cursorPos;
+	GetCursorPos(&cursorPos);
+
+	float mousePosX = (float)cursorPos.x;
+	float mousePosY = (float)cursorPos.y;
+	//cursorPos.y
+
+	m_mousePosition = Vector2(mousePosX, mousePosY);
+
+	return m_mousePosition;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+//uses windows.h...move this
+const Vector2 InputSystem::SnapMousePosition(const int& snapmouseX, const int& snapmouseY) {
+
+	SetCursorPos(snapmouseX, snapmouseY);
+	m_mousePosition = GetMousePosition();
+
+	return Vector2((float)snapmouseX, (float)snapmouseY);
+}
+
+//===========================================================================================================

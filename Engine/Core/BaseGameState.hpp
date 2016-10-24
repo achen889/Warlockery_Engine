@@ -14,9 +14,11 @@
 
 class GameStateRegistration;
 class BaseGameState;
+struct UIScreen;
 
 typedef std::map<std::string, GameStateRegistration*> GameStateRegistry;
 typedef std::map<std::string, GameStateRegistration*>::iterator GameStateRegistryIterator;
+typedef std::pair<std::string, GameStateRegistration*> GameStateRegistryEntry;
 typedef BaseGameState* (GameStateCreationFunc)(const std::string& name );
 
 //===========================================================================================================
@@ -38,9 +40,6 @@ class GameStateRegistration{
 		//friend methods
 		friend GameStateRegistration* FindGameStateByName(const std::string& name);
 		
-		
-		
-		
 private:
 		//vars
 		GameStateCreationFunc* m_creationFunc;
@@ -57,10 +56,10 @@ private:
 //means of registering stuff to the registry
 //name must be lowercase
 inline GameStateRegistration::GameStateRegistration(const std::string& name, GameStateCreationFunc* creationFunction):
-m_name(name)
-//m_creationFunc(creationFunction)
+m_name(name),
+m_creationFunc(creationFunction)
 {
-	m_creationFunc = creationFunction;
+
 	//create a new registry
 	if (!s_gameStateRegistryMap){
 		s_gameStateRegistryMap = new GameStateRegistry();
@@ -73,7 +72,7 @@ m_name(name)
 
 class OpenGLRenderer;
 
-class BaseGameState{
+class BaseGameState {
 public:
 
 	BaseGameState(){
@@ -93,10 +92,12 @@ public:
 	virtual void Update(double deltaSeconds);
 	virtual void Render(OpenGLRenderer* renderer);
 
-	std::string GetName(){
-		return m_name;
-	}
-	
+	virtual void RenderUIScreen(OpenGLRenderer* renderer);
+
+
+	//helpers
+	std::string GetName(){ return m_name; }
+	UIScreen* GetUIScreen();
 	//vars
 	std::string m_name;
 
@@ -110,7 +111,7 @@ static GameStateStack g_currentState;
 
 BaseGameState* GetCurrentState();
 
-void ReturnToPreviousState(); //do this next
+void ReturnToPreviousState();
 
 bool IsCurrentStateValid(); //still has issues
 
@@ -122,11 +123,16 @@ void RenderCurrentState(OpenGLRenderer* renderer);
 
 void SetCurrentGameState(const std::string& stateName);
 
+
+
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///inline helpers
 
 inline BaseGameState* GetCurrentState(){
+
+	if (g_currentState.empty())
+		return NULL;
 
 	return g_currentState.top();
 
@@ -136,10 +142,10 @@ inline BaseGameState* GetCurrentState(){
 
 inline bool IsCurrentStateValid(){
 
-	if ( g_currentState.size() != 0){
-		//if (g_currentState.top()){
+	if ( g_currentState.size() > 0){
+		if (g_currentState.top()){
 			return true;
-		//}
+		}
 		//return false;
 	}
 	return false;

@@ -9,12 +9,9 @@
 #define _included_Map__
 
 #include "Tile.hpp"
-#include "Engine/Renderer/OGLRenderingUtils.hpp"
 #include "Engine/Core/XML/XMLUtils.hpp"
-#include "Engine/Renderer/Text/TextSystem.hpp"
 #include "Engine/Math/Vector2.hpp"
 #include "Engine/Multithreading/CriticalSection.hpp"
-
 
 //debug vars
 
@@ -28,7 +25,6 @@ enum MapDirection{
 	MAP_DIRECTION_SOUTH,
 	MAP_DIRECTION_EAST,
 	MAP_DIRECTION_WEST,
-	//NUMBER_OF_CARDINAL_MAP_DIRECTIONS,
 	MAP_DIRECTION_NORTHEAST,
 	MAP_DIRECTION_NORTHWEST,
 	MAP_DIRECTION_SOUTHEAST,
@@ -44,6 +40,7 @@ typedef std::vector<MapPosition> MapPositionsIterator;
 
 class View;
 
+//2D map made up of square tiles
 class Map{
 public:
 	//vars
@@ -104,6 +101,8 @@ public:
 	//queries
 	TilePtrs GetAllTilesWithinBoxOfTile(const Tile& tileToCheck, const int& width, const int& height);
 
+	TilePtrs GetAllTilesWithinRadiusOfTile(const Tile& tileToCheck, const float& radius);
+	
 	const unsigned int GetIndexFromMapPosition(const MapPosition& mapLocation);
 	
 	bool IsTileIndexValid(const unsigned int& index);
@@ -137,8 +136,8 @@ public:
 	//friend methods
 	friend float GetManhattanDistanceBetweenMapPositions(const MapPosition& positionA, const MapPosition& positionB);
 	friend float GetAbsoluteDistanceBetweenMapPositions(const MapPosition& positionA, const MapPosition& positionB);
-	friend MapPosition GetMapPositionAtScreenCoordinates(const Vector2& screenCoords);
-	
+	friend MapPosition GetMapPositionAtScreenCoordinates(const Vector2& screenCoords);	
+
 };
 
 ///----------------------------------------------------------------------------------------------------------
@@ -161,7 +160,7 @@ inline Tile* Map::GetRandomTile(){
 }
 
 inline IntVec2 Map::GetRandomMapPosition(){
-	return IntVec2(GetRandomIntInRange(0, m_size.x), GetRandomIntInRange(0, m_size.y));
+	return IntVec2(GetRandomIntInRange(0, m_size.x-1), GetRandomIntInRange(0, m_size.y-1));
 }
 
 inline MapPosition GetMapPositionAtScreenCoordinates(const Vector2& screenCoords){

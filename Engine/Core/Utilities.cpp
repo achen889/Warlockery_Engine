@@ -5,54 +5,11 @@
 
 #include "Utilities.hpp"
 
+#include "Engine/Core/Event/EventSystem.hpp" 
+#include "Rgba.hpp"
+
 //===========================================================================================================
-///----------------------------------------------------------------------------------------------------------
-//string utilities
-char* StringToWritableCString(const std::string& str){
-	char * cstr = new char[str.length() + 1];
-	strcpy_s(cstr, str.length() + 1, str.c_str());
 
-	return cstr;
-}
-
-///----------------------------------------------------------------------------------------------------------
-///goes through the string converting every instance of this char to that char
-void ConvertThisCharToThatCharInString(std::string& stringToConvert, char& thisChar, char& thatChar ){
-	//unsigned char forwardSlash = '\'';
-	for(unsigned int i = 0; i < stringToConvert.length(); i++ ){
-		if(stringToConvert[i] == thisChar ){
-			stringToConvert[i] = thatChar;
-		}
-	}
-}
-
-///----------------------------------------------------------------------------------------------------------
-///splits string into tokens
-
-std::vector<std::string> SplitString(std::string str, const std::string& delimiter){
-
-	std::vector<std::string> stringTokens;
-	//stringTokens.reserve(10000);
-
-	size_t found = str.find(delimiter);
-	size_t strIndex = 0;
-	while (found != std::string::npos){
-		strIndex = 0;
-		stringTokens.push_back(str.substr(strIndex, found) );
-		
-		strIndex = found + delimiter.size();
-
-		str = str.substr(strIndex, str.size());
-		
-		found = str.find(delimiter);
-	}
-
-	strIndex = 0;
-	stringTokens.push_back(str.substr(strIndex, found));
-
-	return stringTokens;
-	
-}
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
@@ -304,4 +261,59 @@ int GetFileLength(FILE* fileHandle){
 	return fileLength;
 }
 
+//===========================================================================================================
+
+///----------------------------------------------------------------------------------------------------------
+///event system
+
+void InitEventSystem(){
+	EventSystem::CreateInstance();
+}
+
 //-----------------------------------------------------------------------------------------------------------
+
+static int s_eventsFired = 0;
+
+int GetNumEventsFired() {
+	return s_eventsFired;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+int FireEvent(const std::string& event_name, NamedProperties& args ) {
+
+	EventSystem& eventSys = EventSystem::GetInstance();
+
+	int numSubscribers = eventSys.FireEvent(event_name, args);
+	//track events fired
+	s_eventsFired++;
+
+	return numSubscribers;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void RegisterEventCallback(const std::string& event_name, EventCallbackFunction* callbackFunction){
+
+	EventSystem& eventSys = EventSystem::GetInstance();
+
+	eventSys.RegisterEventCallback(event_name, callbackFunction);
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void UnregisterEventCallback(const std::string& event_name, EventCallbackFunction* callbackFunction){
+
+	EventSystem& eventSys = EventSystem::GetInstance();
+
+	eventSys.UnregisterEventCallback(event_name, callbackFunction);
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+//===========================================================================================================
+
+
+

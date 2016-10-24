@@ -9,8 +9,6 @@
 
 #include <vector>
 
-#include "Engine\Math\Vector3.hpp"
-#include "Engine\Math\Vector2.hpp"
 #include "Engine\Math\Sphere3.hpp"
 #include "Engine\Math\Disc2.hpp"
 

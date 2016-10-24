@@ -10,6 +10,8 @@
 
 #include "Vector2.hpp"
 
+//===========================================================================================================
+
 class Disc2{
 public:
 	Vector2 center;
@@ -27,6 +29,7 @@ public:
 	void Translate(const Vector2& translation );
 	//accessors/queries
 	bool IsPointInside(const Vector2& point) const;
+	float CalcArea() { return PI * (radius * radius); }
 	//operators
 	const Disc2 operator+( const Vector2& translation ) const;
 	const Disc2 operator-( const Vector2& antiTranslation ) const;
@@ -36,8 +39,10 @@ public:
 	//friend methods
 	friend const Disc2 Interpolate( const Disc2& start, const Disc2& end, float fractionFromStartToEnd );
 };
+
 //===========================================================================================================
 //Constructors
+
 inline Disc2::Disc2(){
 	//do nothing
 }
@@ -84,5 +89,7 @@ inline void Disc2::operator+=( const Vector2& translation ){
 inline void Disc2::operator-=( const Vector2& antiTranslation ){
 	center -= antiTranslation;
 }
+
+//===========================================================================================================
 
 #endif

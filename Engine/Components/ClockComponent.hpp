@@ -1,5 +1,5 @@
 //==============================================================================================================
-//ClockComponent.hpp
+//ClockComponent.MPp
 //by Albert Chen Jan-26-2016.
 //==============================================================================================================
 
@@ -29,7 +29,13 @@ public:
 
 	void AddChild(ClockComponent* child );
 
-	Clock& GetClock() { return m_clock;  }
+	void AddToGameClock() {
+		//if (m_clock) {
+			GetGameClock().AddChild(m_clock);
+		//}
+	}
+
+	Clock& GetClock() { return *m_clock;  }
 
 	virtual void OnCreate();
 	virtual void OnDestroy();
@@ -38,7 +44,7 @@ public:
 	
 protected:
 	//vars
-	Clock m_clock;
+	Clock* m_clock = NULL;
 
 };
 
@@ -47,10 +53,17 @@ protected:
 ///inline methods
 inline ClockComponent::ClockComponent() {
 	//add this guy to the game clock if no parent is specified
-	GetGameClock().AddChild(&this->m_clock);
+	
+	
+	
 }
 
 inline ClockComponent::~ClockComponent(){
+
+	if (m_clock) {
+		delete m_clock;
+		m_clock = NULL;
+	}
 
 }
 
@@ -58,7 +71,7 @@ inline ClockComponent::~ClockComponent(){
 
 inline void ClockComponent::AddChild(ClockComponent* child) {
 	//add the other clock component as a child of my clock
-	m_clock.AddChild(&child->m_clock);
+	m_clock->AddChild(child->m_clock);
 }
 
 

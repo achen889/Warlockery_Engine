@@ -15,9 +15,9 @@
 #include <gl\GL.h>
 #include <gl\GLU.h>
 
-#include "Engine/Renderer\Texture.hpp"
-#include "Engine/Renderer\Camera3D.hpp"
-#include "Engine/Renderer\glext.h"
+#include "Engine/Renderer/Texture.hpp"
+#include "Engine/Renderer/Camera3D.hpp"
+#include "Engine/Renderer/glext.h"
 #include "Engine/Renderer/Vertex3D.hpp"
 #include "Engine/Renderer/ShaderWizard.hpp"
 #include "Engine/Core/Rgba.hpp"
@@ -31,7 +31,6 @@
 #include "Engine/Math/LineSegment3.hpp"
 #include "Engine/Math/AABB3.hpp"
 #include "Engine/Math/MatrixUtils.hpp"
-
 
 //===========================================================================================================
 
@@ -63,6 +62,8 @@ static const float FOV_VERTICAL = 45.0f;
 static const float ASPECT_RATIO = (16.0f / 9.0f);
 static const float NEAR_DEPTH = 0.1f;
 static const float FAR_DEPTH = 1000.0f;
+
+#define DISPLAY_BACKGROUND_AABB2 AABB2( Vector2::ZERO, Vector2(theOGLRenderer->GetDisplayWidth(), theOGLRenderer->GetDisplayHeight()) )
 
 //---------------------------------------------------------------------------
 // Silly OpenGL stuff you have to do in Windows to use "advanced" OpenGL
@@ -117,11 +118,16 @@ extern PFNGLDELETESAMPLERSPROC glDeleteSamplers;
 extern PFNGLACTIVETEXTUREPROC glActiveTexture;
 extern PFNGLBINDSAMPLERPROC glBindSampler;
 
+extern PFNGLBINDFRAMEBUFFERPROC glBindFramebuffer;
+extern PFNGLBLITFRAMEBUFFERPROC glBlitFramebuffer;
+extern PFNGLCHECKFRAMEBUFFERSTATUSPROC glCheckFramebufferStatus;
+extern PFNGLDELETEFRAMEBUFFERSPROC glDeleteFramebuffers;
+extern PFNGLFRAMEBUFFERTEXTURE2DPROC glFramebufferTexture2D;
+extern PFNGLGENFRAMEBUFFERSPROC glGenFramebuffers;
+
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///pre declaration
-
-class Material;
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
@@ -154,11 +160,6 @@ public:
 
 };
 
-//-----------------------------------------------------------------------------------------------------------
-///----------------------------------------------------------------------------------------------------------
-///inline methods
-
-
 //===========================================================================================================
 
 typedef std::vector<Vertex3D> Vertex3Ds;
@@ -171,6 +172,7 @@ protected:
 	float m_displayWidth;
 	float m_displayHeight;
 	size_t m_frameCount;
+	Camera3D* m_mainCamera = NULL;
 
 	//ModelViewMatrixStack* m_matrixStack;
 //protected:
@@ -179,6 +181,9 @@ protected:
 public:
 	OpenGLRenderer();
 	~OpenGLRenderer();
+
+	void StartUp(HWND windowHandle);
+	void ShutDown();
 
 	//-----------------------------------------------------------------------------------------------------------
 	//general functions
@@ -194,7 +199,7 @@ public:
 	//Initialize Shader Methods
 	void InitializeShaders();
 
-	//legacy
+	//legacy code
 	void InitializeVAO(VertexArrayObject& myVAO, const char* vertFile, const char* fragFile);
 	void InitializeVAOWithVertexArrayBuffer(VertexArrayObject& myVAO);
 	void InitializeVAOWithShader(VertexArrayObject& myVAO, const char* vertFile, const char* fragFile);
@@ -203,13 +208,29 @@ public:
 	void CreateVAOVertexArrayWithShader(VertexArrayObject& myVAO);
 	void CreateVAOBuffer(VertexArrayObject& myVAO);
 
+	
+	unsigned int CreateVertexArrayObject(unsigned int& vaoID);
+	//clean up helpers
+	void DestroyVertexBufferObject(unsigned int& vboID);
+	void DestroyIndexBufferObject(unsigned int& iboID);
+	void DestroyVertexArrayObject(unsigned int& vaoID);
+
 	int GetBufferCount();
+	Camera3D* GetMainCamera() { return m_mainCamera; }
 	
 	//VBO shader drawing helper methods
 	GLuint InitializeVertexBuffer(GLuint& out_vboID);
 	GLuint InitializeIndexBuffer(GLuint& out_iboID);
 	void CopyVertexBufferData(GLuint vboID, const void* bufferData, size_t bufferSize);
 	void CopyIndexBufferData(GLuint iboID, const void* bufferData, size_t bufferSize);
+
+	void BindVertexArray(unsigned int& vboID, unsigned int& iboID, unsigned int numIndices = 0) {
+		glBindBuffer(GL_ARRAY_BUFFER, (GLuint)vboID);
+
+		if (numIndices != 0) {
+			glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint)iboID);
+		}
+	}
 
 	GLuint CreateBuffer(GLuint vboID, const void* bufferData, size_t bufferSize);
 	void CreateVertexArrayWithShader(GLuint programID, GLuint& bufferID, GLuint& vertexArrayID);
@@ -251,8 +272,21 @@ public:
 	void RenderWithVBOs(Camera3D& camera);
 	void PrepareVAOForRendering(VertexArrayObject& myVAO, Camera3D& camera, bool isPerspective );
 	void RenderVAO(VertexArrayObject& myVAO, Camera3D& camera, bool isPerspective = true);
-
+	
 	void RenderParticlesWithVAO(VertexArrayObject& myVAO, Camera3D& camera);
+
+	//frame buffer helpers
+	GLuint GenerateFrameBuffer();
+	void DeleteFrameBuffer(GLuint fbo_id);
+	void BindFrameBuffer(GLuint fbo_id, GLuint width, GLuint height);
+	void FrameBufferColorTexture(Texture* color_texture, GLuint width, GLuint height);
+	void FrameBufferDepthTexture(GLuint depth_texture);
+	GLenum CheckFrameBufferStatus();
+	bool VerifyFrameBufferStatus();
+	void UnbindFrameBuffer();
+	void CopyFrameBufferToBack(GLuint fbo_id, GLuint width, GLuint height);
+	
+	
 	//===========================================================================================================
 	
 	//-----------------------------------------------------------------------------------------------------------
@@ -313,15 +347,13 @@ public:
 
 	void ClearColor(Rgba clearedColor );
 	void ClearDepth(float clearedDepth );
-
-	void StartUp( HWND windowHandle);
-	void ShutDown();
 	
 	//draw functions
 	void DrawTriangle(const Vector2& v0, const Vector2& v1, const Vector2& v2 );
 	void DrawTriangle3D(const Vector3& v0, const Vector3& v1, const Vector3& v2 );
 
 	void DrawQuad(const Vector2s& vertices );
+
 	void DrawQuad3D(const Vector3s& vertices );
 
 	void DrawPoints(const Vector2s& vertices );
@@ -360,6 +392,21 @@ public:
 
 	void DrawCoordinateAxes(float length);
 
+	//calls the render text event
+	void RenderTextString(const std::string& s, const Vector2& pos, const Rgba& color = Rgba::WHITE,  const float& scale = 1.0f) {
+		NamedProperties np;
+		np.Set("text", s);
+		np.Set("textPosition", pos);
+		np.Set("textColor", color);
+		np.Set("textScale", scale);
+		FireEvent("RenderText", np);
+	}
+
+	//mesh draw functions
+	void DrawMeshQuad2D(const AABB2& boxQuad, const Rgba& viewColor = Rgba::MAGENTA, bool isSolid = false, ModelViewMatrix* modelView = NULL);
+	void DrawMeshDisc2(const Disc2& boxQuad, const Rgba& viewColor = Rgba::MAGENTA, ModelViewMatrix* modelView = NULL);
+	void DrawMeshPoint2D(const Vector2& point, const Rgba& viewColor = Rgba::MAGENTA, ModelViewMatrix* modelView = NULL);
+
 	//texture handlers
 	void DrawTextureQuad( const Texture& texture, const Vector2s& vertices, const Vector2s& textureCoordinates, bool isOpaque = false );
 	void DrawTextureQuad( const Texture& texture, const Vector2s& vertices, bool isOpaque = false );
@@ -372,15 +419,10 @@ public:
 	void PushMatrix();
 	void PopMatrix();
 
+	void EventRenderMesh2D(NamedProperties& params);
+
 	//-----------------------------------------------------------------------------------------------------------
-	//VBO && VAO drawing
-	GLuint m_vboID;
-	GLuint m_vaoID;
-	size_t m_numOFVBOVertexes;
-	size_t m_numOFVBOVertexes1;
-	GLuint m_vboID1;
-	GLuint m_vaoID1;
-	//Vertex3Ds m_VertexAttributes;
+	//VBO && VAO drawing //legacy
 
 	void GenerateVertexArrayAndVBO();
 	//some VAO drawing methods
@@ -393,13 +435,14 @@ public:
 
 	void PopulateVertexArray(Vertex3Ds& out_vertexArray);
 
-	
-
 	void DrawVBO();
 	
+	Matrix4 m_currentOrthoProjectionMatrix;
+
 	Matrix4 MakeDefaultPerspectiveProjectionMatrix();
 	Matrix4 MakeDefaultOrthographicProjectionMatrix();
 
+	Matrix4& GetCurrentOrthographicProjectionMatrix(){ return m_currentOrthoProjectionMatrix; }
 };
 //===========================================================================================================
 

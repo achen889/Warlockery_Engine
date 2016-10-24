@@ -11,7 +11,6 @@
 #include "Time.hpp"
 #include <map>
 #include <string>
-#include "Engine/Multithreading/CriticalSection.hpp"
 
 //===========================================================================================================
 
@@ -26,10 +25,8 @@ extern ProfileMap s_profileMap;
 extern bool doDebugProfile;
 
 #define PROFILE_SECTION() ProfileSection p(FUNCTION_NAME);
+
 #define PROFILE_START(name) { ProfileSection p(STRINGIFY(name), false); //causes a warning in 2015
-
-
-
 #define PROFILE_STOP() p.ProfileEnd(); }
 //===========================================================================================================
 
@@ -53,9 +50,7 @@ public:
 
 	 friend void RenderProfileMapToScreen();
 
-	 friend std::string OutputProfileMapToScreen();
-
-	
+	 friend std::string ProfileMapToString();
 
 	 //vars
 	std::string m_name;
@@ -68,9 +63,6 @@ public:
 	unsigned int numCalls = 1;
 	double averageElapsedTime = 0;
 
-	static bool s_doDebugProfiling;
-
-	
 	//static ProfileMap s_profileMap;
 };
 
@@ -81,31 +73,73 @@ struct ProfileReport{
 	//methods
 	ProfileReport(const std::string& profileName, const double& newTotalElapsedTime, const unsigned int& newNumCalls);
 	
+	//overload <= operator
+	bool operator<=(const ProfileReport& other) { 
+		double avgElapsedTime = this->CalcAverageElapsedTime();
+		double otherAvgElapsedTime = other.CalcAverageElapsedTime();
+
+		return (!(avgElapsedTime > otherAvgElapsedTime));
+	}
+
 	//helpers
-	void CalcAverageElapsedTime();
-	void CalcPercentFrameTime();
+	const double CalcAverageElapsedTime() const;
+	const double CalcPercentFrameTime() const;
+
+	void SetAverageElapsedTime() {
+		m_averageElapsedTime = CalcAverageElapsedTime();
+	}
+	void SetPercentFrameTime() {
+		m_percentFrameTime = CalcPercentFrameTime();
+	}
+
 
 	std::string BuildProfileReport();
-	std::string  OutputProfileReportToScreen();
+	std::string  ProfileReportToString();
 	
 	//vars
 	std::string m_name;
 
 	double elapsedTime;
 
-	double totalElapsedTime;
-	unsigned int numCalls;
-	double averageElapsedTime = 0;
-	double percentFrameTime;
+	double m_totalElapsedTime;
+	unsigned int m_numCalls;
+	double m_averageElapsedTime = 0;
+	double m_percentFrameTime;
 };
+
+typedef std::vector<ProfileReport> ProfileReports;
 
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods
 
-inline void ProfileReport::CalcAverageElapsedTime(){ 
-	averageElapsedTime = totalElapsedTime / numCalls;
+inline const double ProfileReport::CalcAverageElapsedTime() const { 
+	
+	static const double percentWeightOfNewAverage = 0.5;
+	static const double percentWeightOfOldAverage = (1.0 - percentWeightOfNewAverage);
+
+	double averageElapsedTime = 0.0f;
+
+	if (averageElapsedTime == 0.0) {
+		averageElapsedTime = m_totalElapsedTime / m_numCalls;
+	}
+	else {
+		//change this to a weighted average
+		double newAverageElapsedTime = m_totalElapsedTime / m_numCalls;
+
+		double weightedOldAverage = averageElapsedTime * percentWeightOfOldAverage;
+
+		double weightedNewAverage = newAverageElapsedTime * (percentWeightOfNewAverage);
+
+		averageElapsedTime = weightedOldAverage + weightedNewAverage;
+	}
+	return averageElapsedTime;
 }
 
+//===========================================================================================================
+///----------------------------------------------------------------------------------------------------------
+///global helpers
+
+bool CreateProfileReportsFromProfileMap(ProfileReports& outProfileReports, bool sortReports = true);
 
 
 //===========================================================================================================

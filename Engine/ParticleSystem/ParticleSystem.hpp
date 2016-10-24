@@ -25,6 +25,8 @@ typedef std::map<std::string, Emitter*>::iterator ParticleEmitterMapIterator;
 struct ParticleString{
 	Particles m_particles;
 
+	int m_numParticles;
+
 	VertexArrayObject m_pStringVAO;
 
 	MeshRenderer m_particleStringRenderer;
@@ -35,31 +37,16 @@ struct ParticleString{
 		//InitializeParticleStringVAO();
 	}
 
-	ParticleString(int numParticles, const Rgba& stringColor = Rgba::WHITE){
-		InitializeParticleString(m_particles, numParticles, stringColor);
-
-		m_particleStringRenderer = MeshRenderer();
-
-		m_particleStringRenderer.m_material = new Material();
-		m_particleStringRenderer.m_mesh = new Mesh();
-
-		m_particleStringRenderer.m_material->InitializeMaterial("Data/Shaders/basic.vert", "Data/Shaders/basic.frag");
-		m_particleStringRenderer.m_material->m_samplerInUse = false;
-		m_particleStringRenderer.m_mesh->SetDrawMode(GL_LINE_STRIP);
-
-		m_particleStringRenderer.BindVertexArray();
-
-		//InitializeParticleStringVAO();
-	}
+	ParticleString(int numParticles, const Rgba& stringColor = Rgba::WHITE);
 
 	void InitializeParticleString(Particles& m_particles, int numberOfParticles, const Rgba& stringColor = Rgba::WHITE);
 
 	Particle& GetOrigin(){
-		return (*m_particles.begin() );
+		return *(*m_particles.begin() );
 	}
 
 	Particle& GetEnd(){
-		return (*m_particles.end() );
+		return *(*m_particles.end() );
 	}
 
 	void UpdateParticleString(double deltaSeconds);
@@ -70,6 +57,8 @@ struct ParticleString{
 
 	void RenderParticleStringMesh(OpenGLRenderer* renderer, Camera3D& camera, const Rgba& viewColor = Rgba::WHITE);
 
+	void RenderParticleStringMesh2D(OpenGLRenderer* renderer, ModelViewMatrix* modelView = NULL);
+
 	void InitializeParticleStringVAO();
 
 	void RenderParticleStringVAO(OpenGLRenderer* renderer, Camera3D& camera, const Rgba& viewColor );
@@ -79,7 +68,7 @@ struct ParticleString{
 
 //===========================================================================================================
 
-class ParticleSystem{
+class ParticleSystem : EventSubscriberObject{
 public:
 
 	Particles g_particles;
@@ -93,11 +82,25 @@ public:
 
 	void InitializeParticleMeshRenderer();
 	void RegisterParticleCommands();
+
+	void EventSpawnParticleEffect(NamedProperties& params);
+
+	void ClearAllEmitters() {
+		for (ParticleEmitterMapIterator it = g_particleEmitters.begin(); it != g_particleEmitters.end(); ++it) {
+			Emitter* emitter = (it->second);
+			if (emitter) {
+				delete emitter;
+				emitter = NULL;
+			}
+		}
+		g_particleEmitters.clear();
+	}
 	
 	~ParticleSystem(){
 		//do nothing
-		g_particleEmitters.clear();
-		g_particles.clear();
+		ClearAllEmitters();
+		
+		ClearAllParticles();
 	}
 	
 	//mesh/material stuff
@@ -114,7 +117,17 @@ public:
 
 	//queries and accessors
 	unsigned int GetTotalParticles();
-	void ClearAllParticles(){ g_particles.clear(); }
+
+	void ClearAllParticles(){ 
+		for (ParticlesIterator pIter = g_particles.begin(); pIter != g_particles.end(); ++pIter ) {
+			Particle* p = *(pIter);
+			if (p) {
+				delete p;
+				p = NULL;
+			}
+		}
+		g_particles.clear();
+	}
 	
 	bool HasEmitterByName(const std::string& emitterName);
 	Emitter& GetEmitterByName(const std::string& emitterName);

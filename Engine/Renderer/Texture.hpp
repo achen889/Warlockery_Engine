@@ -20,7 +20,7 @@ typedef std::map< int , Texture* >	IntTextureMap;
 
 ///----------------------------------------------------------------------------------------------------------
 ///constants
-
+const std::string COMMON_TEXTURE_INVALID =  "CommonInvalidTexel";
 const std::string COMMON_TEXTURE_DIFFUSE =  "CommonDiffuseTexel";
 const std::string COMMON_TEXTURE_NORMAL =	"CommonNormalTexel";
 const std::string COMMON_TEXTURE_SPECULAR = "CommonSpecularTexel";
@@ -34,8 +34,9 @@ public:
 	virtual ~Texture();
 	///-----------------------------------------------------------------------------------
 	///getters and setters
-	const std::string&		GetName() const															{ return m_pathName ; }
-	unsigned int			GetPlatformHandle() const												{ return m_platformHandle ; }
+	const std::string&		GetName() const	{ return m_pathName ; }
+	const Vector2& GetSize() const { return m_size;  }
+	unsigned int		GetPlatformHandle() const { return m_platformHandle ; }
 	///-----------------------------------------------------------------------------------
 	///texture manipulation methods
 	static Texture*	CreateOrGetTexture( const std::string& texturePath, bool allowNullTexture = false );
@@ -61,16 +62,26 @@ public:
 		//ConsolePrintf("deleting global textures!\n");
 	}
 
+
+
+	//Create texture from pixel data helper
+	void CreateTextureFromData(const std::string& texturePath, unsigned char* pixelData, const int& x, const int& y, const int& numberOfColorComponents);
+	void CreateNullTexture(const int& x, const int& y, const int& numberOfColorComponents = 4);
+	
+	//default constructor
+	Texture() {
+		//do nothing
+	}
+
+	//public vars
+	unsigned int m_platformHandle;
+	Vector2	m_size;
 protected:
 	///-----------------------------------------------------------------------------------
 	///constructor
-	Texture(){
-		//do nothing
-	}
-	Texture( const std::string& pathName, bool allowNullTexture = false );
 
-	void CreateTextureFromData(const std::string& texturePath, unsigned char* pixelData, const int& x, const int& y, const int& numberOfColorComponents);
-	
+	Texture(const std::string& pathName, bool allowNullTexture = false );
+
 	friend void CreateCommonEngineTextures();
 	friend Texture* GetTextureInMap(const std::string& texName);
 
@@ -78,8 +89,7 @@ protected:
 	
 	//vars
 	std::string	m_pathName;
-	Vector2	m_size;
-	unsigned int m_platformHandle;
+	unsigned char* m_pixelData = NULL;
 
 	static TextureMap s_globalTextures;
 	

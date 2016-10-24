@@ -86,7 +86,6 @@ inline const Vector3& PhysicsMotionComponent::UpdateVelocityWithAcceleration(dou
 //-----------------------------------------------------------------------------------------------------------
 
 inline const Vector3& PhysicsMotionComponent::UpdateAccelerationWithForces(double deltaSeconds){
-	UNUSED(deltaSeconds);
 
 	const float inverseMass = 1.0f / m_mass;
 	m_acceleration = m_forces * inverseMass;

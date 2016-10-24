@@ -7,23 +7,80 @@
 
 //===========================================================================================================
 
-int RollDice(const Dice& dice){
+///----------------------------------------------------------------------------------------------------------
+///dice methods
 
+
+
+Dice::Dice(const std::string& diceString) {
+	char* diceCStr = StringToWritableCStr(diceString);
+
+	char* currentValue;
+	char* tokenInBuffer;
+
+	//default z to 0
+	diceDef.z = 0;
+
+	//use this with a char* buffer, parse dice
+	currentValue = strtok_s(diceCStr, "d", &tokenInBuffer);
+	diceDef.x = CStringToInt(currentValue);
+
+	if (tokenInBuffer[1] == '+' || tokenInBuffer[2] == '+' || tokenInBuffer[3] == '+') {
+		currentValue = strtok_s(NULL, "+", &tokenInBuffer);
+		diceDef.y = CStringToInt(currentValue);
+
+		currentValue = strtok_s(NULL, "\n", &tokenInBuffer);
+		diceDef.z = CStringToInt(currentValue);
+	}
+	else if (tokenInBuffer[1] == '-') {
+		currentValue = strtok_s(NULL, "-", &tokenInBuffer);
+		diceDef.y = CStringToInt(currentValue);
+
+		currentValue = strtok_s(NULL, "\n", &tokenInBuffer);
+		diceDef.z = -1 * CStringToInt(currentValue);
+	}
+	else {
+		currentValue = strtok_s(NULL, "\n", &tokenInBuffer);
+		diceDef.y = CStringToInt(currentValue);
+	}
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+const Dice& Dice::operator=(const std::string& diceStrToAssign) {
+
+	*this = Dice(diceStrToAssign);
+	
+	return *this;
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+const int Dice::RollDice() const {
 	int diceTotal = 0;
-	for (int i = 0; i < dice.x; i++){
-		diceTotal += GetRandomIntInRange(1, dice.y);
+	for (int i = 0; i < diceDef.x; i++) {
+		diceTotal += GetRandomIntInRange(1, diceDef.y);
 	}
 
-	diceTotal += dice.z;
+	diceTotal += diceDef.z;
 
 	return diceTotal;
+}
+
+
+//===========================================================================================================
+
+int RollDice(const Dice& dice){
+
+	return dice.RollDice();
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 //must be in the form "3d6+7"
 int RollDice(const std::string& diceString){
-	Dice diceFromString = ParseStringToDice(diceString);
+	Dice diceFromString = diceString;
 
 	return RollDice(diceFromString);
 }
@@ -33,9 +90,9 @@ int RollDice(const std::string& diceString){
 std::string DiceToString(const Dice& dice){
 	std::string diceString = "";
 
-	diceString += IntToString(dice.x) + "d";
-	diceString += IntToString(dice.y) + "+-";
-	diceString += IntToString(dice.z);
+	diceString += IntToString(dice.diceDef.x) + "d";
+	diceString += IntToString(dice.diceDef.y) + "+-";
+	diceString += IntToString(dice.diceDef.z);
 
 	return diceString;
 }
@@ -46,34 +103,7 @@ std::string DiceToString(const Dice& dice){
 //assume 3d6+7 format, no spaces
 Dice ParseStringToDice(const std::string& diceString){
 
-	char* diceCStr = StringToWritableCString(diceString);
-
-	char* currentValue;
-	char* tokenInBuffer;
-
-	Dice parsedDice;
-
-	//use this with a char* buffer, parse dice
-	currentValue = strtok_s(diceCStr, "d", &tokenInBuffer);
-	parsedDice.x = CStringToInt(currentValue);
-	if (tokenInBuffer[1] == '+'){
-	 	currentValue = strtok_s(NULL, "+", &tokenInBuffer);
-	 	parsedDice.y = CStringToInt(currentValue);
-
-		currentValue = strtok_s(NULL, "\n", &tokenInBuffer);
-		parsedDice.z = CStringToInt(currentValue);
-	}
-	else if (tokenInBuffer[1] == '-'){
-	 	currentValue = strtok_s(NULL, "-", &tokenInBuffer);
-		parsedDice.y = CStringToInt(currentValue);
-
-		currentValue = strtok_s(NULL, "\n", &tokenInBuffer);
-		parsedDice.z = -1 * CStringToInt(currentValue);
-	}
-
-	//debug
-	//std::string getString = "x = " + IntToString(parsedDice.x) + "y = " + IntToString(parsedDice.y) + "z = " + IntToString(parsedDice.z);
-	//ConsoleGenericMessageBox(getString, diceString);
+	Dice parsedDice = diceString;
 
 	return parsedDice;
 }

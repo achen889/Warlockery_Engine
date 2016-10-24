@@ -10,6 +10,7 @@
 
 #include "Engine\Console\Console.hpp"
 #include "Engine\Multithreading\CriticalSection.hpp"
+#include <map>
 
 //===========================================================================================================
 
@@ -20,6 +21,8 @@
 #define MB = 1024 * 1024;
 
 #define LOG_MEM_ALLOC(numBytes) LogMemAlloc(numBytes, FILE_NAME, LINE_NUM )
+
+extern bool doDebugMemory;
 
 struct MemoryUse{
 	//vars
@@ -143,13 +146,16 @@ inline void* operator new(size_t numBytes){
 	//this is my new
 	void* allocPtr = malloc(numBytes);
 	
+	if (doDebugMemory) {
 	//InitializeByteTrackerMap();
 
-	TrackMemoryAlloc(numBytes);
+		TrackMemoryAlloc(numBytes);
 
-	//LogMemoryAllocation(numBytes, FILE_NAME, LINE_NUM);
+		//LogMemoryAllocation(numBytes, FILE_NAME, LINE_NUM);
 
 	//AddBytesToTrackerMap(allocPtr, numBytes, FILE_NAME, LINE_NUM);
+	}
+
 
 	return allocPtr;
 }
@@ -161,7 +167,10 @@ inline void* operator new(size_t numBytes){
 inline void operator delete(void* ptr){
 	//this is my delete, is paired with just about all of them
 	
-	TrackMemoryDealloc(ptr);
+	if (doDebugMemory) {
+		TrackMemoryDealloc(ptr);
+	}
+	
 	
 	free(ptr);
 }
@@ -173,13 +182,15 @@ inline void operator delete(void* ptr){
 inline void* operator new(size_t numBytes, const char* file, const size_t& line){
 
 	void* allocPtr = malloc(numBytes);
-
-	InitializeByteTrackerMap();
-
-	TrackMemoryAlloc(numBytes);
 	
-	AddBytesToTrackerMap(allocPtr, numBytes, file, line);
+	if (doDebugMemory) {
+		InitializeByteTrackerMap();
 
+		TrackMemoryAlloc(numBytes);
+
+		AddBytesToTrackerMap(allocPtr, numBytes, file, line);
+	}
+	
 	return allocPtr;
 
 }
@@ -201,16 +212,22 @@ inline void operator delete(void* ptr, const char* file, const size_t& line){
 
 inline void* operator new[](std::size_t numBytes ){
 
-	TrackMemoryAlloc(numBytes);
+	void* allocPtr = malloc(numBytes);
 
-	return malloc(numBytes);
+	if (doDebugMemory) {
+		TrackMemoryAlloc(numBytes);
+	}
+	
+	return allocPtr;
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 inline void operator delete[](void* ptr){
 
-	TrackMemoryDealloc(ptr);
+	if (doDebugMemory) {
+		TrackMemoryDealloc(ptr);
+	}
 
 	free(ptr);
 }
@@ -223,11 +240,13 @@ inline void* operator new[](std::size_t numBytes, const char* file, const size_t
 
 	void* allocPtr = malloc(numBytes);
 
-	InitializeByteTrackerMap();
+	if (doDebugMemory) {
+		InitializeByteTrackerMap();
 
-	TrackMemoryAlloc(numBytes);
+		TrackMemoryAlloc(numBytes);
 
-	AddBytesToTrackerMap(allocPtr, numBytes, file, line);
+		AddBytesToTrackerMap(allocPtr, numBytes, file, line);
+	}
 
 	return allocPtr;
 

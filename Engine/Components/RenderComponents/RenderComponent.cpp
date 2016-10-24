@@ -17,7 +17,9 @@ RenderComponent::RenderComponent(const XMLNode& node): BaseComponent(node){
 	std::string diffuseTexturePath = ReadXMLAttributeAsString(node, "texturePath");
 	std::string shaderName = ReadXMLAttributeAsString(node, "shader");
 
-	InitializeMeshRenderer(diffuseTexturePath, shaderName, GL_TRIANGLE_STRIP);
+	
+	//this one is probably getting set and then not being released
+	InitializeMeshRenderer(diffuseTexturePath, shaderName, true, true, GL_TRIANGLE_STRIP);
 
 }
 
@@ -55,30 +57,54 @@ void RenderComponent::Render(OpenGLRenderer* renderer, Camera3D& camera, bool is
 
 //-----------------------------------------------------------------------------------------------------------
 
-void RenderComponent::InitializeMeshRenderer(const std::string& diffuseTexturePath, const std::string& shaderName, const GLuint& drawMode) {
-	//if (!m_meshRenderer) {
+void RenderComponent::InitializeMeshRenderer(const std::string& diffuseTexturePath, const std::string& shaderName, bool allocMat, bool allocMesh, const GLuint& drawMode) {
+	UNUSED(drawMode);
 
-	m_meshRenderer.m_material->InitializeDefaultSampler();
-	m_meshRenderer.m_material->InitializeShaderFromShaderName(shaderName);
+	std::string myName = GetName();
+	
+	
+	if (!m_meshRenderer) {
+		
+		if (!allocMat || !allocMesh) {
+			//ConsolePrintf("\ncreate or get meshrender name: %s", myName.c_str());
+			m_meshRenderer = MeshRenderer::CreateOrGetMeshRenderer(myName, allocMat, allocMesh);
+		}
+		else {
+			//ConsolePrintf("\nnew meshrender name: %s", myName.c_str());
+			m_meshRenderer = new MeshRenderer(myName, allocMat, allocMesh);
+		}
+	}
+	//refactor this to do what I said it would do
+	Material* renderMat = Material::CreateOrGetMaterial(myName);
+	
+	renderMat->InitializeDefaultSampler();
+	renderMat->InitializeShaderFromShaderName(shaderName);
 
 	//loads default if no texture specified
 	if (diffuseTexturePath == "") {
-		m_meshRenderer.m_material->SetTextureInMap("gTexDiffuse", COMMON_TEXTURE_DIFFUSE);
+		renderMat->SetTextureInMap("gTexDiffuse", COMMON_TEXTURE_DIFFUSE);
+		renderMat->SetTextureInMap("gTexture", COMMON_TEXTURE_DIFFUSE);
 	}
 	else {
-		m_meshRenderer.m_material->SetTextureInMap("gTexDiffuse", diffuseTexturePath);
+		renderMat->SetTextureInMap("gTexDiffuse", diffuseTexturePath);
+		renderMat->SetTextureInMap("gTexture", diffuseTexturePath);
 	}
+	m_meshRenderer->SetMaterial(*renderMat);
 
-	m_meshRenderer.m_mesh->SetDrawMode(drawMode);
-
-	m_meshRenderer.BindVertexArray();
+	if (!allocMesh) {
+		Mesh* renderMesh = Mesh::CreateOrGetMesh(myName);
+		m_meshRenderer->SetMesh(*renderMesh);
+	}
+	
+	m_meshRenderer->BindVertexArray();
+	//the children will create the mesh
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 void RenderComponent::SetTextureInMaterial(const std::string& texBindName, const std::string& texturePath) {
-	if (m_meshRenderer.m_material)
-		m_meshRenderer.m_material->SetTextureInMap(texBindName, texturePath);
+	if (m_meshRenderer->m_material)
+		m_meshRenderer->m_material->SetTextureInMap(texBindName, texturePath);
 
 }
 

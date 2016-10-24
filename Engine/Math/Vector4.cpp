@@ -12,7 +12,7 @@
 //-----------------------------------------------------------------------------------------------------------
 //Normalize Methods
 ///----------------------------------------------------------------------------------------------------------
-///Normalize converts Vector2 to a Length of 1.
+///Normalize converts Vector4 to a Length of 1.
 float Vector4::Normalize(){
 	float LengthSquared = x*x + y*y + z*z;
 	if(LengthSquared != 0){
@@ -60,9 +60,9 @@ float CalcDistanceSquared( const Vector4& positionA, const Vector4& positionB ){
 	return ( LengthABX * LengthABX + LengthABY * LengthABY + LengthABZ * LengthABZ + LengthABW * LengthABW);
 }
 
-const Vector4 Interpolate( const Vector4& startVec3, const Vector4& endVec3, float fractionFromStartToEnd ){
-	Vector4 rangeFromSToE = endVec3 - startVec3;
+const Vector4 Interpolate( const Vector4& start, const Vector4& end, float fractionFromStartToEnd ){
+	Vector4 rangeFromSToE = end - start;
 
-	return startVec3 + ( rangeFromSToE * fractionFromStartToEnd);
+	return start + ( rangeFromSToE * fractionFromStartToEnd);
 }
 

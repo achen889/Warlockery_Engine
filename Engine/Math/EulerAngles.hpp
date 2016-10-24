@@ -10,12 +10,14 @@
 
 #include "Vector3.hpp"
 
+//===========================================================================================================
+
 class EulerAngles{
 public:
 	//variables
-	float yawDegreesAboutZ;
-	float pitchDegreesAboutY;
-	float rollDegreesAboutX;
+	float yawDegreesAboutZ = 0;
+	float pitchDegreesAboutY = 0;
+	float rollDegreesAboutX = 0;
 
 	//methods
 	EulerAngles();
@@ -25,6 +27,7 @@ public:
 	Vector3 ToVector3();
 
 };
+
 ///----------------------------------------------------------------------------------------------------------
 ///inline functions
 ///----------------------------------------------------------------------------------------------------------
@@ -49,11 +52,9 @@ inline EulerAngles::EulerAngles(const EulerAngles& newEulerAngles){
 ///accessors
 
 inline Vector3 EulerAngles::ToVector3(){
-
-
-	//return Vector3(-yawDegreesAboutZ, -pitchDegreesAboutY, rollDegreesAboutX);
-
 	return Vector3(rollDegreesAboutX, pitchDegreesAboutY, yawDegreesAboutZ);
 }
+
+//===========================================================================================================
 
 #endif

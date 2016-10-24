@@ -11,7 +11,7 @@
 #include "ThreadSafeQueue.hpp"
 #include "Job.hpp"
 #include "Thread.hpp"
-#include "Engine/Core/Utilities.hpp"
+//#include "Engine/Core/Utilities.hpp"
 #include "Engine/Core/BinaryUtils.hpp"
 
 //===========================================================================================================
@@ -22,6 +22,7 @@ enum JobType{
 	JOB_TYPE_FILEIO,
 	JOB_TYPE_INPUT,
 	JOB_TYPE_SOUND,
+	JOB_TYPE_EVENT,
 	NUM_JOB_TYPES
 };
 
@@ -117,8 +118,12 @@ public:
 	void Update(double maxTimeMs = 10.0);
 
 	//job management
-	void AddPendingJob(Job *job, const Priority& priority, JobCompleteCallback* jobCompleteCallbackFunc = NULL, const JobType& jobType = JOB_TYPE_GENERAL);
-	void AddPendingJob(const Priority& priority, JobCompleteCallbackFunc* jobCallBackFunc, void* data, const JobType& jobType = JOB_TYPE_GENERAL);
+	void AddPendingJob(Job *job, const Priority& priority, 
+		JobCompleteCallback* jobCompleteCallbackFunc = NULL, const JobType& jobType = JOB_TYPE_GENERAL);
+
+	void AddPendingJob(const Priority& priority, JobCompleteCallbackFunc* jobCallBackFunc, 
+		void* data, const JobType& jobType = JOB_TYPE_GENERAL);
+
 	bool RunJob(const JobType& jobType = JOB_TYPE_GENERAL);
 
 	//thread management
@@ -388,6 +393,52 @@ protected:
 
 //===========================================================================================================
 
+///----------------------------------------------------------------------------------------------------------
+///this one fires an event on a thread, subscribers will still be called on the main thread
+struct FireEventJob : Job {
+
+	//vars
+	std::string event_name;
+	NamedProperties& event_params;
+
+	//methods
+	FireEventJob(const std::string& name, NamedProperties& params) :
+		event_name(name),
+		event_params(params)
+	{
+		
+	}
+
+	void Execute() {
+		FireEvent(event_name, event_params);
+	}
+protected:
+	//Assignment Operator
+	const FireEventJob& operator=(const FireEventJob& jobToAssign) {
+		*this = jobToAssign;
+
+		return *this;
+	}
+
+};
+
+//===========================================================================================================
+
+//untested, we'll see if it works later
+
+void FireEventOnThread(std::string event_name, NamedProperties& event_params);
+
+inline void FireEventOnThread(std::string event_name, NamedProperties& event_params) {
+
+	if (theJobManager) {
+		Job* myFireEventJob = new FireEventJob(event_name, event_params);
+		
+		theJobManager->AddPendingJob(myFireEventJob, PRIORITY_HIGH);
+	}
+}
+
+
+//===========================================================================================================
 
 
 

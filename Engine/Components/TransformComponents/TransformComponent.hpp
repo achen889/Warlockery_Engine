@@ -1,5 +1,5 @@
 //==============================================================================================================
-//TransformComponent.hpp
+//TransformComponent.MPp
 //by Albert Chen Jan-26-2016.
 //==============================================================================================================
 
@@ -33,16 +33,16 @@ public:
 
 	static ComponentRegistration s_TransformComponentRegistration;
 
-	void AddChild();
+	virtual const Vector3& GetPosition() { return m_position;  }
 
-	void SetPosition(const Vector2& position);
-	void SetPosition(const Vector3& position);
-
-	void SetScale(const float& scaleUniform ) { m_scale = Vector3(scaleUniform, scaleUniform, scaleUniform); }
-	void SetScale(const Vector2& scaleNonUniform) { m_scale = ToVector3(scaleNonUniform); }
-	void SetScale(const Vector3& scaleNonUniform) { m_scale = scaleNonUniform; }
-
-	void SetRotationDegrees3D(const EulerAngles& rotationDegrees3D) { m_orientation = rotationDegrees3D;  }
+	virtual void SetPosition(const Vector2& position);
+	virtual void SetPosition(const Vector3& position);
+	
+	virtual void SetScale(const float& scaleUniform ) { m_scale = Vector3(scaleUniform, scaleUniform, scaleUniform); }
+	virtual void SetScale(const Vector2& scaleNonUniform) { m_scale = ToVector3(scaleNonUniform); }
+	virtual void SetScale(const Vector3& scaleNonUniform) { m_scale = scaleNonUniform; }
+	
+	virtual void SetRotationDegrees3D(const EulerAngles& rotationDegrees3D) { m_orientation = rotationDegrees3D;  }
 
 	ModelViewMatrix CreateTransformMatrix();
 	
@@ -53,44 +53,23 @@ public:
 
 	//lock axes
 	//lock coords methods
-	void DoLockX(Vector3& vectorToLock) {
-		if (lockX) {
-			vectorToLock.x = 0.0f;
-		}
-	}
-	void DoLockY(Vector3& vectorToLock) {
-		if (lockY) {
-			vectorToLock.y = 0.0f;
-		}
-	}
-	void DoLockZ(Vector3& vectorToLock) {
-		if (lockZ) {
-			vectorToLock.z = 0.0f;
-		}
-	}
-	void DoLockXYZ(Vector3& vectorToLock) {
+	void DoLockX(Vector3& vectorToLock) {	if (lockX) vectorToLock.x = 0.0f; }
+	void DoLockY(Vector3& vectorToLock) {	if (lockY)vectorToLock.y = 0.0f; }
+	void DoLockZ(Vector3& vectorToLock) {	if (lockZ)vectorToLock.z = 0.0f; }
+	void DoLockXYZ(Vector3& vectorToLock){
 		DoLockX(vectorToLock);
 		DoLockY(vectorToLock);
 		DoLockZ(vectorToLock);
 	}
+	void LockXY() {	lockX = lockY = true; }
+	void UnlockXY() {	lockX = lockY = false; }
+	void LockZ() {	lockZ = true;}
+	void UnlockZ() { lockZ = false; }
 
-	void LockXY() {
-		lockX = lockY = true;
-	}
-	void UnlockXY() {
-		lockX = lockY = false;
-	}
-	void LockZ() {
-		lockZ = true;
-	}
-	void UnlockZ() {
-		lockZ = false;
-	}
-	
-protected:
+
 	//vars
 	Vector3 m_position;
-	Vector3 m_scale;
+	Vector3 m_scale = Vector3(1.0f, 1.0f, 1.0f);
 	EulerAngles m_orientation;
 
 	//lock axes

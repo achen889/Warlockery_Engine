@@ -17,6 +17,7 @@ public:
 	IntVec2();
 	IntVec2(const IntVec2& copy);
 	IntVec2(int initialX, int initialY );
+	IntVec2(int initialVal);
 	~IntVec2();
 
 	static const IntVec2 ZERO;
@@ -61,13 +62,24 @@ inline IntVec2::IntVec2(){
 inline IntVec2::~IntVec2(){
 	//do nothing
 }
-inline IntVec2::IntVec2(const IntVec2& copy){
+inline IntVec2::IntVec2(const IntVec2& copy):
+	x(copy.x),
+	y(copy.y)
+{
 	x = copy.x;
 	y = copy.y;
 }
-inline IntVec2::IntVec2(int initialX, int initialY ){
-	x = initialX;
-	y = initialY;
+inline IntVec2::IntVec2(int initialX, int initialY ):
+	x(initialX),
+	y(initialY)
+{
+
+}
+inline IntVec2::IntVec2(int initialVal):
+	x(initialVal),
+	y(initialVal)
+{
+
 }
 ///----------------------------------------------------------------------------------------------------------
 ///Operators for Vec2

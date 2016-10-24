@@ -21,19 +21,25 @@ FontSystem::FontSystem(const std::string fontFilePath){
 }
 
 void FontSystem::InitializeFontMeshRenderer(){
-	m_fontRenderer = new MeshRenderer();
-	m_fontRenderer->m_material = new Material();
-	m_fontRenderer->m_mesh = new Mesh();
+	
+	if (m_fontRenderer == NULL) {
+		m_fontRenderer = new MeshRenderer();
 
-	std::string texturePath = "Data/Fonts/" + m_FontSummary.m_fileName;
+		std::string texturePath = "Data/Fonts/" + m_FontSummary.m_fileName;
 
-	//m_textRenderer.m_material->m_glSampler.SetTexture(texturePath);
-	m_fontRenderer->m_material->SetTextureInMap("gTexture", texturePath);
+		//the font's material
+		m_fontMat.InitializeMaterial("basicSampler");
+		m_fontMat.SetTextureInMap("gTexture", texturePath);
+		
+		//m_textRenderer.m_material->m_glSampler.SetTexture(texturePath);
+		m_fontRenderer->SetMaterial(m_fontMat);//m_material->SetTextureInMap("gTexture", texturePath);
 
-	m_fontRenderer->m_mesh->SetDrawMode(GL_QUADS);
-	m_fontRenderer->m_material->InitializeMaterial("Data/Shaders/basicSampler.vert", "Data/Shaders/basicSampler.frag"); //load prog
+		m_fontRenderer->m_mesh->SetDrawMode(GL_QUADS);
+		//m_fontRenderer->m_material->InitializeMaterial("Data/Shaders/basicSampler.vert", "Data/Shaders/basicSampler.frag"); //load prog
 
-	m_fontRenderer->BindVertexArray();
+		m_fontRenderer->BindVertexArray();
+	}
+	
 }
 
 ///----------------------------------------------------------------------------------------------------------
@@ -127,7 +133,7 @@ unsigned int FontSystem::GetCharXAdvance(const unsigned int& charID){
 //-----------------------------------------------------------------------------------------------------------
 
 void FontSystem::LoadFontSystemFromBuffer(){
-	std::string fontSummaryLoaded = "Font Summary Data:";
+	std::string fontSummaryLoaded = "\n===Font Summary Data===";
 
 	char* currentValue;
 	char* tokenInBuffer;

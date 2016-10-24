@@ -29,11 +29,11 @@ Texture::Texture(const std::string& texturePath, bool allowNullTexture ){
 	UNUSED(requiredNumberOfColorComponents);
 	
 	unsigned char*	pixelData	= stbi_load( texturePath.c_str(), &x, &y, &numberOfColorComponents, 0 );
-	if(pixelData == nullptr && !allowNullTexture ){
+	if(pixelData == nullptr /*&& !allowNullTexture*/ ){
 		std::string errorMessageTitle = "ERROR: pixelData not set, texture not found!";
-		std::string errorMessageTexture = "DEBUG: "+texturePath +" is Missing or Broken!";
+		std::string errorMessageTexture = "\n\nDEBUG: "+texturePath +" is Missing or Broken!";
 
-		ConsoleGenericMessageBox( errorMessageTexture.c_str(),  errorMessageTitle.c_str() );
+		ERROR_RECOVERABLE((errorMessageTitle + errorMessageTexture).c_str() );
 	}
 
 	CreateTextureFromData(texturePath, pixelData, x, y, numberOfColorComponents);
@@ -50,6 +50,7 @@ void Texture::CreateTextureFromData(const std::string& texturePath, unsigned cha
 	m_size.x = (float)x;
 	m_size.y = (float)y;
 	m_pathName = texturePath;
+	//m_pixelData = pixelData;
 
 	// Enable texturing
 	glEnable(GL_TEXTURE_2D);
@@ -95,6 +96,59 @@ void Texture::CreateTextureFromData(const std::string& texturePath, unsigned cha
 
 }
 
+//-----------------------------------------------------------------------------------------------------------
+
+void Texture::CreateNullTexture(const int& x, const int& y, const int& numberOfColorComponents) {
+	
+	m_size.x = (float)x;
+	m_size.y = (float)y;
+
+	// Enable texturing
+	glEnable(GL_TEXTURE_2D);
+
+	// Tell OpenGL that our pixel data is single-byte aligned
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+	// Ask OpenGL for an unused texName (ID number) to use for this texture
+	glGenTextures(1, (GLuint*)&m_platformHandle);
+
+	// Tell OpenGL to bind (set) this as the currently active texture
+	glBindTexture(GL_TEXTURE_2D, m_platformHandle);
+
+	// Set texture clamp vs. wrap (repeat)
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE); // one of: GL_CLAMP_TO_EDGE, GL_REPEAT, GL_MIRRORED_REPEAT, GL_MIRROR_CLAMP_TO_EDGE, ...
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE); // one of: GL_CLAMP_TO_EDGE, GL_REPEAT, GL_MIRRORED_REPEAT, GL_MIRROR_CLAMP_TO_EDGE, ...
+
+																		 // Set magnification (texel > pixel) and minification (texel < pixel) filters
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR); // one of: GL_NEAREST, GL_LINEAR
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR); // one of: GL_NEAREST, GL_LINEAR, GL_NEAREST_MIPMAP_NEAREST, GL_NEAREST_MIPMAP_LINEAR, GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR_MIPMAP_LINEAR
+
+	GLenum bufferFormat = GL_RGBA; // the format our source pixel data is currently in; any of: GL_RGB, GL_RGBA, GL_LUMINANCE, GL_LUMINANCE_ALPHA, ...
+	if (numberOfColorComponents == 3)
+		bufferFormat = GL_RGB;
+	if (numberOfColorComponents == 1)
+		bufferFormat = GL_RED; //gotta be a way to get a white font color with this
+
+							   // Todo: What happens if numComponents is neither 3 nor 4?
+
+	GLenum internalFormat = bufferFormat; // the format we want the texture to me on the card; allows us to translate into a different texture format as we upload to OpenGL
+
+	glTexImage2D(				// Upload this pixel data to our new OpenGL texture
+		GL_TEXTURE_2D,			// Creating this as a 2d texture
+		0,						// Which mipmap level to use as the "root" (0 = the highest-quality, full-res image), if mipmaps are enabled
+		internalFormat,			// Type of texel format we want OpenGL to use for this texture internally on the video card
+		(int)m_size.x,			// Texel-width of image; for maximum compatibility, use 2^N + 2^B, where N is some integer in the range [3,10], and B is the border thickness [0,1]
+		(int)m_size.y,			// Texel-height of image; for maximum compatibility, use 2^M + 2^B, where M is some integer in the range [3,10], and B is the border thickness [0,1]
+		0,						// Border size, in texels (must be 0 or 1)
+		bufferFormat,			// Pixel format describing the composition of the pixel data in buffer
+		GL_UNSIGNED_BYTE,		// Pixel color components are unsigned bytes (one byte per color/alpha channel)
+		NULL);	// Location of the actual pixel data bytes/buffer
+
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+
 //===========================================================================================================
 
 ///-----------------------------------------------------------------------------------
@@ -113,6 +167,13 @@ Texture* Texture::CreateOrGetTexture(const std::string& texturePath, bool allowN
 		return textureIter->second;
 	}	
 	Texture* newTexture = new Texture(texturePath, allowNullTexture); //mem leak here
+
+	if (allowNullTexture) {
+		if (newTexture->m_pathName == "") {
+			return NULL;
+		}
+	}
+
 	//if not null add to list
 	if (!(newTexture->GetName() == "")){
 			s_globalTextures[texturePath] = newTexture;
@@ -127,8 +188,14 @@ Texture* Texture::CreateOrGetTexture(const std::string& texturePath, bool allowN
 
 void CreateCommonEngineTextures(){
 	
-
 	const int defaultColorComponents = 3;
+
+	//4x4 checkerboard magenta/black
+	unsigned char defaultInvalidTexel[defaultColorComponents * 16] = 
+			{ 0, 0, 0, 255, 0, 255,  0, 0, 0, 255, 0, 255,
+			  255, 0, 255, 0, 0, 0, 255, 0, 255, 0, 0, 0,
+			  0, 0, 0, 255, 0, 255,  0, 0, 0, 255, 0, 255,
+			  255, 0, 255, 0, 0, 0, 255, 0, 255, 0, 0, 0 }; //4x4 checkerboard magenta/black
 
 	unsigned char defaultDiffuseTexel [4] = { 255, 255, 255, 255 }; //opaque white
 	unsigned char defaultNormalTexel  [defaultColorComponents] = { 127, 127, 255 }; //normal facing out
@@ -138,12 +205,21 @@ void CreateCommonEngineTextures(){
 	const int TEXEL_SIZE_X = 1;
 	const int TEXEL_SIZE_Y = 1;
 
+	//the general invalid texture
+	Texture* defaultInvalidTexture = new Texture();
+
+	//these are for blinn-phong lighting if we do that
 	Texture* defaultDiffuseTexture =  new Texture();
 	Texture* defaultNormalTexture =   new Texture();
 	Texture* defaultSpecularTexture = new Texture();
 	Texture* defaultEmissiveTexture = new Texture();
 
 	int platformHandleID = 0;
+
+	defaultInvalidTexture->m_platformHandle = platformHandleID;
+	defaultInvalidTexture->CreateTextureFromData(COMMON_TEXTURE_INVALID, defaultInvalidTexel, TEXEL_SIZE_X+3, TEXEL_SIZE_Y+3, defaultColorComponents);
+	Texture::s_globalTextures[COMMON_TEXTURE_INVALID] = defaultInvalidTexture;
+	platformHandleID++;
 
 	//make diffuse
  	defaultDiffuseTexture->m_platformHandle = platformHandleID;

@@ -43,6 +43,14 @@ public:
 typedef std::vector<NetAddress> NetAddresses;
 typedef std::vector<NetAddress>::iterator NetAddressesIterator;
 
+
+// struct NetSender{
+// 	NetAddress address;
+// 	NetConnection* connection;
+// 	NetSession* session;
+// 
+// };
+
 //-----------------------------------------------------------------------------------------------------------
 
 inline void NetAddress::Init(sockaddr* addrToCopy, size_t addrLength) {

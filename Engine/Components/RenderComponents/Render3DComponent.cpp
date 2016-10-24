@@ -17,7 +17,7 @@ Render3DComponent::Render3DComponent(const XMLNode& node): RenderComponent(node)
 	std::string diffuseTexturePath = ReadXMLAttributeAsString(node, "texturePath");
 	std::string shaderName = ReadXMLAttributeAsString(node, "shader");
 
-	InitializeMeshRenderer(diffuseTexturePath, shaderName, GL_TRIANGLE_STRIP);
+	InitializeMeshRenderer(diffuseTexturePath, shaderName, true, true, GL_TRIANGLE_STRIP);
 
 }
 
@@ -54,7 +54,7 @@ void Render3DComponent::SetRenderMesh3D(const Vector3& screenPosition, const Vec
 	InitializeMeshRenderer(diffuseTexturePath, shaderName);
 
 	//sets render box
-	m_meshRenderer.m_mesh->InitializeQuad3DMesh(m_renderBounds, m_color); //box
+	m_meshRenderer->m_mesh->InitializeQuad3DMesh(m_renderBounds, m_color); //box
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -64,16 +64,16 @@ void Render3DComponent::Render(OpenGLRenderer* renderer, Camera3D& camera, bool 
 	
 	UNUSED(renderer);
 
-	if (m_meshRenderer.m_material && m_meshRenderer.m_mesh){
+	if (m_meshRenderer->m_material && m_meshRenderer->m_mesh){
 
 		//sets render sphere
 		//m_meshRenderer->m_mesh->InitializeSphereMesh(Sphere3(m_renderBounds.CalcCenter(), renderSize.x), Rgba::BLUE); //sphere
 		
 		if (lights){
-			m_meshRenderer.RenderMeshWithLights(camera, isPerspective, *lights, modelView);
+			m_meshRenderer->RenderMeshWithLights(camera, isPerspective, *lights, modelView);
 		}
 		else{
-			m_meshRenderer.RenderMesh(camera, isPerspective);
+			m_meshRenderer->RenderMesh(camera, isPerspective);
 		}
 
 	}

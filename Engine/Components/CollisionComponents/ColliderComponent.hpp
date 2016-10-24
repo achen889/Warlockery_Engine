@@ -1,5 +1,5 @@
 //==============================================================================================================
-//ColliderComponent.hpp
+//ColliderComponent.MPp
 //by Albert Chen Jan-26-2016.
 //==============================================================================================================
 
@@ -11,6 +11,24 @@
 #include "Engine/Components/BaseComponent.hpp"
 
 //===========================================================================================================
+
+enum ColliderShape {
+	COLLIDER_AABB2,
+	COLLIDER_DISC2,
+	NUM_COLLIDER_SHAPES
+};
+
+enum ColliderType {
+	TYPE_2D,
+	NUM_COLLIDER_TYPES
+};
+
+//===========================================================================================================
+
+class ColliderComponent;
+
+typedef std::vector<ColliderComponent*> ColliderComponents;
+typedef std::vector<ColliderComponent*>::iterator ColliderComponentsIterator;
 
 class ColliderComponent : public BaseComponent{
 public:
@@ -34,15 +52,30 @@ public:
 	virtual void Update(double deltaSeconds);
 
 	//collision helpers
-	virtual bool IsColliding();
+	virtual void SetOnCollisionEventCallback(const std::string& event_name, EventCallbackFunc* func, void* data = NULL);
 
-	virtual void OnCollisionEventCallback();
-	
+	virtual bool IsColliding(ColliderComponent* otherCollider);
+
+	virtual bool DoCollisionCheck(ColliderComponent* otherCollider);
+
+	virtual void ExecuteOnCollisionEventCallback();
+
+	ColliderShape GetColliderShape() { return m_shape; }
+	void SetColliderShape(const ColliderShape& shape) { m_shape = shape; }
+	ColliderType GetType() { return m_type;  }
+	void SetType(const ColliderType& type) { m_type = type; }
+
 protected:
 	//vars
+	ColliderType m_type;
+	ColliderShape m_shape;
+	
 	bool isActive = true;
-	EventCallback* m_collEventCallback; //event to be called on coll
+	EventCallback* m_collEventCallback = NULL; //event to be called on coll
+
 };
+
+
 
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------

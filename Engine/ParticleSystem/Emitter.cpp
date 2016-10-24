@@ -34,8 +34,12 @@ Emitter::Emitter(XMLNode& emitterNode){
 }
 
 Emitter::~Emitter(){
-	//delete all particles in this emitter
-	//m_particles.clear();
+
+	if (m_effect) {
+		delete m_effect;
+		m_effect = NULL;
+	}
+
 }
 //===========================================================================================================
 
@@ -60,8 +64,8 @@ void Emitter::PushParticleToParticleSystem(Particles& particlesToUpdate, const f
 
 	//spawn one set!
 	for (unsigned int i = 0; i < m_particlesPerSpawn; i++){
-		particlesToUpdate.push_back(Particle(m_position, m_effect->GetInitialVelocity(), m_color, m_is2D));
-		Particle& particleToPush = particlesToUpdate.back();
+		particlesToUpdate.push_back(new Particle(m_position, m_effect->GetInitialVelocity(), m_color, m_is2D));
+		Particle& particleToPush = *particlesToUpdate.back();
 		//additional things
 		particleToPush.SetLifeSpanSeconds(newLifeSpanSeconds);
 		if (m_color == Rgba::BLACK){

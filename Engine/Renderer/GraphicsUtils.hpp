@@ -11,11 +11,17 @@
 ///----------------------------------------------------------------------------------------------------------
 ///Debug Shapes
 enum ShapeType{
+	//3D
 	SHAPE_TYPE_SPHERE3D,
 	SHAPE_TYPE_POINT3D,
 	SHAPE_TYPE_BOX3D,
 	SHAPE_TYPE_LINE3D,
 	SHAPE_TYPE_ARROW3D,
+	//2D
+	SHAPE_TYPE_BOX2D,
+	SHAPE_TYPE_DISC2D,
+	SHAPE_TYPE_LINE2D,
+
 	NUM_SHAPETYPES
 };
 
@@ -55,6 +61,12 @@ struct DebugShape{
 
 	DebugShape(const AABB3& boxToDebug, const float& lifespanSeconds = 0.1f,
 		const Rgba& newstartCol = Rgba::MAGENTA, const Rgba& newendCol = Rgba::MAGENTA, bool isdepthTestOn = true, bool isDualMode = false);
+	
+	//2D constructors
+	DebugShape(const AABB2& boxToDebug, const float& lifespanSeconds = -1.0f , const Rgba& newstartCol = Rgba::MAGENTA , bool isdepthTestOn = true, bool isDualMode = false);
+	
+	void InitShapeMeshRenderer();
+	
 	//-----------------------------------------------------------------------------------------------------------
 	void Update(double deltaSeconds){
 		secondsSinceSpawn += (float)deltaSeconds;
@@ -65,7 +77,7 @@ struct DebugShape{
 	void DrawDebugShape(OpenGLRenderer* renderer, Camera3D* camera = NULL);
 
 	bool IsDead(){
-		if (lifespanSeconds < 0.0f){
+		if (lifespanSeconds < 0.0f){ //any negative lifespan val means it's immortal
 			return false;
 		}
 
@@ -84,7 +96,13 @@ struct DebugShapes{
 	DebugShape* AddDebugShape(DebugShape* debugShape);
 };
 
-static DebugShapes g_debugShapes;
+static int debugShapeID = 0;
+
+//#define ADD_DEBUG_SHAPE_BOX2D_W_ID(box,pos, id) DebugShape* box_##id## = new DebugShape((AABB2)box, pos )
+
+
+
+extern DebugShapes g_debugShapes;
 
 
 

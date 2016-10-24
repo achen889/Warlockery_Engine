@@ -9,10 +9,13 @@
 #include <stdarg.h>
 #include <iostream>
 #include "LogFile.hpp"
-#include "Engine/Core/Utilities.hpp"
+
+//#include "Engine/Core/Utilities.hpp"
 
 //-----------------------------------------------------------------------------------------------
 std::string g_logFileName = "Warlockery_Game_LogFile.txt";
+
+bool g_enableLog = false;
 
 ///----------------------------------------------------------------------------------------------------------
 ///sets the file name
@@ -24,6 +27,7 @@ void SetLogFileName(const std::string& newFileName){
 // Opens, writes, flushes, and closes the file so the log is guaranteed to be up-to-date, even
 //	if the very next line is a crash.
 void AppendTextLineToLogFile(const std::string& textLine, const std::string& newLogFileName){
+	if (!g_enableLog)return;
 	FILE* file = nullptr;
 	errno_t errorCode = fopen_s(&file, newLogFileName.c_str(), "at");
 	if( !errorCode )
@@ -49,6 +53,7 @@ void WipeLogFile()
 
 //-----------------------------------------------------------------------------------------------
 void LogFilePrintf(const char* messageFormat, ...){
+	if (!g_enableLog)return;
 	const int MESSAGE_MAX_LENGTH = 2048;
 	char messageLiteral[ MESSAGE_MAX_LENGTH ];
 	va_list variableArgumentList;

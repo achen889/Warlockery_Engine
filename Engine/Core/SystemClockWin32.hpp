@@ -9,11 +9,15 @@
 #ifndef _included_SystemClockWin32__
 #define _included_SystemClockWin32__
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
 #include <stdio.h>
 #include <string>
+
+//===========================================================================================================
+
+struct _SYSTEMTIME;
+
+typedef _SYSTEMTIME SYSTEMTIME;
+typedef unsigned short WORD;
 
 //===========================================================================================================
 
@@ -32,17 +36,26 @@ struct SystemClockWin32{
 	SystemClockWin32(){
 		//do nothing
 	}
-	SystemClockWin32(const SYSTEMTIME& systemTimeWin32);
+	SystemClockWin32(SYSTEMTIME* systemTimeWin32);
+
+	~SystemClockWin32() {
+		//do nothing
+	}
+
 	//setters
-	void SetClockFromSystemTimeWin32(const SYSTEMTIME& systemTimeWin32);
+	void SetClockFromSystemTimeWin32(SYSTEMTIME* systemTimeWin32);
 	void SetNameOfMonth();
 	void SetDayOfWeek(WORD WdayOfWeek);
-
 	
 	//getters
 
-	std::string ToString(bool isNumerical = false){
-		return GetDateString(isNumerical)+" "+ GetTimeString();
+	std::string ToString(bool isNumerical = false, bool addDateString = false ){
+		std::string timeStr;
+		if (addDateString) {
+			timeStr += GetDateString(isNumerical) + " ";
+		}
+		timeStr += GetTimeString();
+		return timeStr;
 	}
 
 	std::string GetDateString(bool isNumerical = false);
@@ -52,19 +65,28 @@ struct SystemClockWin32{
 
 };
 
-static SYSTEMTIME g_systemTimeWin32;
+extern SYSTEMTIME* g_systemTimeWin32;
 
 //===========================================================================================================
 
 //win32 clock functions
-void SetEngineClock(SystemClockWin32& clock, const bool& isLocalTime = false);
+void SetEngineClock(SystemClockWin32* clock, const bool& isLocalTime = false);
+
+std::string GetSystem32TimeString();
+
+
+///----------------------------------------------------------------------------------------------------------
+///inline global helpers
 
 inline std::string GetSystem32TimeString(){
-	SystemClockWin32 tempSysClock;
+	//create temp sys clock win32
+	SystemClockWin32 tempSysClockWin32(g_systemTimeWin32);
 
-	SetEngineClock(tempSysClock, true);
+	SetEngineClock(&tempSysClockWin32, true);
 
-	return tempSysClock.ToString();
+	std::string timeStr = tempSysClockWin32.ToString();
+
+	return timeStr;
 }
 
 //===========================================================================================================

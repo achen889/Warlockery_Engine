@@ -171,10 +171,6 @@ void UDPSocketThread::ProcessIncoming() {
 		
 		if (recvd > 0) {
 
-			//when the packet is here, it still has waffle, but somehow the mem gets screwy in time
-			//std::string debugRecievedPacketBuffer = "\nUDPSocket=>Received[" + GetBufferAsNumbers(buffer, (size_t)recvd, 16) + "]";
-			//ConsolePrintString(debugRecievedPacketBuffer); //ff1900waffle turns out it was there all along..so it screwed up later...
-
 			packetQueue->EnqueueRead(&buffer[0], recvd, (sockaddr*)&otherAddr, addrLen);
 		
 		}
@@ -244,6 +240,7 @@ UDPSocket::UDPSocket(NetPacketQueue* queue, short port){
 
 UDPSocket::~UDPSocket(){
 	//do nothing
+	//m_serviceThread->
 }
 
 //-----------------------------------------------------------------------------------------------------------

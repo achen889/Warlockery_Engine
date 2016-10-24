@@ -3,7 +3,7 @@
 //by Albert Chen Jan-21-2015.
 //==============================================================================================================
 
-#include "Engine\Math\Disc2.hpp"
+#include "Disc2.hpp"
 
 ///----------------------------------------------------------------------------------------------------------
 ///if the point is outside disc, increase radius to fit
@@ -32,3 +32,5 @@ const Disc2 Interpolate( const Disc2& start, const Disc2& end, float fractionFro
 
 	return interpolatedDisc;
 }
+
+//===========================================================================================================

@@ -8,15 +8,24 @@
 
 //===========================================================================================================
 
+MeshRendererMap MeshRenderer::s_globalMeshRenderers;
+
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///mesh renderer
 
-MeshRenderer::MeshRenderer(){
+MeshRenderer::MeshRenderer(const std::string name, bool allocMat, bool allocMesh):
+	m_name(StringToWritableCStr(name)),
+	m_didAllocMat(allocMat),
+	m_didAllocMesh(allocMesh)
+{
 	m_vaoID = CreateVertexArrayObject();
-
-	m_mesh = new Mesh(); //mem leak here
-	m_material = new Material();
+	if (allocMat) {
+		AllocMaterial();
+	}
+	if (allocMesh) {
+		AllocMesh();
+	}
 
 }
 
@@ -24,24 +33,25 @@ MeshRenderer::MeshRenderer(){
 
 MeshRenderer::~MeshRenderer(){
 
-	if (m_mesh){
-		delete m_mesh;
-		m_mesh = NULL;
-	}
+	FreeMaterial();
+	
+	FreeMesh();	
 
-	if (m_material){
-		delete m_material;
-		m_material = NULL;
-	}
-
+	DestroyVertexArrayObject();
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 unsigned int MeshRenderer::CreateVertexArrayObject(){
-	glGenVertexArrays(1, &m_vaoID);
+	return theOGLRenderer->CreateVertexArrayObject(m_vaoID);
+}
 
-	return (unsigned int)m_vaoID;
+//-----------------------------------------------------------------------------------------------------------
+
+void MeshRenderer::DestroyVertexArrayObject() {
+
+	return theOGLRenderer->DestroyVertexArrayObject(m_vaoID);
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -70,12 +80,13 @@ void MeshRenderer::BindVertexArray(){
 
 	glBindVertexArray(m_vaoID);
 
-	glBindBuffer(GL_ARRAY_BUFFER, (GLuint)m_mesh->m_vboID);
+	m_mesh->BindVertexArray();
 
-	if (m_mesh->m_numIndicesToDraw != 0){
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint)m_mesh->m_iboID);
-	}
-
+// 	glBindBuffer(GL_ARRAY_BUFFER, (GLuint)m_mesh->m_vboID);
+// 
+// 	if (m_mesh->m_numIndicesToDraw != 0) {
+// 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, (GLuint)m_mesh->m_iboID);
+// 	}
 
 	GLuint materialProgramID = (GLuint)m_material->GetProgramID();
 
@@ -145,63 +156,13 @@ void MeshRenderer::BindUnifiedLight(Light* m_light){
 //-----------------------------------------------------------------------------------------------------------
 
 
-void MeshRenderer::RenderMeshWithLights(Camera3D& camera, bool isPerspective, Lights lights, ModelViewMatrix* modelView){
+void MeshRenderer::RenderMeshWithLights(Camera3D& camera, bool isPerspective, Lights& lights, ModelViewMatrix* modelView){
 	if (theOGLRenderer){
 
 		//binds material shader and all the uniforms I might ever need
 		m_material->PrepareShaderForRendering(camera, isPerspective, modelView);
-
-		int lightCount = lights.size();
-
-		//light data array buffers
-		float* lightPowers = new float[lightCount];
-		Rgba* lightColors = new Rgba[lightCount];
-
-		Vector2* lightIntensities = new Vector2[lightCount];
-		Vector3* lightPositions = new Vector3[lightCount];
-		Vector3* lightFacings = new Vector3[lightCount];
-
-		float* lightPositionFactors = new float[lightCount];
-		float* lightFacingFactors = new float[lightCount];
-		float* lightAngles = new float[lightCount];
-		float* lightSpotPowers = new float[lightCount];
-
-		int lightIndex = 0;
-
-		for (std::vector<Light*>::iterator itLight = lights.begin(); itLight != lights.end(); ++itLight){
-			Light& light = (**itLight);
-
-			lightPowers[lightIndex] = light.m_lightPower;
-			lightColors[lightIndex] = light.m_lightColor;
-
-			lightIntensities[lightIndex] = light.m_lightIntensity;
-			lightPositions[lightIndex] = light.m_lightPosition;
-			lightFacings[lightIndex] = light.m_lightFacing;
-
-			lightPositionFactors[lightIndex] = light.m_lightPositionFactor;
-			lightFacingFactors[lightIndex] = light.m_lightFacingFactor;
-			lightAngles[lightIndex] = light.GetLightAngle();
-			lightSpotPowers[lightIndex] = light.m_spotPower;
-
-			lightIndex++;
-		}
-
-		GLuint meshRendererMatProgramID = (GLuint)m_material->GetProgramID();
-
-		m_material->m_glProgram.BindFloat("gLightCount", (float)lightCount);
-		//bind the light arrays
-		theOGLRenderer->ProgramBindFloatArray(meshRendererMatProgramID, "gLightPowers[0]", lightPowers, lightCount);
-		m_material->m_glProgram.BindColorArray("gLightColors[0]", lightColors, lightCount);
-
-		theOGLRenderer->ProgramBindVec2Array(meshRendererMatProgramID, "gLightIntensities[0]", lightIntensities, lightCount);
-		theOGLRenderer->ProgramBindVec3Array(meshRendererMatProgramID, "gLightPositions[0]", lightPositions, lightCount);
-		theOGLRenderer->ProgramBindVec3Array(meshRendererMatProgramID, "gLightFacings[0]", lightFacings, lightCount);
-
-		theOGLRenderer->ProgramBindFloatArray(meshRendererMatProgramID, "gLightPositionFactors[0]", lightPositionFactors, lightCount);
-		theOGLRenderer->ProgramBindFloatArray(meshRendererMatProgramID, "gLightFacingFactor[0]", lightFacingFactors, lightCount);
-		theOGLRenderer->ProgramBindFloatArray(meshRendererMatProgramID, "gLightAngles[0]", lightAngles, lightCount);
-		theOGLRenderer->ProgramBindFloatArray(meshRendererMatProgramID, "gSpotPowers[0]", lightSpotPowers, lightCount);
-
+		
+		m_material->BindUnifiedLights(lights);
 		// 		if (light){
 		// 			BindUnifiedLight(light);
 		// 		}
@@ -223,12 +184,10 @@ void MeshRenderer::RenderMeshWithLights(Camera3D& camera, bool isPerspective, Li
 		}
 
 		UnbindMeshRenderer();
-
 	}
 }
 
 //-----------------------------------------------------------------------------------------------------------
-
 
 void MeshRenderer::RenderMesh2D(ModelViewMatrix* modelView, Light* light){
 	if (theOGLRenderer){
@@ -240,8 +199,7 @@ void MeshRenderer::RenderMesh2D(ModelViewMatrix* modelView, Light* light){
 		if (light){
 			BindUnifiedLight(light);
 		}
-
-		//theOGLRenderer->PrepareMaterialShaderForRendering(*m_material, camera, isPerspective);
+		
 		//if it has a texture and sampler
 		if (m_material->m_samplerInUse){
 
@@ -266,9 +224,41 @@ void MeshRenderer::RenderMesh2D(ModelViewMatrix* modelView, Light* light){
 
 //-----------------------------------------------------------------------------------------------------------
 
+void MeshRenderer::RenderMesh2DWithLights(ModelViewMatrix* modelView, Lights& lights) {
+	if (theOGLRenderer) {
+
+		//binds material shader and all the uniforms I might ever need
+		ASSERT_AND_DIE((m_material != NULL), "mat is null!!");
+		m_material->PrepareShaderForRendering2D(modelView);
+
+		m_material->BindUnifiedLights(lights);
+		
+		//if it has a texture and sampler
+		if (m_material->m_samplerInUse) {
+
+			RenderWithTextureSampler();
+
+		}
+		else {
+			if (m_mesh->m_numIndicesToDraw == 0) {
+				DrawMeshVertexArray();
+			}
+			else {
+				DrawIndexedMeshVertexArray();
+			}
+
+		}
+		UnbindMeshRenderer();
+
+	}
+}
+
+
+//-----------------------------------------------------------------------------------------------------------
+
 //this one works and is even used for mesh 2d
 void MeshRenderer::RenderMesh(Camera3D& camera, bool isPerspective, Light* light, ModelViewMatrix* modelView){
-	PROFILE_SECTION();
+	//PROFILE_SECTION();
 	if (theOGLRenderer){
 		//PROFILE_START("PrepareMesh");
 		//binds material shader and all the uniforms I might ever need
@@ -306,55 +296,63 @@ void MeshRenderer::RenderMesh(Camera3D& camera, bool isPerspective, Light* light
 //-----------------------------------------------------------------------------------------------------------
 
 void MeshRenderer::UnbindMeshRenderer(){
+	//PROFILE_SECTION();
+	
 	theOGLRenderer->DisableShaderProgram();
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-
+	
 	glBindVertexArray(0);
 
 	//glDeleteBuffers(1, &m_mesh->m_vboID);
+
+	//if (m_vaoID != NULL) {
+	//glDeleteVertexArrays(1, &m_vaoID);
+	//}
+
 
 	//theOGLRenderer->g_BufferCount--;
 	//if (myVAO.m_Program != NULL) {
 	//	glDeleteProgram(myVAO.m_Program);
 	//	}
 
-	// 	if (m_vaoID != NULL) {
-	// 		glDeleteVertexArrays(1, &m_vaoID);
-	// 	}
 
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 void MeshRenderer::DrawMeshVertexArray(){
+	glBindVertexArray(m_vaoID);
 
 	theOGLRenderer->DrawVertexArray((GLenum)m_mesh->m_drawMode, (GLuint)m_vaoID, (size_t)m_mesh->m_numVerticesToDraw);
 
-	//glBindVertexArray(0);
+	glBindVertexArray(0);
 }
 
 
 //-----------------------------------------------------------------------------------------------------------
 
 void MeshRenderer::DrawIndexedMeshVertexArray(){
-
+	//PROFILE_SECTION()
+	
 	glBindVertexArray(m_vaoID);
 
 	theOGLRenderer->DrawVertexElements((GLenum)m_mesh->m_drawMode, (GLuint)m_mesh->m_iboID, (GLint)m_mesh->m_numIndicesToDraw, (size_t)0);
 
-	//glBindVertexArray(0);
+	glBindVertexArray(0);
 
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 void MeshRenderer::RenderWithTextureSampler(){
+	//PROFILE_SECTION();
+
 	glEnable(GL_TEXTURE_2D);
 
 	m_material->BindMaterialTextures();
 
-	//theOGLRenderer->CreateVertexArrayWithShader((GLuint)m_material.m_glProgram.m_programID, (GLuint)m_mesh.m_vboID, (GLuint)m_vaoID);
+	//theOGLRenderer->CreateVertexArrayWithShader((GLuint)m_material->m_glProgram.m_programID, (GLuint)m_mesh->m_vboID, (GLuint)m_vaoID);
 
 	if (m_mesh->m_numIndicesToDraw == 0){
 		DrawMeshVertexArray();
@@ -362,7 +360,6 @@ void MeshRenderer::RenderWithTextureSampler(){
 	else{
 		DrawIndexedMeshVertexArray();
 	}
-
 	glDisable(GL_TEXTURE_2D);
 }
 
@@ -393,6 +390,28 @@ void SetDefaultTexturedMeshRenderer(MeshRenderer& meshRenderer){
 	meshRenderer.m_mesh->SetDrawMode(GL_QUADS);
 
 	meshRenderer.BindVertexArray();
+}
+
+//===========================================================================================================
+///----------------------------------------------------------------------------------------------------------
+///static helpers
+
+MeshRenderer* MeshRenderer::CreateOrGetMeshRenderer(const std::string& name, bool allocMat, bool allocMesh, bool allowNullMeshRenderer) {
+
+	UNUSED(allowNullMeshRenderer);
+
+	MeshRendererMapIterator meshIter = s_globalMeshRenderers.find(name);
+	if (meshIter != s_globalMeshRenderers.end()) {
+		return meshIter->second;
+	}
+	MeshRenderer* newMeshRenderer = new MeshRenderer(name, allocMat, allocMesh); //mem leak here
+
+														//if not null add to list
+	if (!(newMeshRenderer->GetName() == "")) {
+		s_globalMeshRenderers[name] = newMeshRenderer;
+	}
+	return newMeshRenderer;
+
 }
 
 //===========================================================================================================

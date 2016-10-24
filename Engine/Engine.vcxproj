@@ -43,7 +43,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '10.0'">v100</PlatformToolset>
     <PlatformToolset Condition="'$(VisualStudioVersion)' == '12.0'">v120</PlatformToolset>
@@ -72,15 +72,18 @@
     <IntDir>$(SolutionDir)..\Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
     <IntDir>$(SolutionDir)..\Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)..\Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</OutDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IntDir>$(SolutionDir)..\Temporary\$(ProjectName)_$(Platform)_$(Configuration)\</IntDir>
+    <PreBuildEventUseInBuild>false</PreBuildEventUseInBuild>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -88,7 +91,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINSOCKAPI_;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.4.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.6.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
@@ -96,6 +99,7 @@
       <EnablePREfast>false</EnablePREfast>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <CompileAsManaged>false</CompileAsManaged>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -103,8 +107,16 @@
     </Link>
     <Lib>
       <AdditionalDependencies>opengl32.lib;glu32.lib;xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)/Sound/cricket-1.4.2/lib/win/vs$(VisualStudioVersion)/x86/DebugStatic7;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../../../;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ForceSymbolReferences>
+      </ForceSymbolReferences>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)..\..\..\Engine\Sound\cricket-1.6.2\lib\win\vs$(VisualStudioVersion)\$(PlatformShortName)\DebugStatic\ck.pdb" "$(OutDir)ck.pdb"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">
     <ClCompile>
@@ -112,7 +124,7 @@
       <WarningLevel>Level4</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_WINSOCKAPI_;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.4.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.6.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
@@ -120,6 +132,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <CompileAsManaged>false</CompileAsManaged>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -127,8 +140,16 @@
     </Link>
     <Lib>
       <AdditionalDependencies>opengl32.lib;glu32.lib;xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)/Sound/cricket-1.4.2/lib/win/vs$(VisualStudioVersion)/x86/DebugStatic7;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../../../;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ForceSymbolReferences>
+      </ForceSymbolReferences>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)..\..\..\Engine\Sound\cricket-1.6.2\lib\win\vs$(VisualStudioVersion)\$(PlatformShortName)\DebugStatic\ck.pdb" "$(OutDir)ck.pdb"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -138,13 +159,14 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;_WINSOCKAPI_;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.4.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)../;$(ProjectDir)/Sound/cricket-1.6.2/inc/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <BasicRuntimeChecks>Default</BasicRuntimeChecks>
       <CompileAsManaged>false</CompileAsManaged>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <ShowIncludes>false</ShowIncludes>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,8 +176,16 @@
     </Link>
     <Lib>
       <AdditionalDependencies>opengl32.lib;glu32.lib;xinput9_1_0.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalLibraryDirectories>$(ProjectDir)/Sound/cricket-1.4.2/lib/win/vs$(VisualStudioVersion)/x86/ReleaseStatic7;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)/../../../;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <ForceSymbolReferences>
+      </ForceSymbolReferences>
     </Lib>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
+    <PreBuildEvent>
+      <Command>copy "$(SolutionDir)..\..\..\Engine\Sound\cricket-1.6.2\lib\win\vs$(VisualStudioVersion)\$(PlatformShortName)\DebugStatic\ck.pdb" "$(OutDir)ck.pdb"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="ReadMe.txt" />
@@ -163,22 +193,36 @@
   <ItemGroup>
     <ClInclude Include="Components\BaseComponent.hpp" />
     <ClInclude Include="Components\ClockComponent.hpp" />
+    <ClInclude Include="Components\CollisionComponents\Collider2DComponent.hpp" />
     <ClInclude Include="Components\CollisionComponents\ColliderComponent.hpp" />
-    <ClInclude Include="Components\DestructibleComponent.hpp" />
+    <ClInclude Include="Components\CollisionComponents\UICollider2DComponent.hpp" />
+    <ClInclude Include="Components\HealthComponent.hpp" />
     <ClInclude Include="Components\RenderComponents\Render2DComponent.hpp" />
     <ClInclude Include="Components\RenderComponents\Render3DComponent.hpp" />
     <ClInclude Include="Components\RenderComponents\RenderComponent.hpp" />
+    <ClInclude Include="Components\TransformComponents\PhysicsMotion2DComponent.hpp" />
     <ClInclude Include="Components\TransformComponents\RigidBodyComponent.hpp" />
     <ClInclude Include="Components\TransformComponents\TransformComponent.hpp" />
+    <ClInclude Include="Components\TransformComponents\Transform2DComponent.hpp" />
     <ClInclude Include="Console\Console.hpp" />
     <ClInclude Include="Console\DevConsole.hpp" />
     <ClInclude Include="Console\LogFile.hpp" />
     <ClInclude Include="Core\BaseGameState.hpp" />
     <ClInclude Include="Core\BinaryUtils.hpp" />
+    <ClInclude Include="Core\BitArray.hpp" />
     <ClInclude Include="Core\Clock.hpp" />
     <ClInclude Include="Core\EventCallback.hpp" />
+    <ClInclude Include="Core\Event\EventSystem.hpp" />
+    <ClInclude Include="Core\Event\EventUtilities.hpp" />
+    <ClInclude Include="Core\Event\NamedProperties.hpp" />
+    <ClInclude Include="Core\Event\TypedProperty.hpp" />
     <ClInclude Include="Core\Memory.hpp" />
+    <ClInclude Include="Core\Metrics\GameplayMetric.hpp" />
+    <ClInclude Include="Core\Metrics\GameplayMetricLog.hpp" />
+    <ClInclude Include="Core\ObjectFactory.hpp" />
     <ClInclude Include="Core\Performance.hpp" />
+    <ClInclude Include="Core\SortingUtils.hpp" />
+    <ClInclude Include="Core\StringUtils.hpp" />
     <ClInclude Include="Core\SystemClockWin32.hpp" />
     <ClInclude Include="Core\FileWizard.hpp" />
     <ClInclude Include="Core\Rgba.hpp" />
@@ -192,9 +236,19 @@
     <ClInclude Include="Input\GUI\UIProgressBar.hpp" />
     <ClInclude Include="Input\GUI\UIElement.hpp" />
     <ClInclude Include="Input\GUI\UIText.hpp" />
+    <ClInclude Include="Input\InputCommon.hpp" />
     <ClInclude Include="Input\InputSystem.hpp" />
+    <ClInclude Include="Input\KeyBindingSystem.hpp" />
+    <ClInclude Include="Map\Map.hpp" />
+    <ClInclude Include="Map\Pathfinding\Path.hpp" />
+    <ClInclude Include="Map\Pathfinding\Pathfinder.hpp" />
+    <ClInclude Include="Map\Pathfinding\PathNode.hpp" />
+    <ClInclude Include="Map\Tile.hpp" />
+    <ClInclude Include="Map\TileState.hpp" />
+    <ClInclude Include="Map\Visibility\Visibility.hpp" />
     <ClInclude Include="Math\AABB2.hpp" />
     <ClInclude Include="Math\AABB3.hpp" />
+    <ClInclude Include="Math\Dice.hpp" />
     <ClInclude Include="Math\Disc2.hpp" />
     <ClInclude Include="Math\EngineMath.hpp" />
     <ClInclude Include="Math\EulerAngles.hpp" />
@@ -205,12 +259,16 @@
     <ClInclude Include="Math\Math2D.hpp" />
     <ClInclude Include="Math\Math3D.hpp" />
     <ClInclude Include="Math\MathCommands.hpp" />
+    <ClInclude Include="Math\MathCommon.hpp" />
     <ClInclude Include="Math\MathUtils.hpp" />
     <ClInclude Include="Math\Matrix4.hpp" />
     <ClInclude Include="Math\MatrixUtils.hpp" />
     <ClInclude Include="Math\Noise.hpp" />
     <ClInclude Include="Math\PhysicsMotion2D.hpp" />
+    <ClInclude Include="Math\RandomUtils.hpp" />
     <ClInclude Include="Math\Sphere3.hpp" />
+    <ClInclude Include="Math\Spline\CubicHermiteCurve.hpp" />
+    <ClInclude Include="Math\Spline\CubicHermiteSpline.hpp" />
     <ClInclude Include="Math\Vector2.hpp" />
     <ClInclude Include="Math\Vector3.hpp" />
     <ClInclude Include="Math\Vector4.hpp" />
@@ -226,6 +284,7 @@
     <ClInclude Include="Networking\NetPacketQueue.hpp" />
     <ClInclude Include="Networking\NetworkSession.hpp" />
     <ClInclude Include="Networking\NetworkSystem.hpp" />
+    <ClInclude Include="Networking\ReliableTracker.hpp" />
     <ClInclude Include="Networking\UDPSocket.hpp" />
     <ClInclude Include="ParticleSystem\AdvancedParticleUtils.hpp" />
     <ClInclude Include="ParticleSystem\Effect.hpp" />
@@ -235,6 +294,7 @@
     <ClInclude Include="ParticleSystem\ParticleSystem.hpp" />
     <ClInclude Include="Renderer\AnimatedTexture.hpp" />
     <ClInclude Include="Renderer\Camera3D.hpp" />
+    <ClInclude Include="Renderer\FrameBuffer.hpp" />
     <ClInclude Include="Renderer\glext.h" />
     <ClInclude Include="Renderer\GraphicsUtils.hpp" />
     <ClInclude Include="Renderer\Light.hpp" />
@@ -252,20 +312,44 @@
     <ClInclude Include="Renderer\Text\FontSystem.hpp" />
     <ClInclude Include="Renderer\Text\TextSystem.hpp" />
     <ClInclude Include="Renderer\Vertex3D.hpp" />
-    <ClInclude Include="Sound\EngineSound.hpp" />
-    <ClInclude Include="Sound\Sound.hpp" />
-    <ClInclude Include="Sound\SoundSystem.hpp" />
+    <ClInclude Include="Sound\AudioSystem.hpp" />
+    <ClInclude Include="Sound\SoundSystemFMOD.hpp" />
+    <ClInclude Include="UserInterface\KeyFrameAnimation\AnimatedProperty.hpp" />
+    <ClInclude Include="UserInterface\KeyFrameAnimation\KeyFrameSequence.hpp" />
+    <ClInclude Include="UserInterface\UICommon.hpp" />
+    <ClInclude Include="UserInterface\UIScreen.hpp" />
+    <ClInclude Include="UserInterface\UISystem.hpp" />
+    <ClInclude Include="UserInterface\WidgetStates\WidgetStateProperties.hpp" />
+    <ClInclude Include="UserInterface\WidgetStyle.hpp" />
+    <ClInclude Include="UserInterface\WidgetStyleFactory.hpp" />
+    <ClInclude Include="UserInterface\Widgets\BaseWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\ButtonWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\CheckBoxWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\CursorWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\DropDownWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\EditLineWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\GroupWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\LabelWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\LayoutWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\ProgressBarWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\SliderWidget.hpp" />
+    <ClInclude Include="UserInterface\Widgets\WidgetFactory.hpp" />
+    <ClInclude Include="UserInterface\Widgets\WidgetTypes.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Components\BaseComponent.cpp" />
     <ClCompile Include="Components\ClockComponent.cpp" />
+    <ClCompile Include="Components\CollisionComponents\Collider2DComponent.cpp" />
     <ClCompile Include="Components\CollisionComponents\ColliderComponent.cpp" />
-    <ClCompile Include="Components\DestructibleComponent.cpp" />
+    <ClCompile Include="Components\CollisionComponents\UICollider2DComponent.cpp" />
+    <ClCompile Include="Components\HealthComponent.cpp" />
     <ClCompile Include="Components\RenderComponents\Render2DComponent.cpp" />
     <ClCompile Include="Components\RenderComponents\Render3DComponent.cpp" />
     <ClCompile Include="Components\RenderComponents\RenderComponent.cpp" />
+    <ClCompile Include="Components\TransformComponents\PhysicsMotion2DComponent.cpp" />
     <ClCompile Include="Components\TransformComponents\RigidBodyComponent.cpp" />
     <ClCompile Include="Components\TransformComponents\TransformComponent.cpp" />
+    <ClCompile Include="Components\TransformComponents\Transform2DComponent.cpp" />
     <ClCompile Include="Console\Console.cpp" />
     <ClCompile Include="Console\DevConsole.cpp" />
     <ClCompile Include="Console\LogFile.cpp" />
@@ -273,8 +357,13 @@
     <ClCompile Include="Core\BinaryUtils.cpp" />
     <ClCompile Include="Core\Clock.cpp" />
     <ClCompile Include="Core\EventCallback.cpp" />
+    <ClCompile Include="Core\Event\EventSystem.cpp" />
+    <ClCompile Include="Core\Event\NamedProperties.cpp" />
     <ClCompile Include="Core\Memory.cpp" />
+    <ClCompile Include="Core\Metrics\GameplayMetricLog.cpp" />
+    <ClCompile Include="Core\ObjectFactory.cpp" />
     <ClCompile Include="Core\Performance.cpp" />
+    <ClCompile Include="Core\StringUtils.cpp" />
     <ClCompile Include="Core\SystemClockWin32.cpp" />
     <ClCompile Include="Core\FileWizard.cpp" />
     <ClCompile Include="Core\Rgba.cpp" />
@@ -289,8 +378,17 @@
     <ClCompile Include="Input\GUI\UIElement.cpp" />
     <ClCompile Include="Input\GUI\UIText.cpp" />
     <ClCompile Include="Input\InputSystem.cpp" />
+    <ClCompile Include="Input\KeyBindingSystem.cpp" />
+    <ClCompile Include="Map\Map.cpp" />
+    <ClCompile Include="Map\Pathfinding\Path.cpp" />
+    <ClCompile Include="Map\Pathfinding\Pathfinder.cpp" />
+    <ClCompile Include="Map\Pathfinding\PathNode.cpp" />
+    <ClCompile Include="Map\Tile.cpp" />
+    <ClCompile Include="Map\TileState.cpp" />
+    <ClCompile Include="Map\Visibility\Visibility.cpp" />
     <ClCompile Include="Math\AABB2.cpp" />
     <ClCompile Include="Math\AABB3.cpp" />
+    <ClCompile Include="Math\Dice.cpp" />
     <ClCompile Include="Math\Disc2.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='DebugInline|Win32'">false</CompileAsManaged>
@@ -326,7 +424,10 @@
     <ClCompile Include="Math\MatrixUtils.cpp" />
     <ClCompile Include="Math\Noise.cpp" />
     <ClCompile Include="Math\PhysicsMotion2D.cpp" />
+    <ClCompile Include="Math\RandomUtils.cpp" />
     <ClCompile Include="Math\Sphere3.cpp" />
+    <ClCompile Include="Math\Spline\CubicHermiteCurve.cpp" />
+    <ClCompile Include="Math\Spline\CubicHermiteSpline.cpp" />
     <ClCompile Include="Math\Vector2.cpp" />
     <ClCompile Include="Math\Vector3.cpp" />
     <ClCompile Include="Math\Vector4.cpp" />
@@ -346,6 +447,7 @@
     <ClCompile Include="ParticleSystem\ParticleSystem.cpp" />
     <ClCompile Include="Renderer\AnimatedTexture.cpp" />
     <ClCompile Include="Renderer\Camera3D.cpp" />
+    <ClCompile Include="Renderer\FrameBuffer.cpp" />
     <ClCompile Include="Renderer\GraphicsUtils.cpp" />
     <ClCompile Include="Renderer\Light.cpp" />
     <ClCompile Include="Renderer\Material.cpp" />
@@ -360,8 +462,26 @@
     <ClCompile Include="Renderer\Text\FontSystem.cpp" />
     <ClCompile Include="Renderer\Text\TextSystem.cpp" />
     <ClCompile Include="Renderer\Vertex3D.cpp" />
-    <ClCompile Include="Sound\Sound.cpp" />
-    <ClCompile Include="Sound\SoundSystem.cpp" />
+    <ClCompile Include="Sound\AudioSystem.cpp" />
+    <ClCompile Include="Sound\SoundSystemFMOD.cpp" />
+    <ClCompile Include="UserInterface\UICommon.cpp" />
+    <ClCompile Include="UserInterface\UIScreen.cpp" />
+    <ClCompile Include="UserInterface\UISystem.cpp" />
+    <ClCompile Include="UserInterface\WidgetStates\WidgetStateProperties.cpp" />
+    <ClCompile Include="UserInterface\WidgetStyle.cpp" />
+    <ClCompile Include="UserInterface\WidgetStyleFactory.cpp" />
+    <ClCompile Include="UserInterface\Widgets\BaseWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\ButtonWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\CheckBoxWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\CursorWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\DropDownWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\EditLineWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\GroupWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\LabelWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\LayoutWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\ProgressBarWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\SliderWidget.cpp" />
+    <ClCompile Include="UserInterface\Widgets\WidgetFactory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

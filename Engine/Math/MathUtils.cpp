@@ -10,8 +10,6 @@
 
 //#include "Engine\Console\DevConsole.hpp"
 
-const float InverseRandMax = ( 1.0f / RAND_MAX );
-
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///basic math
@@ -87,6 +85,7 @@ bool IsPowerOfTwo( unsigned int x ){
 	//return true;
 
 }
+
 //===========================================================================================================
 ///-------------------------------------------------------------------------------------------------------------
 ///Converts radians to degrees
@@ -97,61 +96,6 @@ float ConvertRadiansToDegrees(float radians ){
 //converts degrees to radians
 float ConvertDegreesToRadians(float degrees ){
 	return degrees * RadiansPerDegree;
-}
-
-//===========================================================================================================
-//Random Number Generators
-
-void RandomSeed(unsigned int seedValue){ 
-	srand(seedValue);
-}
-
-///----------------------------------------------------------------------------------------------------------
-///Returns a random int >0 less than specified value
-int GetRandomIntLessThan(int maxValNotInclusive ){
-	return rand() % maxValNotInclusive;
-}
-
-///----------------------------------------------------------------------------------------------------------
-///Returns a random int between the two specified values
-int GetRandomIntInRange(int minValInclusive, int maxValInclusive){
-	return ( rand() % (maxValInclusive + 1 - minValInclusive) ) + minValInclusive;
-}
-
-///----------------------------------------------------------------------------------------------------------
-///Returns a random float between zero and one
-float GetRandomFloatZeroToOne(){
-	return (float) rand() * InverseRandMax;
-}
-
-///----------------------------------------------------------------------------------------------------------
-///Returns a random float between the two specified values
-float GetRandomFloatInRange(float minValInclusive, float maxValInclusive){
-	return (float) ( ( rand() * InverseRandMax ) * (maxValInclusive - minValInclusive) ) + minValInclusive;
-}
-
-Rgba GetRandomColor(){
-	return Rgba(GetRandomByte(), GetRandomByte(), GetRandomByte());
-}
-
-float GetRandomAngleDegrees(){
-	return GetRandomFloatInRange(0.0f, 360.0f);
-}
-
-float GetRandomAngleRadians(){
-	return GetRandomFloatInRange(0.0f, TWO_PI );
-}
-
-const unsigned char GetRandomByte(){
-	return (unsigned char)GetRandomIntInRange(0, 255);
-}
-
-const char GetRandomAsciiChar(){
-	return (char)GetRandomIntInRange(33, 126);
-}
-
-const char GetRandomAsciiLetter(){
-	return (char)GetRandomIntInRange(65, 122);
 }
 
 //===========================================================================================================
@@ -168,17 +112,23 @@ float RangeMap( const float& inValue, const float& inStart, const float& inEnd, 
 
 	float inputRange = inEnd - inStart;
 	float outputRange = outEnd - outStart;
-	float outValue = inValue / inputRange; 
-	float newValue = outValue * outputRange;
+
+	float outInRangeRatio = outputRange / inputRange;
+	float inValueDiff = inValue - inStart;
+	float newValue = outInRangeRatio * inValueDiff;
+
+	//float outValue = inValue / inputRange; 
+	//float newValue = outValue * outputRange;
 
 	return outStart + newValue;
 }
 
 //===========================================================================================================
 //Interpolate and easing functions
-float Interpolate( float start, float end, float fractionFromStartToEnd ){
-	float rangeStoE = end - start;
-	return rangeStoE * fractionFromStartToEnd;
+const float Interpolate( float start, float end, float fractionFromStartToEnd ){
+	float fractionRemaining = 1.0f - fractionFromStartToEnd;
+
+	return fractionRemaining * start + fractionFromStartToEnd * end;
 }
 
 float SmoothStart( float normalizedValue ){
@@ -197,5 +147,3 @@ float SmoothStep( float normalizedValue ){
 
 
 //===========================================================================================================
-
-

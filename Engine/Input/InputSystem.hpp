@@ -5,121 +5,29 @@
 
 #pragma once
 
-
-
 #ifndef _included_InputSystem__
 #define _included_InputSystem__
 
-#include "Engine\Math\Vector2.hpp"
-#include "Engine\Console\Console.hpp"
-#include "Engine\Math\Math2D.hpp"
+#include "Engine/Math/Vector2.hpp"
+#include "Engine/Console/Console.hpp"
+#include "Engine/Math/Math2D.hpp"
 
-#define WIN32_LEAN_AND_MEAN
-#include <windows.h>
-
-#define NUMBER_OF_VIRTUAL_KEYS 256
-#define MAX_NUMBER_OF_XBOX_CONTROLLERS 4
+#include "Engine/Core/EventCallback.hpp"
 
 //macro key defines
-#define IF_INPUT_SYSTEM_EXISTS if(theInputSystem)
+#define IF_INPUT_SYSTEM_EXISTS if(theInputSystem != NULL)
 #define IF_INPUT_IS_KEY_PRESSED(name) if(theInputSystem->IsKeyDown((int)name))
 #define IF_INPUT_IS_KEY_RELEASED(name) if(theInputSystem->WasKeyJustReleased((int)name))
 #define INPUT_IS_KEY_RELEASED(name)theInputSystem->WasKeyJustReleased((int)name)
 #define INPUT_IS_KEY_PRESSED(name)theInputSystem->IsKeyDown((int)name)
+
+#define INPUT_GET_MOUSE_SCREEN_POS() theInputSystem->GetMouseScreenPosition()
 #define INPUT_WAS_MOUSE_BUTTON_RELEASED(name) theInputSystem->WasMouseButtonJustReleased((int)name)
 #define INPUT_IS_MOUSE_BUTTON_PRESSED(name) theInputSystem->IsMouseButtonDown((int)name)
 #define IF_INPUT_WAS_MOUSE_BUTTON_RELEASED(name) if(theInputSystem->WasMouseButtonJustReleased((int)name) )
 #define IF_INPUT_IS_MOUSE_BUTTON_PRESSED(name) if(theInputSystem->IsMouseButtonDown((int)name))
 
-//special key defines
-#define KEY_BACKSPACE VK_BACK
-#define KEY_ENTER VK_RETURN
-#define KEY_TILDE 192
-#define KEY_COMMA VK_OEM_COMMA
-#define KEY_CAPSLOCK VK_CAPITAL
-#define KEY_SPACEBAR VK_SPACE
-#define KEY_HOME VK_HOME
-#define KEY_PRINT_SCREEN VK_SNAPSHOT
-#define KEY_ESC VK_ESCAPE
-#define KEY_TAB VK_TAB
-#define KEY_SHIFT VK_SHIFT
-#define KEY_LEFT_SHIFT VK_LSHIFT
-#define KEY_RIGHT_SHIFT VK_RSHIFT
-#define KEY_CTRL VK_CONTROL
-#define KEY_LEFT_CTRL VK_LCONTROL
-#define KEY_RIGHT_CTRL VK_RCONTROL
-#define KEY_PAGE_DOWN VK_PRIOR
-#define KEY_PAGE_UP VK_NEXT
-#define KEY_ARROW_UP VK_UP
-#define KEY_ARROW_DOWN VK_DOWN
-#define KEY_ARROW_LEFT VK_LEFT
-#define KEY_ARROW_RIGHT VK_RIGHT
-#define KEY_F1 VK_F1
-#define KEY_F2 VK_F2
-#define KEY_F3 VK_F3
-#define KEY_F4 VK_F4
-#define KEY_F5 VK_F5
-#define KEY_F6 VK_F6
-#define KEY_F7 VK_F7
-#define KEY_F8 VK_F8
-#define KEY_F9 VK_F9
-#define KEY_F10 VK_F10
-#define KEY_F11 VK_F11
-#define KEY_F12 VK_F12
-
-//mouse button enums
-enum MouseButtonID{
-	MOUSE_BUTTON_LEFT,
-	MOUSE_BUTTON_RIGHT,
-	NUMBER_OF_MOUSE_BUTTONS
-};
-
-//xbox button enums
-enum XBoxButtonID{
-	XBOX_BUTTON_X, 
-	XBOX_BUTTON_Y, 
-	XBOX_BUTTON_A, 
-	XBOX_BUTTON_B,
-	XBOX_BUTTON_LEFT_TRIGGER,
-	XBOX_BUTTON_RIGHT_TRIGGER,
-	NUMBER_OF_XBOX_BUTTONS
-
-};
-
-enum XboxJoystickID{
-	XBOX_JOYSTICK_LEFT,
-	XBOX_JOYSTICK_RIGHT,
-	NUMBER_OF_XBOX_JOYSTICKS
-};
-
-struct XBoxControllerState{
-	bool isPluggedIn;
-	unsigned int m_controllerID;
-	bool m_buttonDownStates[NUMBER_OF_XBOX_BUTTONS ];
-	Vector2 m_stickPositions[ NUMBER_OF_XBOX_JOYSTICKS ];
-	///----------------------------------------------------------------------------------------------------------
-	///constructors
-	XBoxControllerState(){
-		//do nothing
-	}
-
-	XBoxControllerState(int controllerNumber){
-		m_controllerID = controllerNumber;
-	}
-
-};
-
-struct KeyState{
-	bool m_isDown;
-	bool m_wasJustReleased;
-};
-
-struct MouseButtonState{
-	bool m_isDown;
-	bool m_wasJustReleased;
-	bool m_didDoubleClick;
-	//bool m_isCursorHidden;
-};
+#include "InputCommon.hpp"
 
 class InputSystem{
 public:
@@ -133,6 +41,7 @@ public:
 	//input queries
 	bool IsKeyDown(int keyData );
 	bool WasKeyJustReleased(int keyData );
+	bool WasKeyJustPressed(int keyData);
 	void SetKeyState(int keyData, bool isPressedDown);
 
 	//mouse queries
@@ -181,13 +90,14 @@ public:
 	}
 
 	bool m_isReadyToQuit;
-
+	bool m_mouseCursorHidden;
 private:
 	void* m_platformHandle;
 	long m_prevAddress;
 
 	KeyState m_KeyState[NUMBER_OF_VIRTUAL_KEYS];
 	MouseButtonState m_MouseState[NUMBER_OF_MOUSE_BUTTONS];
+	
 	Vector2 m_mousePosition;
 	Vector2 m_mouseScreenPosition;
 	Vector2 m_lastMousePosition;
@@ -209,6 +119,7 @@ private:
 
 extern InputSystem* theInputSystem;
 
+
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods
@@ -224,7 +135,14 @@ inline bool InputSystem::IsKeyDown(int keyData ){
 
 inline bool InputSystem::WasKeyJustReleased(int keyData ){
 	if( keyData >=0 && keyData < NUMBER_OF_VIRTUAL_KEYS )
-		return m_KeyState[keyData].m_wasJustReleased;
+		return m_KeyState[keyData].m_wasJustChanged && !m_KeyState[keyData].m_isDown;
+	else
+		return false;
+}
+
+inline bool InputSystem::WasKeyJustPressed(int keyData) {
+	if (keyData >= 0 && keyData < NUMBER_OF_VIRTUAL_KEYS)
+		return m_KeyState[keyData].m_wasJustChanged && m_KeyState[keyData].m_isDown;
 	else
 		return false;
 }
@@ -235,17 +153,6 @@ inline void InputSystem::SetLatestKeyPressed(int charID){
 
 ///----------------------------------------------------------------------------------------------------------
 ///mouse queries
-inline bool InputSystem::IsMouseWheelPresent(){
-	return (GetSystemMetrics(SM_MOUSEWHEELPRESENT) != 0);
-}
-
-inline void InputSystem::ShowMouseCursor(){
-	ShowCursor(true);
-}
-
-inline void InputSystem::HideMouseCursor(){
-	ShowCursor(false);
-}
 
 inline void InputSystem::SetMouseWheelScrollDirection(int mouseDeltaValue ){
 	
@@ -294,21 +201,7 @@ inline bool InputSystem::DidMouseButtonDoubleClick(int mouseData ){
 	return didDoubleClick;
 }
 
-inline const Vector2& InputSystem::GetMousePosition(){
-	POINT cursorPos; 
-	GetCursorPos(&cursorPos); 
-
-	float mousePosX = (float)cursorPos.x;
-	float mousePosY = (float)cursorPos.y;
-	//cursorPos.y
-
-	m_mousePosition = Vector2( mousePosX, mousePosY); 
-
-	return m_mousePosition; 
-}
-
 inline void InputSystem::SetScreenMousePosition(const float& mouseX, const float& mouseY ){
-	//m_lastMousePosition = m_mousePosition;
 
 	m_mouseScreenPosition = Vector2(mouseX, mouseY );
 
@@ -322,14 +215,6 @@ inline bool InputSystem::IsMouseHoverOnAABB2(const AABB2& renderBounds){
 	}
 	return false;
 
-}
-
-inline const Vector2 InputSystem::SnapMousePosition(const int& snapmouseX, const int& snapmouseY ){
-
-	SetCursorPos(snapmouseX, snapmouseY);
-	m_mousePosition = GetMousePosition();
-
-	return Vector2((float)snapmouseX, (float)snapmouseY);
 }
 
 inline const Vector2& InputSystem::GetMouseMoveDirection(){

@@ -6,9 +6,18 @@
 #include "SystemClockWin32.hpp"
 #include "Utilities.hpp"
 
+
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
 //===========================================================================================================
 
-SystemClockWin32::SystemClockWin32(const SYSTEMTIME& systemTimeWin32){
+//I think this is okay, I mean the compile seems happy
+SYSTEMTIME* g_systemTimeWin32 = new SYSTEMTIME;
+
+//===========================================================================================================
+
+SystemClockWin32::SystemClockWin32(SYSTEMTIME* systemTimeWin32){
 
 	SetClockFromSystemTimeWin32(systemTimeWin32);
 	
@@ -16,18 +25,18 @@ SystemClockWin32::SystemClockWin32(const SYSTEMTIME& systemTimeWin32){
 
 //-----------------------------------------------------------------------------------------------------------
 
-void SystemClockWin32::SetClockFromSystemTimeWin32(const SYSTEMTIME& systemTimeWin32){
-	Year = (int)systemTimeWin32.wYear;
+void SystemClockWin32::SetClockFromSystemTimeWin32(SYSTEMTIME* systemTimeWin32){
+	Year = (int)systemTimeWin32->wYear;
 	//ClampInt(clock.Year, 1601, 30827);
-	Month = (unsigned int)systemTimeWin32.wMonth;
+	Month = (unsigned int)systemTimeWin32->wMonth;
 	SetNameOfMonth();
-	SetDayOfWeek(systemTimeWin32.wDayOfWeek);
-	DayOfMonth = (int)systemTimeWin32.wDay;
+	SetDayOfWeek(systemTimeWin32->wDayOfWeek);
+	DayOfMonth = (int)systemTimeWin32->wDay;
 
-	Hour = (int)systemTimeWin32.wHour;
-	Minute = (int)systemTimeWin32.wMinute;
-	Second = (int)systemTimeWin32.wSecond;
-	Milliseconds = (int)systemTimeWin32.wMilliseconds;
+	Hour = (int)systemTimeWin32->wHour;
+	Minute = (int)systemTimeWin32->wMinute;
+	Second = (int)systemTimeWin32->wSecond;
+	Milliseconds = (int)systemTimeWin32->wMilliseconds;
 }
 
 void SystemClockWin32::SetNameOfMonth(){
@@ -125,16 +134,15 @@ std::string SystemClockWin32::GetTimeString(){
 
 //-----------------------------------------------------------------------------------------------------------
 
-void SetEngineClock(SystemClockWin32& clock, const bool& isLocalTime){
+void SetEngineClock(SystemClockWin32* clock, const bool& isLocalTime){
 	//PROFILE_SECTION();
 	//#ifdef(WIN32) //put this here later for platform stuff
 	if (!isLocalTime)
-		GetSystemTime(&g_systemTimeWin32);
+		GetSystemTime(g_systemTimeWin32);
 	else
-		GetLocalTime(&g_systemTimeWin32);
+		GetLocalTime(g_systemTimeWin32);
 
-	clock.SetClockFromSystemTimeWin32(g_systemTimeWin32);
-
+	clock->SetClockFromSystemTimeWin32(g_systemTimeWin32);
 }
 
 //===========================================================================================================

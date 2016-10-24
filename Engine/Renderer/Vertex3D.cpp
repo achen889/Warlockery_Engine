@@ -320,18 +320,17 @@ void GenerateVertexArrayDisc2D(Vertex3Ds& out_verts, Disc2 discToDraw, const Rgb
 	Vector3 discRenderPoint = ToVector3(DiscVertex);
 
 	Vector2 discTexCoords;
-	discTexCoords.SetUnitLengthAndHeadingDegrees(0.0f);
+	discTexCoords.SetUnitLengthAndHeadingDegrees(-1.0f);
 	
 	Vertex3D discVert3D = Vertex3D(discRenderPoint, viewColor, discTexCoords);
 	const int degreeStep = 1;
-	for (int i = 1; i < 360; i += degreeStep){
-		DiscVertex.SetLengthAndHeadingRadians(discToDraw.radius, float(i));
+	for (int i = 0; i < 360; i += degreeStep){
+		DiscVertex.SetLengthAndHeadingDegrees(discToDraw.radius, float(i));
 		DiscVertex += discToDraw.center;
 		//DiscVertex.RotateDegrees(degreeStep);
+		discRenderPoint = ToVector3(DiscVertex, 0.0f);
 
 		discTexCoords.RotateDegrees((float)degreeStep);
-
-		discRenderPoint = ToVector3(DiscVertex, 0.0f);
 
 		discVert3D.m_position = discRenderPoint;
 		discVert3D.m_texCoords = discTexCoords;

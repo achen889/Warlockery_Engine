@@ -68,6 +68,9 @@ struct State{
 
 	Vertex3D vertex;
 
+// 	Vector3 m_position;
+// 	Rgba m_color;
+
 	float radius = 0.01f;
 
 	//physics integration stuff
@@ -97,10 +100,12 @@ struct State{
 		//do nothing
 	}
 
-	State(const Vector3& initpos, const Vector3& initVel,const Rgba& color = Rgba::WHITE , bool is2DMode = false) :
+	State(const Vector3& initpos, const Vector3& initVel,const Rgba& color = Rgba::BLACK , bool is2DMode = false) :
 		//position(initpos),
 		velocity(initVel),
 		vertex(Vertex3D(initpos, color)),
+// 		m_position(initpos),
+// 		m_color(color),
 		prevPrevPosition(vertex.m_position)
 	{
 		
@@ -223,6 +228,18 @@ public:
 	Vector3 GetForces(){ return m_state.forces; }
 	float GetMass(){ return m_state.mass; }
 
+	Vertex3D& GetVertex3D() { 
+
+		return m_state.vertex;
+		
+// 		Vertex3D outVertex;
+// 		outVertex.m_position = m_state.vertex.m_position;
+// 		outVertex.m_color = m_state.vertex.m_color;
+// 		outVertex.m_normal = Vector3::COMMON_WORLD_NORMAL;
+// 
+// 		return outVertex;
+	}
+
 	//queries	
 	bool IsDead(){ return m_state.IsDead(); }
 	
@@ -242,8 +259,8 @@ public:
 
 //===========================================================================================================
 
-typedef std::vector<Particle> Particles; //somehow frame rate does silly things when not by ptr
-typedef std::vector<Particle>::iterator ParticlesIterator;
+typedef std::vector<Particle*> Particles; //somehow frame rate does silly things when not by ptr
+typedef std::vector<Particle*>::iterator ParticlesIterator;
 
 ///----------------------------------------------------------------------------------------------------------
 ///inline methods

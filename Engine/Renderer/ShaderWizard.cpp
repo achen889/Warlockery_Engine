@@ -18,12 +18,27 @@ GLShaderMap GLShader::s_globalShaders;
 GLSampler::GLSampler() :
 m_samplerID(0)
 {
-
+	m_textureMap.clear();
 }
 
 GLSampler::~GLSampler(){
 	//do something
-	m_textureMap.clear();
+	//ConsolePrintf("\ndeleting glsampler!");
+
+	//do a better job cleaning up this mem
+ 	//m_textureMap.clear();
+// 	for (TextureMap::iterator it = m_textureMap.begin(); it != m_textureMap.end(); ){
+// 		Texture* tex = (it->second);
+// 		if (tex) {
+// 			delete tex;
+// 			tex = NULL;
+// 		}
+// 		it = m_textureMap.erase(it);
+// 	}
+
+	//ConsolePrintf("\ntexture map gone!");
+	//the most recent crash is here :D
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -40,7 +55,11 @@ void GLSampler::SetDefaultTextures(){
 //-----------------------------------------------------------------------------------------------------------
 
 void GLSampler::SetTextureInMap(const std::string& texName, const std::string& texFilePath){
-	m_textureMap[texName] = Texture::CreateOrGetTexture(texFilePath);
+
+	Texture* tex = Texture::CreateOrGetTexture(texFilePath, true);
+
+	SetTextureInMap(texName, tex);
+
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -49,11 +68,16 @@ void GLSampler::SetTextureInMap(const std::string& texName, Texture* tex){
 	if (tex){
 		m_textureMap[texName] = tex;
 	}
+	else{
+		m_textureMap[texName] = Texture::CreateOrGetTexture(COMMON_TEXTURE_INVALID);
+	}
 }
 
 //-----------------------------------------------------------------------------------------------------------
 
 Texture* GLSampler::GetTextureInMap(const std::string& texName){
+	
+	
 	if (m_textureMap.find(texName) != m_textureMap.end()){
 		return m_textureMap[texName];// = Texture::CreateOrGetTexture(texFilePath);
 	}
@@ -66,18 +90,27 @@ void GLSampler::BindTextureMapToShader(unsigned int programID){
 	int texIndex = 0;
 	for (TextureMapIterator it = m_textureMap.begin(); it != m_textureMap.end(); ++it){
 		Texture* myTexture = (it->second);
-
 		std::string texName = (std::string)it->first;
 
-		if (myTexture){
-			glActiveTexture(GL_TEXTURE0 + texIndex);
-			theOGLRenderer->ProgramBindSamplerIndex((GLuint)programID, texName.c_str(), texIndex);
-			glBindTexture(GL_TEXTURE_2D, myTexture->GetPlatformHandle());
-			glBindSampler(texIndex, m_samplerID);
+		if (myTexture) {
+			BindTextureToShader(myTexture, texName, programID, texIndex);
 		}
 
-		texIndex++;
 	}
+}
+
+//-----------------------------------------------------------------------------------------------------------
+
+void GLSampler::BindTextureToShader(Texture* myTexture, const std::string& texName, unsigned int programID , int& texIndex) {
+	
+	if (myTexture) {
+		glActiveTexture(GL_TEXTURE0 + texIndex);
+		theOGLRenderer->ProgramBindSamplerIndex((GLuint)programID, texName.c_str(), texIndex);
+		glBindTexture(GL_TEXTURE_2D, myTexture->GetPlatformHandle());
+		glBindSampler(texIndex, m_samplerID);
+	}
+
+	texIndex++;
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -123,7 +156,7 @@ void GLShader::BindViewMatrix3D(Camera3D& camera){
 //-----------------------------------------------------------------------------------------------------------
 
 void GLShader::BindViewMatrix2D(){
-	theOGLRenderer->BindViewMatricesToProgram(m_programID, IDENTITY_MATRIX, theOGLRenderer->MakeDefaultOrthographicProjectionMatrix());
+	theOGLRenderer->BindViewMatricesToProgram(m_programID, IDENTITY_MATRIX, theOGLRenderer->GetCurrentOrthographicProjectionMatrix());
 }
 
 //-----------------------------------------------------------------------------------------------------------
@@ -276,12 +309,12 @@ void LoadAllShadersFromFiles(){
 // 					}
 
 					//does loading shaders need to be on the same thread as the rendering context?
-					std::string vertFullDef = vertFileDef.GetDefinition();
-					std::string fragFullDef = fragFileDef.GetDefinition();
+					std::string vertFullDef = vertFileDef.ToString();
+					std::string fragFullDef = fragFileDef.ToString();
 
 					GLShader::CreateOrGetShader(vertFileDef.m_fileName, vertFullDef, fragFullDef);
 
-					ConsolePrintString("Loaded Shader: " + vertFileDef.m_fileName + "\n    " + vertFullDef + " & " + fragFullDef + "\n");
+					ConsoleLogPrintString("Loaded Shader: " + vertFileDef.m_fileName + "\n    " + vertFullDef + " & " + fragFullDef + "\n");
 
 				}
 

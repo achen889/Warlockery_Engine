@@ -1,5 +1,5 @@
 //==============================================================================================================
-//BaseComponent.hpp
+//BaseComponent.MPp
 //by Albert Chen Oct-19-2015.
 //==============================================================================================================
 
@@ -8,9 +8,8 @@
 #ifndef _included_BaseComponent__
 #define _included_BaseComponent__
 
-#include "Engine/Core/Utilities.hpp"
+//#include "Engine/Core/Utilities.hpp"
 #include "Engine/Core/XML/XMLUtils.hpp"
-#include "Engine/Core/EventCallback.hpp"
 
 class ComponentRegistration;
 class BaseComponent;
@@ -36,6 +35,8 @@ class ComponentRegistration{
 
 		//friend methods
 		friend ComponentRegistration* FindComponentByName(const std::string& name);
+
+		friend void ClearComponentRegistry();
 		
 protected:
 		//vars
@@ -77,7 +78,9 @@ public:
 	}
 	virtual ~BaseComponent(){
 		//do nothing
+
 	}
+
 	BaseComponent(const std::string& name);
 
 	BaseComponent(const XMLNode& node);
@@ -91,11 +94,13 @@ public:
 	virtual void Render(OpenGLRenderer* renderer);
 
 	//accessors
-	std::string GetNameID(){ return m_name + " " + IntToString(m_id); }
-	std::string GetName(){ return m_name; }
-	
+	virtual std::string GetNameID(){ return std::string(m_name) + " " + IntToString(m_id); }
+	virtual std::string GetName(){ return std::string(m_name); }
+
+	virtual void SetName(const std::string& name) { m_name = StringToWritableCStr(name); }
+
 	//vars
-	std::string m_name;
+	char* m_name;
 	size_t m_id;
 
 };
@@ -108,7 +113,7 @@ typedef std::vector<BaseComponent*>::iterator BaseComponentsIterator;
 ///inline methods
 
 inline BaseComponent::BaseComponent(const std::string& name) :
-m_name(name),
+m_name(StringToWritableCStr(name)),
 m_id(s_componentID)
 {
 	s_componentID++;

@@ -28,7 +28,10 @@ m_mapPosition(loc)
 	//set render component
 	m_renderComponent = RenderComponent("TileRenderer" + IntToString(m_mapIndex));
 
-	m_mapHeight = GetRandomFloatInRange(-0.5f, 0.5f);
+	//m_mapHeight = GetRandomFloatInRange(-0.5f, 0.5f);
+
+	m_color = Rgba::WHITE;
+	GetTileDetailsForTileType();
 	
 }
 
@@ -92,11 +95,11 @@ const char Tile::GetTileDetailsForTileType(){
 	char m_symbol = ' ';
 
 	if (m_type == TILE_TYPE_AIR){
-		//m_color = Rgba::BLACK;
+	    m_color = Rgba::WHITE;
 		m_symbol = '.';
 	}
 	else if (m_type == TILE_TYPE_SOLID){
-		//m_color = Rgba::GRAY;
+		m_color = Rgba::GRAY;
 		m_symbol = '#';
 	}
 	return m_symbol;

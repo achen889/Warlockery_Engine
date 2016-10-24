@@ -8,6 +8,7 @@
 #define _included_Vector2__
 
 #include "MathUtils.hpp"
+#include "Engine/Core/Utilities.hpp"
 #include <vector>
 
 class Vector2{
@@ -21,9 +22,10 @@ public:
 	Vector2();
 	~Vector2();
 	Vector2(const Vector2& copy);
-	Vector2(float initialAll){
-		x = initialAll;
-		y = initialAll;
+	Vector2(float initialAll): 
+		x(initialAll),
+		y(initialAll){
+		
 	}
 	explicit Vector2(float initialX, float initialY);
 	//accessors
@@ -40,6 +42,7 @@ public:
 	bool operator!=(const Vector2& vectorToNotEqual) const;
 	//assignment operator
 	const Vector2& operator=(const Vector2& vectorToAssign);
+	const Vector2& operator=(const float& floatToAssign);
 	//addition operators
 	const Vector2 operator+(const Vector2& vectorToAdd) const;
 	void operator+=(const Vector2& vectorToAdd);
@@ -57,7 +60,9 @@ public:
 	//Rotate methods
 	void Rotate90Degrees();
 	void RotateNeg90Degrees();
-	void RotateDegrees( float degrees );
+	inline void SetHeadingDegrees(float headingDegrees);
+
+	void RotateDegrees(float degrees);
 	void RotateRadians( float radians );
 	//Normalize methods
 	float Normalize();
@@ -72,10 +77,11 @@ public:
 	void SetLengthAndHeadingDegrees(float newLength, float headingDegrees);
 	void SetLengthAndHeadingRadians(float newLength, float headingRadians);
 
+
 	//utility methods
 	std::string ToString();
 	friend std::string ToString(const Vector2& i);
-	inline Vector2 ToVector2(const std::string inVec2Str);
+	//inline Vector2 ToVector2(const std::string inVec2Str);
 
 	//friend methods
 	friend float CalcDistance( const Vector2& positionA, const Vector2& positionB );
@@ -83,35 +89,40 @@ public:
 	friend const Vector2 operator*(float scale, const Vector2& vectorToScale);
 	friend float DotProduct( const Vector2& a, const Vector2& b);
 	friend const Vector2 Interpolate( const Vector2& start, const Vector2& end, float fractionFromStartToEnd );
-	Vector2 GetVec2FromString(const std::string& vec2Str);
+	//Vector2 GetVec2FromString(const std::string& vec2Str);
 	friend float SetOrientationTowards(const Vector2& myPosition, const Vector2& targetPosition);
+	friend Vector2 GetRandomVector2InRange(const float& minRange, const float& maxRange);
 	friend Vector2 Reflect(const Vector2& incomingVector, const Vector2& planeNormal);
 	friend void ConsolePrintVector2(const Vector2& consoleVector2 );
 	
 };
+
 //===========================================================================================================
 ///----------------------------------------------------------------------------------------------------------
 ///Default Constructor
 ///----------------------------------------------------------------------------------------------------------
 
-
 inline Vector2::~Vector2(){ 
 	//do nothing for speed
 }
 
-inline Vector2::Vector2(const Vector2& copy){
-	x = copy.x;
-	y = copy.y;
+inline Vector2::Vector2(const Vector2& copy):
+	x(copy.x),
+	y(copy.y){
+	
 }
 ///----------------------------------------------------------------------------------------------------------
 ///Explicit Constructor
-inline Vector2::Vector2(float initialX, float initialY){
-	x = initialX;
-	y = initialY;
+inline Vector2::Vector2(float initialX, float initialY): 
+	x(initialX),
+	y(initialY){
+	
 }
 //-----------------------------------------------------------------------------------------------------------
+
 ///----------------------------------------------------------------------------------------------------------
 ///utility methods
+
 inline std::string Vector2::ToString(){
 	return "" + FloatToString(x) + ", " + FloatToString(y) + "";
 }
@@ -184,6 +195,11 @@ inline const Vector2& Vector2::operator=(const Vector2& vectorToAssign){
 	y = vectorToAssign.y;
 	return *this;
 }
+inline const Vector2& Vector2::operator=(const float& floatToAssign) {
+	x = floatToAssign;
+	y = floatToAssign;
+	return *this;
+}
 ///addition operator 
 inline const Vector2 Vector2::operator+(const Vector2& vectorToAdd) const { 
 	return Vector2( x + vectorToAdd.x, y + vectorToAdd.y );
@@ -242,6 +258,14 @@ inline void Vector2::RotateNeg90Degrees(){
 	y = -x;
 	x = px;
 }
+
+///----------------------------------------------------------------------------------------------------------
+///set heading based on current length and new rotation
+inline void Vector2::SetHeadingDegrees(float headingDegrees) {
+	x = CalcLength() * cos(headingDegrees * RadiansPerDegree);
+	y = CalcLength() * sin(headingDegrees * RadiansPerDegree);
+}
+
 ///----------------------------------------------------------------------------------------------------------
 ///Sets length of vec2 to specific length
 inline float Vector2::SetLength( float newLength ){
@@ -282,7 +306,7 @@ inline Vector2 Reflect(const Vector2& incomingVector, const Vector2& planeNormal
 	Vector2 projectionVectorOfIncomingByPlaneNormal = planeNormal * projectionOfIncomingByPlaneNormal;
 	
 	Vector2 reflectionOfIncomingVector = incomingVector - ( 2.0f * projectionVectorOfIncomingByPlaneNormal);
-
+	
 	return reflectionOfIncomingVector;
 }
 

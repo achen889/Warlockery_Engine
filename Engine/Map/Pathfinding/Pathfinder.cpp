@@ -158,6 +158,8 @@ void ProcessAdjacentMapTiles(Path& thePath, Map* map, const IntVec2& start, cons
 //===========================================================================================================
 
 void ProcessAdjacentMapTile(Path& thePath, Tile* tile, Map* map, const IntVec2& start, const IntVec2& goal ){
+	UNUSED(start);
+
 	PROFILE_SECTION();
 	if (tile == NULL)
 		return;
@@ -283,7 +285,7 @@ const float CalcHypotheticalGCostToAdjacentNodePosition(PathNode* currentActiveN
 //===========================================================================================================
 
 //
-void RenderDebugPathMeshOnMap(OpenGLRenderer* renderer, MeshRenderer& pathMeshRenderer, Path& pathToRender, Map* map){
+void RenderDebugPathMeshOnMap2D(OpenGLRenderer* renderer, MeshRenderer& pathMeshRenderer, Path& pathToRender, Map* map){
 	UNUSED(renderer);
 	//renderer->SetTextureViewTransparent();
 
@@ -295,26 +297,27 @@ void RenderDebugPathMeshOnMap(OpenGLRenderer* renderer, MeshRenderer& pathMeshRe
 
 	Tile* pathingTile = NULL;
 	
+	//render start/goal/open tiles
 	if (map && !pathToRender.IsOpenListEmpty()){
 
 		//render start tile
 		pathingTile = map->GetTileAtMapPosition(pathToRender.m_startPosition);
 		GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, Rgba::SILVER, false);
 
+		
 		//render goal tile
 		pathingTile = map->GetTileAtMapPosition(pathToRender.m_goalPosition);
-		//if (pathToRender.m_isComplete)
 		GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, Rgba::GOLD, false);
 
 		if (pathToRender.m_activeNode){
 			pathingTile = map->GetTileAtMapPosition(pathToRender.m_activeNode->m_position);
-			//if (pathToRender.m_isComplete)
 			GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, Rgba::MAGENTA, false);
+
 			//OUTPUT_COLOR_STRING_TO_SCREEN(IntToString(pathToRender.m_activeNode->m_nodeCost.f), pathingTile->m_renderBounds.mins.x, pathingTile->m_renderBounds.maxs.y, Rgba::GOLD);
 		}
 	
-		Rgba openListColor = Rgba::BLUE;
-		//openListColor.a = 255 * (0.5f + GetRandomFloatZeroToOne() * 0.35f);
+		static Rgba openListColor = Rgba::BLUE;
+		openListColor.a = 127;
 
 		for (OpenListPathMapIterator it = pathToRender.m_openList.begin(); it != pathToRender.m_openList.end(); ++it){
 			PathNode& pathnode = *(it->second);
@@ -322,25 +325,18 @@ void RenderDebugPathMeshOnMap(OpenGLRenderer* renderer, MeshRenderer& pathMeshRe
 			pathingTile = map->GetTileAtMapPosition(pathnode.m_position);
 
 			GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, openListColor , false);
-			//copy all verts to mesh
-			pathMeshRenderer.m_mesh->CopyMeshVertexData(inPathVerts);
 
-			pathMeshRenderer.RenderMesh2D(&mapToWorldTransform);
-
-			inPathVerts.clear();
 			//OUTPUT_COLOR_STRING_TO_SCREEN(IntToString(pathnode.m_nodeCost.f), pathingTile->m_renderBounds.mins.x, pathingTile->m_renderBounds.maxs.y, Rgba::GOLD);
-
 		}
 
 	}
 
 
-
 	//create path mesh for all of closed list
 	if (map && pathToRender.m_closedList.size() > 1 ){
 
-		Rgba closedListColor = Rgba::RED;
-		//closedListColor.a = 255 * (0.5f + GetRandomFloatZeroToOne() * 0.35f);
+		static Rgba closedListColor = Rgba::RED;
+		closedListColor.a = 127;
 
 		for (ClosedListIterator it = pathToRender.m_closedList.begin() + 1; it != pathToRender.m_closedList.end() - 1; ++it){
 			PathNode& pathnode = (*it);
@@ -348,28 +344,24 @@ void RenderDebugPathMeshOnMap(OpenGLRenderer* renderer, MeshRenderer& pathMeshRe
 			pathingTile = map->GetTileAtMapPosition(pathnode.m_position);
 
 			GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, closedListColor, false);
-			pathMeshRenderer.m_mesh->CopyMeshVertexData(inPathVerts);
-
-			pathMeshRenderer.RenderMesh2D(&mapToWorldTransform);
-
-			inPathVerts.clear();
+			
 			//OUTPUT_COLOR_STRING_TO_SCREEN(IntToString(pathnode.m_nodeCost.f), pathingTile->m_renderBounds.mins.x, pathingTile->m_renderBounds.maxs.y, Rgba::GOLD);
 			
 		}//end of for
-		
-
 
 		if (pathToRender.m_isImpossible){
 			return;
 		}
+	
+		static Rgba pathColor = Rgba::GREEN;
+		pathColor.a = 210;
+
 		//Create path mesh for only path
 		ClosedListIterator mypathIterator = pathToRender.m_closedList.end() - 1;
 		PathNode& myPathGoalNode = (*mypathIterator);
 		//start traversing from goal back to start
 		PathNode* traversalPathNode = &myPathGoalNode;
 		//traversalPathNode = traversalPathNode->m_parent;
-
-		Rgba pathColor = Rgba::GREEN;
 
 		//create last closed node added
 		pathingTile = map->GetTileAtMapPosition(traversalPathNode->m_position);
@@ -381,23 +373,23 @@ void RenderDebugPathMeshOnMap(OpenGLRenderer* renderer, MeshRenderer& pathMeshRe
 		//create path
 		while (traversalPathNode->m_parent != NULL){
 			   
-			   pathingTile = map->GetTileAtMapPosition(traversalPathNode->m_position); //has an infinite loop in this case...
-				//if (pathToRender.m_isComplete)
-					GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, pathColor, false);
-					pathMeshRenderer.m_mesh->CopyMeshVertexData(inPathVerts);
-
-					pathMeshRenderer.RenderMesh2D(&mapToWorldTransform);
-
-					inPathVerts.clear();
-					//OUTPUT_COLOR_STRING_TO_SCREEN(IntToString(traversalPathNode->m_nodeCost.f), pathingTile->m_renderBounds.mins.x, pathingTile->m_renderBounds.maxs.y, Rgba::WHITE);
-				//else
-					//GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, Rgba::ORANGE, false);
-
+			   pathingTile = map->GetTileAtMapPosition(traversalPathNode->m_position); //has an infinite loop in certain cases
+			   GenerateVertexArrayTextureQuad(inPathVerts, pathingTile->m_renderBounds, AABB2::ZERO_TO_ONE, pathColor, false);
+		
+				//OUTPUT_COLOR_STRING_TO_SCREEN(IntToString(traversalPathNode->m_nodeCost.f), pathingTile->m_renderBounds.mins.x, pathingTile->m_renderBounds.maxs.y, Rgba::WHITE);
+			
 				traversalPathNode = traversalPathNode->m_parent;
 		}//end of while
+
+	
+	
+
 	}//end of outer if
 
-
+	//copy all verts to mesh
+	pathMeshRenderer.m_mesh->CopyMeshVertexData(inPathVerts);
+	pathMeshRenderer.RenderMesh2D(&mapToWorldTransform);
+	inPathVerts.clear();
 	
 }
 
